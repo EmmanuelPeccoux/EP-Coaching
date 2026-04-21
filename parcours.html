@@ -157,7 +157,8 @@
 }
 .epoch-photo img {
   display: block;
-  max-height: 400px; width: auto;
+  max-height: 480px; width: auto;
+  object-fit: cover; object-position: top center;
   filter: grayscale(20%) contrast(1.1);
   transition: filter 0.5s, transform 0.6s;
 }
@@ -188,7 +189,7 @@
   display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 20px;
 }
 .epoch-photos-grid img {
-  width: 100%; height: 200px; object-fit: cover;
+  width: 100%; height: 220px; object-fit: cover; object-position: top center;
   filter: grayscale(20%) contrast(1.1);
   transition: filter 0.4s;
 }
