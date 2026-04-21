@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coaching — Emmanuel Peccoux Coach Bodybuilding</title>
+<link rel="stylesheet" href="style.css">
+<style>
+
+/* ═══ HERO ═══ */
+.coaching-hero {
+  min-height: 80vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 140px 80px 80px;
+  position: relative; overflow: hidden;
+}
+.ch-bg { position: absolute; inset: 0; z-index: 0; background: var(--g1); }
+.ch-bg img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center;
+  opacity: 0.12; filter: grayscale(100%) contrast(1.4);
+}
+.ch-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--black) 30%, transparent 100%);
+}
+.ch-content { position: relative; z-index: 2; }
+.ch-h1 {
+  font-family: 'Bebas Neue';
+  font-size: clamp(64px, 10vw, 130px);
+  line-height: 0.88; letter-spacing: 3px; text-transform: uppercase;
+  animation: slideUp 1s ease both;
+}
+.ch-h1 .r { color: var(--red); }
+.ch-h1 .o { -webkit-text-stroke: 1.5px rgba(255,255,255,0.12); color: transparent; }
+.ch-sub {
+  font-size: 15px; color: rgba(255,255,255,0.45); font-weight: 600;
+  max-width: 560px; line-height: 1.9; margin-top: 20px;
+  animation: slideUp 1s 0.15s ease both;
+}
+.ch-sub em { color: var(--white); font-style: normal; }
+@keyframes slideUp { from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)} }
+
+/* ═══ MARQUEE ═══ */
+/* shared */
+
+/* ═══ PROCESS ═══ */
+.process-section {
+  background: var(--g1);
+  padding: 140px 80px;
+}
+.process-intro {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  align-items: end; margin-bottom: 80px;
+}
+.process-intro p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.9; font-weight: 500; }
+.process-intro p em { color: var(--white); font-style: normal; }
+
+.steps-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
+.step-card {
+  background: var(--g2); padding: 40px 30px;
+  position: relative; overflow: hidden;
+  transition: background 0.3s;
+}
+.step-card:hover { background: var(--g3); }
+.step-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--red);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+}
+.step-card:hover::before { transform: scaleX(1); }
+.step-n { font-family: 'Bebas Neue'; font-size: 60px; color: rgba(230,0,0,0.1); line-height: 1; margin-bottom: 18px; }
+.step-title { font-family: 'Bebas Neue'; font-size: 20px; letter-spacing: 1px; margin-bottom: 12px; }
+.step-desc { font-size: 12px; color: var(--muted2); line-height: 1.85; }
+.step-desc em { color: rgba(255,255,255,0.75); font-style: normal; }
+
+/* ═══ SHEET SECTION ═══ */
+.sheet-section {
+  background: var(--black);
+  padding: 140px 80px;
+}
+.sheet-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
+  align-items: center; margin-top: 60px;
+}
+
+/* Sheet visual */
+.sheet-visual {
+  background: var(--g2); border-radius: 3px;
+  border: 1px solid rgba(230,0,0,0.08);
+  overflow: hidden;
+}
+.sheet-visual-header {
+  background: var(--red); padding: 14px 20px;
+  font-family: 'Bebas Neue'; font-size: 13px; letter-spacing: 3px;
+  display: flex; align-items: center; gap: 10px;
+}
+.sheet-tabs {
+  display: flex; flex-wrap: wrap; gap: 1px;
+  background: var(--g1); padding: 12px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.sh-tab {
+  font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  padding: 5px 9px; background: var(--g3); color: var(--muted);
+  border-radius: 2px; transition: all 0.2s;
+}
+.sh-tab.active { background: var(--red); color: var(--white); }
+.sheet-cells {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; padding: 16px;
+}
+.sheet-cell {
+  background: var(--g1); padding: 12px 10px; border-radius: 2px;
+  border-left: 2px solid rgba(230,0,0,0.25);
+}
+.sc-lbl { font-size: 7px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.sc-val { font-family: 'Bebas Neue'; font-size: 22px; color: var(--red); }
+.sheet-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  border-top: 1px solid rgba(255,255,255,0.03);
+}
+.sheet-row-cell {
+  padding: 10px 14px; font-size: 10px; color: var(--muted2);
+  border-right: 1px solid rgba(255,255,255,0.03);
+}
+.sheet-row-cell:last-child { border: none; }
+.sheet-row-cell.red { color: var(--red); font-weight: 700; }
+.sheet-row-cell.green { color: #22c55e; font-weight: 700; }
+
+/* Sheet list */
+.sheet-list { list-style: none; }
+.sheet-list li {
+  padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex; align-items: flex-start; gap: 14px;
+  font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65;
+}
+.sheet-list li:last-child { border: none; }
+.sheet-list li::before {
+  content: ''; width: 5px; height: 5px; background: var(--red);
+  border-radius: 1px; flex-shrink: 0; margin-top: 7px;
+}
+.sheet-list li em { color: var(--white); font-style: normal; font-weight: 700; }
+
+/* ═══ DAILY ═══ */
+.daily-section {
+  background: var(--g1);
+  padding: 140px 80px;
+}
+.daily-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 60px; }
+.daily-card {
+  background: var(--g2); padding: 50px 40px;
+  position: relative; overflow: hidden;
+  transition: background 0.3s;
+}
+.daily-card:hover { background: var(--g3); }
+.daily-card::after {
+  content: attr(data-word);
+  position: absolute; bottom: -20px; right: 10px;
+  font-family: 'Bebas Neue'; font-size: 100px;
+  color: rgba(255,255,255,0.02); pointer-events: none;
+}
+.dc-icon { font-size: 32px; margin-bottom: 20px; }
+.dc-title { font-family: 'Bebas Neue'; font-size: 26px; letter-spacing: 1px; margin-bottom: 14px; }
+.dc-desc { font-size: 13px; color: var(--muted2); line-height: 1.9; }
+.dc-desc em { color: rgba(255,255,255,0.8); font-style: normal; }
+.dc-desc strong { color: var(--red); font-weight: 700; }
+
+/* ═══ PRICING ═══ */
+.pricing-section {
+  background: var(--black);
+  padding: 140px 80px;
+  text-align: center;
+}
+.pricing-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px;
+  margin-top: 60px; max-width: 960px; margin-left: auto; margin-right: auto;
+}
+.pricing-card {
+  background: var(--g2); padding: 44px 36px;
+  position: relative; overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: left;
+}
+.pricing-card:hover { transform: translateY(-8px); box-shadow: 0 32px 80px rgba(0,0,0,0.4); }
+.pricing-card.featured {
+  background: var(--red);
+}
+.pricing-card.featured .pc-sub { color: rgba(255,255,255,0.7); }
+.pricing-card.featured .pc-price-lbl { color: rgba(255,255,255,0.6); }
+.pricing-card.featured .pc-feat { color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.15); }
+.pricing-card.featured .pc-feat::before { background: var(--white); }
+.pricing-card.featured .pc-feat em { color: var(--white); }
+.pricing-card.featured .pc-note { color: rgba(255,255,255,0.5); }
+
+.pc-badge {
+  display: inline-block; font-size: 8px; font-weight: 900; letter-spacing: 2px;
+  text-transform: uppercase; background: var(--black); color: var(--red);
+  padding: 4px 10px; margin-bottom: 20px;
+}
+.pricing-card.featured .pc-badge { background: rgba(0,0,0,0.2); color: var(--white); }
+
+.pc-title { font-family: 'Bebas Neue'; font-size: 26px; letter-spacing: 1px; margin-bottom: 8px; }
+.pc-sub { font-size: 11px; color: var(--muted2); margin-bottom: 24px; line-height: 1.6; }
+.pc-price { font-family: 'Bebas Neue'; font-size: 64px; line-height: 1; color: var(--red); margin-bottom: 4px; }
+.pricing-card.featured .pc-price { color: var(--white); }
+.pc-price-lbl { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; }
+.pc-divider { height: 1px; background: rgba(255,255,255,0.07); margin-bottom: 24px; }
+.pricing-card.featured .pc-divider { background: rgba(255,255,255,0.2); }
+
+.pc-feats { list-style: none; }
+.pc-feat {
+  padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.6;
+}
+.pc-feat::before {
+  content: ''; width: 5px; height: 5px; background: var(--red);
+  border-radius: 50%; flex-shrink: 0; margin-top: 6px;
+}
+.pc-feat em { color: var(--white); font-style: normal; font-weight: 700; }
+.pc-feat:last-child { border: none; }
+.pc-note { font-size: 10px; color: rgba(255,255,255,0.25); letter-spacing: 1px; margin-top: 20px; }
+.pc-btn { margin-top: 28px; width: 100%; display: flex; justify-content: center; }
+.pricing-card.featured .btn-outline { border-color: rgba(255,255,255,0.4); color: var(--white); }
+
+.pricing-note {
+  margin-top: 40px; font-size: 12px; color: rgba(255,255,255,0.3);
+  line-height: 1.8; max-width: 600px; margin-left: auto; margin-right: auto;
+}
+.pricing-note em { color: rgba(255,255,255,0.6); font-style: normal; }
+
+/* ═══ FAQ ═══ */
+.faq-section {
+  background: var(--g1);
+  padding: 140px 80px;
+}
+.faq-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  margin-top: 60px; align-items: start;
+}
+.faq-list { display: flex; flex-direction: column; gap: 0; }
+.faq-item {
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 0; cursor: pointer;
+  font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.85);
+  transition: color 0.2s;
+}
+.faq-q:hover { color: var(--white); }
+.faq-arrow {
+  width: 20px; height: 20px; flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.2); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; transition: all 0.3s;
+}
+.faq-item.open .faq-arrow { background: var(--red); border-color: var(--red); transform: rotate(45deg); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.85;
+  font-weight: 500;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+.faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
+.faq-a em { color: rgba(255,255,255,0.8); font-style: normal; }
+
+/* FAQ photo */
+.faq-photo-wrap { position: relative; }
+.faq-photo-wrap img {
+  width: 100%; height: 500px; object-fit: cover; object-position: center top;
+  filter: grayscale(20%) contrast(1.1);
+}
+.faq-photo-wrap::before {
+  content: ''; position: absolute;
+  top: 16px; right: -16px; bottom: -16px; left: 16px;
+  border: 1px solid rgba(230,0,0,0.15); z-index: -1;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 1100px) {
+  .coaching-hero { padding: 140px 32px 60px; }
+  .process-section,.sheet-section,.daily-section,.pricing-section,.faq-section { padding: 80px 32px; }
+  .process-intro { grid-template-columns: 1fr; gap: 24px; margin-bottom: 40px; }
+  .steps-grid { grid-template-columns: 1fr 1fr; }
+  .sheet-grid { grid-template-columns: 1fr; gap: 40px; }
+  .daily-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 480px; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .faq-photo-wrap { display: none; }
+}
+@media (max-width: 600px) {
+  .steps-grid { grid-template-columns: 1fr; }
+  .ch-h1 { font-size: clamp(50px,14vw,90px); }
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="scroll-progress" id="sp"></div>
+<div class="cursor" id="cursor"><div class="cursor-dot"></div></div>
+<div class="cursor-ring" id="cring"></div>
+
+<nav class="nav scrolled" id="nav">
+  <a href="index.html" class="nav-logo">EP<span class="dot">.</span>COACHING</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Accueil</a>
+    <a href="parcours.html" class="nav-link">Mon Parcours</a>
+    <a href="coaching.html" class="nav-link active">Coaching</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </div>
+  <a href="contact.html" class="nav-cta">Me contacter</a>
+  <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Accueil</a>
+  <a href="parcours.html">Parcours</a>
+  <a href="coaching.html">Coaching</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="coaching-hero">
+  <div class="ch-bg">
+    <img src="images/training_deadlift.png" alt="Training">
+  </div>
+  <div class="ch-content">
+    <div class="s-tag" style="animation:slideUp 0.9s ease both;">Le Coaching</div>
+    <h1 class="ch-h1">
+      Un suivi<br>
+      <span class="r">construit</span><br>
+      <span class="o">pour toi.</span>
+    </h1>
+    <p class="ch-sub">Pas de programme générique, pas de plan copié-collé. <em>Chaque suivi est unique</em> — bâti sur ta vie, tes données, tes objectifs. Voici ce que ça veut dire concrètement.</p>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Suivi Alimentaire <span class="dot">·</span></span>
+    <span class="marquee-item">Programme Personnalisé <span class="dot">·</span></span>
+    <span class="marquee-item">Check-in Hebdomadaire <span class="dot">·</span></span>
+    <span class="marquee-item">WhatsApp Quotidien <span class="dot">·</span></span>
+    <span class="marquee-item">Google Sheet Complet <span class="dot">·</span></span>
+    <span class="marquee-item">Graphiques de Progression <span class="dot">·</span></span>
+    <span class="marquee-item">Road Map Semaine/Semaine <span class="dot">·</span></span>
+    <span class="marquee-item">Suivi Alimentaire <span class="dot">·</span></span>
+    <span class="marquee-item">Programme Personnalisé <span class="dot">·</span></span>
+    <span class="marquee-item">Check-in Hebdomadaire <span class="dot">·</span></span>
+    <span class="marquee-item">WhatsApp Quotidien <span class="dot">·</span></span>
+    <span class="marquee-item">Google Sheet Complet <span class="dot">·</span></span>
+    <span class="marquee-item">Graphiques de Progression <span class="dot">·</span></span>
+    <span class="marquee-item">Road Map Semaine/Semaine <span class="dot">·</span></span>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="process-intro">
+    <div class="rv">
+      <div class="s-tag">Comment ça marche</div>
+      <h2 class="s-title">4 étapes.<br><span class="r">Un résultat.</span></h2>
+      <div class="redbar"></div>
+    </div>
+    <div class="rv2">
+      <p>Chaque suivi commence par une vraie compréhension de qui tu es. Pas de template, pas de copier-coller. On construit <em>ensemble</em>, de l'appel découverte jusqu'aux résultats visibles — semaine après semaine.</p>
+    </div>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card rv">
+      <div class="step-n">01</div>
+      <div class="step-title">L'Appel Découverte</div>
+      <div class="step-desc">Tu remplis un questionnaire détaillé avant l'appel — niveau, objectif, historique d'entraînement, contraintes. Pendant l'appel, <em>je te projette dans ce qu'on peut construire ensemble</em> et je vois si le suivi est fait pour toi.</div>
+    </div>
+    <div class="step-card rv2">
+      <div class="step-n">02</div>
+      <div class="step-title">Semaine Calibrage</div>
+      <div class="step-desc">Avant de tout changer, <em>une semaine d'observation</em>. Tu ne modifies rien. Je regarde ton quotidien réel — ce que tu manges, comment tu t'entraînes, ton niveau d'énergie — pour construire une Road Map qui te correspond vraiment.</div>
+    </div>
+    <div class="step-card rv3">
+      <div class="step-n">03</div>
+      <div class="step-title">Le Suivi Actif</div>
+      <div class="step-desc">Programme complet + plan alimentaire flexible + check-in hebdomadaire. <em>Disponible chaque jour sur WhatsApp</em>. Ajustements basés sur tes données — poids, digestion, énergie, performance, mental.</div>
+    </div>
+    <div class="step-card rv4">
+      <div class="step-n">04</div>
+      <div class="step-title">Résultats & Autonomie</div>
+      <div class="step-desc">Les données trackées, les graphiques qui parlent d'eux-mêmes. Et au-delà du physique : <em>tu comprends enfin comment ton corps fonctionne</em> — pour être autonome toute ta vie.</div>
+    </div>
+  </div>
+</section>
+
+<!-- GOOGLE SHEET -->
+<section class="sheet-section">
+  <div class="rv">
+    <div class="s-tag">L'outil de suivi</div>
+    <h2 class="s-title">Un Google Sheet<br><span class="r">conçu pour toi.</span></h2>
+    <div class="redbar"></div>
+  </div>
+  <div class="sheet-grid">
+    <div class="rv-left">
+      <p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.9;font-weight:500;margin-bottom:28px;">Dès le début du suivi, tu reçois un <strong style="color:var(--white)">Google Sheet complet</strong> — conçu sur mesure et expliqué de A à Z. Ce n'est pas un template générique : c'est un outil vivant qui évolue avec toi.</p>
+      <ul class="sheet-list">
+        <li><em>Dashboard</em> — vue d'ensemble de toutes tes variables en un coup d'œil</li>
+        <li><em>Road Map</em> — où on en est et où on va, semaine par semaine</li>
+        <li><em>Plan alimentaire</em> — flexible, macros calculés automatiquement</li>
+        <li><em>Programme d'entraînement</em> — ton planning complet avec logbook intégré</li>
+        <li><em>Weekly Checking</em> — bilan hebdomadaire complet (poids, énergie, sommeil, digestion…)</li>
+        <li><em>Psychologie</em> — suivi de ton mental et de ton bien-être</li>
+        <li><em>Correction des exercices</em> — notes et cues techniques par exercice</li>
+        <li><em>Graphiques</em> — visualise ta progression dans le temps</li>
+        <li><em>Tracker de mensurations</em> — suivi corporel détaillé</li>
+        <li><em>Base alimentaire</em> — bibliothèque d'aliments pour ton plan</li>
+        <li><em>Apps Script automatisé</em> — scores en couleur, calculs automatiques, résumés email</li>
+      </ul>
+    </div>
+    <div class="rv-right">
+      <div class="sheet-visual">
+        <div class="sheet-visual-header">📊 EP Coaching — Google Sheet</div>
+        <div class="sheet-tabs">
+          <div class="sh-tab active">Dashboard</div>
+          <div class="sh-tab">Road Map</div>
+          <div class="sh-tab">Alimentation</div>
+          <div class="sh-tab">Programme</div>
+          <div class="sh-tab">Checking</div>
+          <div class="sh-tab">Graphiques</div>
+          <div class="sh-tab">Psycho</div>
+          <div class="sh-tab">+4</div>
+        </div>
+        <div class="sheet-cells">
+          <div class="sheet-cell"><div class="sc-lbl">Poids actuel</div><div class="sc-val">— kg</div></div>
+          <div class="sheet-cell"><div class="sc-lbl">Calories cible</div><div class="sc-val">—</div></div>
+          <div class="sheet-cell"><div class="sc-lbl">Semaine</div><div class="sc-val">S01</div></div>
+          <div class="sheet-cell"><div class="sc-lbl">Protéines</div><div class="sc-val">—g</div></div>
+          <div class="sheet-cell"><div class="sc-lbl">Objectif</div><div class="sc-val">—</div></div>
+          <div class="sheet-cell"><div class="sc-val" style="color:#22c55e;margin-top:18px;">▲ —</div></div>
+        </div>
+        <div class="sheet-row">
+          <div class="sheet-row-cell">Lundi</div>
+          <div class="sheet-row-cell red">Push A</div>
+          <div class="sheet-row-cell green">Complété</div>
+        </div>
+        <div class="sheet-row">
+          <div class="sheet-row-cell">Mardi</div>
+          <div class="sheet-row-cell red">Pull A</div>
+          <div class="sheet-row-cell green">Complété</div>
+        </div>
+        <div class="sheet-row">
+          <div class="sheet-row-cell">Mercredi</div>
+          <div class="sheet-row-cell red">Legs A</div>
+          <div class="sheet-row-cell" style="color:var(--muted2);">En cours</div>
+        </div>
+        <div style="padding:12px 14px;font-size:10px;color:var(--muted);letter-spacing:1px;border-top:1px solid rgba(255,255,255,0.03);">Apps Script · Auto-calculated · Color-coded</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DAILY -->
+<section class="daily-section">
+  <div class="rv">
+    <div class="s-tag">Au quotidien</div>
+    <h2 class="s-title">Ce qu'on fait<br><span class="r">chaque semaine.</span></h2>
+    <div class="redbar"></div>
+  </div>
+  <div class="daily-grid">
+    <div class="daily-card rv" data-word="FOOD">
+      <div class="dc-icon">🍽️</div>
+      <div class="dc-title">Suivi Alimentaire</div>
+      <div class="dc-desc">Tu me dis ce que tu manges — ça peut être <em>un simple message</em> ou un screen de ton appli de tracking. Je vérifie, j'ajuste, je te donne un retour. <strong>Flexible selon ton niveau d'engagement</strong>.</div>
+    </div>
+    <div class="daily-card rv2" data-word="TRAIN">
+      <div class="dc-icon">🏋️</div>
+      <div class="dc-title">Suivi Entraînement</div>
+      <div class="dc-desc">Tu m'envoies <em>au moins une série par exercice</em> — vidéo ou photo. Je regarde ton setup, je corrige, j'optimise. Si tu n'as pas de programme, <strong>je le construis de zéro</strong>. Si t'en as un, je l'améliore.</div>
+    </div>
+    <div class="daily-card rv" data-word="CHECK">
+      <div class="dc-icon">📋</div>
+      <div class="dc-title">Check-in Hebdomadaire</div>
+      <div class="dc-desc">Chaque semaine tu remplis ton checking dans le Sheet — poids, sommeil, digestion, stress, énergie, mental. Je fais le bilan complet et <em>j'ajuste le plan</em> en conséquence. Rien n'est laissé au hasard.</div>
+    </div>
+    <div class="daily-card rv2" data-word="DISPO">
+      <div class="dc-icon">💬</div>
+      <div class="dc-title">Disponibilité Quotidienne</div>
+      <div class="dc-desc">Je suis <em>joignable chaque jour sur WhatsApp</em>. Une question, un doute, un repas à valider, une série à corriger — tu envoies, je réponds. <strong>Tu n'es jamais seul dans ta progression</strong>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <div class="rv">
+    <div class="s-tag" style="justify-content:center;">L'offre</div>
+    <h2 class="s-title">Simple.<br><span class="r">Transparent.</span></h2>
+    <div class="redbar" style="margin:20px auto;"></div>
+    <p style="font-size:14px;color:rgba(255,255,255,0.4);max-width:440px;margin:0 auto;line-height:1.8;font-weight:500;">Je suis en phase de lancement — les places sont limitées et les tarifs évoluent au fil des clients.</p>
+  </div>
+  <div class="pricing-grid rv2">
+    <!-- Phase Founder -->
+    <div class="pricing-card">
+      <div class="pc-badge">Phase Founder</div>
+      <div class="pc-title">Starter</div>
+      <div class="pc-sub">Pour ceux qui démarrent leur suivi et veulent poser des bases solides.</div>
+      <div class="pc-price">70€</div>
+      <div class="pc-price-lbl">par mois</div>
+      <div class="pc-divider"></div>
+      <ul class="pc-feats">
+        <li class="pc-feat"><em>Programme d'entraînement</em> complet et personnalisé</li>
+        <li class="pc-feat"><em>Plan alimentaire</em> flexible (IIFYM)</li>
+        <li class="pc-feat"><em>Google Sheet</em> coaching complet</li>
+        <li class="pc-feat">Check-in hebdomadaire</li>
+        <li class="pc-feat">WhatsApp quotidien</li>
+        <li class="pc-feat">Ajustements hebdomadaires</li>
+      </ul>
+      <div class="pc-note">Places limitées · Tarif fondateur</div>
+      <div class="pc-btn">
+        <a href="https://wa.me/33766834777?text=Bonjour%20Emmanuel%2C%20je%20veux%20en%20savoir%20plus%20sur%20le%20suivi" class="btn" target="_blank" style="width:100%;justify-content:center;font-size:10px;padding:14px;">Démarrer</a>
+      </div>
+    </div>
+    <!-- Phase 2 - FEATURED -->
+    <div class="pricing-card featured">
+      <div class="pc-badge">Phase 2</div>
+      <div class="pc-title">Coaching Complet</div>
+      <div class="pc-sub">Le suivi intégral avec toutes les fonctionnalités et une attention maximale.</div>
+      <div class="pc-price">130€</div>
+      <div class="pc-price-lbl">par mois</div>
+      <div class="pc-divider"></div>
+      <ul class="pc-feats">
+        <li class="pc-feat"><em>Tout du plan Starter</em></li>
+        <li class="pc-feat"><em>Semaine calibrage</em> dédiée</li>
+        <li class="pc-feat">Correction vidéo exercices</li>
+        <li class="pc-feat">Road Map compétition/objectif</li>
+        <li class="pc-feat">Suivi psychologique intégré</li>
+        <li class="pc-feat">Graphiques de progression avancés</li>
+        <li class="pc-feat">Tracker de mensurations</li>
+      </ul>
+      <div class="pc-note">Prochain palier tarifaire</div>
+      <div class="pc-btn">
+        <a href="https://wa.me/33766834777?text=Bonjour%20Emmanuel%2C%20je%20veux%20en%20savoir%20plus%20sur%20le%20suivi" class="btn btn-outline" target="_blank" style="width:100%;justify-content:center;font-size:10px;padding:14px;">Rejoindre la liste</a>
+      </div>
+    </div>
+    <!-- Premium -->
+    <div class="pricing-card">
+      <div class="pc-badge">Phase 3</div>
+      <div class="pc-title">Premium</div>
+      <div class="pc-sub">Pour les compétiteurs ou ceux qui veulent le maximum d'implication.</div>
+      <div class="pc-price">180€</div>
+      <div class="pc-price-lbl">par mois</div>
+      <div class="pc-divider"></div>
+      <ul class="pc-feats">
+        <li class="pc-feat"><em>Tout du plan Complet</em></li>
+        <li class="pc-feat">Appel stratégie mensuel (vidéo)</li>
+        <li class="pc-feat"><em>Préparation compétition</em> dédiée</li>
+        <li class="pc-feat">Peaking & water manipulation</li>
+        <li class="pc-feat">Coaching posing</li>
+        <li class="pc-feat">Accès prioritaire</li>
+      </ul>
+      <div class="pc-note">Disponible sur dossier</div>
+      <div class="pc-btn">
+        <a href="https://wa.me/33766834777?text=Bonjour%20Emmanuel%2C%20je%20veux%20en%20savoir%20plus%20sur%20le%20coaching%20Premium" class="btn" target="_blank" style="width:100%;justify-content:center;font-size:10px;padding:14px;">Nous contacter</a>
+      </div>
+    </div>
+  </div>
+  <p class="pricing-note rv3">Paiement mensuel par <em>Revolut</em>. Pas d'engagement longue durée imposé. Le suivi peut s'arrêter à tout moment. <em>La transparence, c'est la base.</em></p>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="rv">
+    <div class="s-tag">Questions fréquentes</div>
+    <h2 class="s-title">Les réponses<br><span class="r">claires.</span></h2>
+    <div class="redbar"></div>
+  </div>
+  <div class="faq-grid">
+    <div class="rv-left">
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q">Tu as 16 ans — est-ce que tu es crédible pour coacher ?<div class="faq-arrow">+</div></div>
+          <div class="faq-a">L'âge n'est pas la crédibilité — <em>les résultats et le système le sont</em>. Je construis mes clients avec la même rigueur que mon propre suivi : données hebdomadaires, ajustements basés sur les faits, pas sur les intuitions. Mon Google Sheet, mes graphiques, ma progression parlent d'eux-mêmes.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Combien de temps dure le suivi minimum ?<div class="faq-arrow">+</div></div>
+          <div class="faq-a">Il n'y a pas d'engagement forcé. Je recommande <em>3 mois minimum</em> pour voir des résultats significatifs et comprendre les mécanismes. Mais tu es libre d'arrêter quand tu veux — c'est ton choix, pas une prison.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Est-ce que le coaching est adapté aux débutants ?<div class="faq-arrow">+</div></div>
+          <div class="faq-a">Oui. La <em>semaine de calibrage</em> est faite pour ça — je pars de ton niveau réel, pas de ce que tu crois être. Que tu aies 1 mois ou 3 ans d'expérience, on reconstruit depuis les bases si besoin.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Comment se passe la communication au quotidien ?<div class="faq-arrow">+</div></div>
+          <div class="faq-a"><em>WhatsApp</em> exclusivement. Messages courts et directs — je ne fais pas de longs pavés analytiques. Tu envoies, je réponds. Si c'est urgent, je réponds plus vite. Disponibilité quotidienne garantie.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Est-ce que je dois peser ma nourriture ?<div class="faq-arrow">+</div></div>
+          <div class="faq-a">C'est à toi de décider. Je propose un suivi <em>flexible</em> — si tu pèses tout, je me base sur les macros exactes. Si tu n'as pas envie, on peut travailler avec des estimations et des patterns alimentaires. L'important, c'est la régularité, pas la perfection.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Tu es 100% naturel — comment je sais que c'est vrai ?<div class="faq-arrow">+</div></div>
+          <div class="faq-a">Je vise la compétition WNBF — une fédération naturelle avec <em>tests antidopage</em>. Ma progression sur 3 ans est documentée et cohérente avec une progression naturelle. C'est un principe de vie, pas un argument marketing.</div>
+        </div>
+      </div>
+    </div>
+    <div class="faq-photo-wrap rv-right">
+      <img src="images/green_side.png" alt="Emmanuel">
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:var(--black);padding:140px 80px;text-align:center;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(230,0,0,0.1)0%,transparent 70%);pointer-events:none;"></div>
+  <div class="rv" style="position:relative;z-index:2;">
+    <div class="s-tag" style="justify-content:center;color:rgba(255,255,255,0.2);">Prêt ?</div>
+    <h2 class="s-title" style="font-size:clamp(52px,9vw,110px);">Démarre<br><span class="r">maintenant.</span></h2>
+    <p style="font-size:15px;color:rgba(255,255,255,0.4);font-weight:600;max-width:400px;margin:20px auto 48px;line-height:1.8;">Un message, une conversation. Je réponds dans la journée.</p>
+    <a href="https://wa.me/33766834777?text=Bonjour%20Emmanuel%2C%20je%20veux%20en%20savoir%20plus%20sur%20le%20suivi" class="btn" target="_blank" style="font-size:12px;padding:20px 56px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Démarrer sur WhatsApp
+    </a>
+    <div style="margin-top:24px;font-size:10px;color:rgba(255,255,255,0.15);letter-spacing:2px;text-transform:uppercase;">@emmanuelpccoux · Réponse garantie sous 24h</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">EP<span class="dot">.</span>COACHING</div>
+  <div class="footer-links">
+    <a href="index.html">Accueil</a>
+    <a href="parcours.html">Parcours</a>
+    <a href="coaching.html">Coaching</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Emmanuel Peccoux — Tous droits réservés</div>
+</footer>
+
+<script>
+const sp=document.getElementById('sp');
+window.addEventListener('scroll',()=>{
+  const s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight;
+  sp.style.transform=`scaleX(${s/h})`;
+  document.getElementById('nav').classList.add('scrolled');
+});
+const dot=document.getElementById('cursor'),ring=document.getElementById('cring');
+let rx=0,ry=0,mx=0,my=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px)`;});
+(function raf(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(raf);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>ring.classList.add('hovered'));
+  el.addEventListener('mouseleave',()=>ring.classList.remove('hovered'));
+});
+const burger=document.getElementById('burger'),mm=document.getElementById('mobileMenu');
+burger.addEventListener('click',()=>{mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
+mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mm.classList.remove('open');document.body.style.overflow='';}));
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:0.07});
+document.querySelectorAll('.rv,.rv2,.rv3,.rv4,.rv-left,.rv-right').forEach(el=>obs.observe(el));
+// FAQ
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.querySelector('.faq-q').addEventListener('click',()=>{
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>

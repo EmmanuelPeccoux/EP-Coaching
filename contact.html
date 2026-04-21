@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Emmanuel Peccoux Coach Bodybuilding</title>
+<link rel="stylesheet" href="style.css">
+<style>
+
+.contact-wrap {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  padding-top: var(--nav-h);
+}
+
+/* Left panel */
+.contact-left {
+  background: var(--g1);
+  padding: 100px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.contact-left::before {
+  content: '';
+  position: absolute; top: 0; right: 0; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--red), transparent);
+}
+.cl-giant {
+  position: absolute; bottom: -40px; left: -20px;
+  font-family: 'Bebas Neue'; font-size: 20vw;
+  color: rgba(255,255,255,0.015); pointer-events: none; line-height: 1;
+}
+.cl-content { position: relative; z-index: 2; }
+
+.contact-h1 {
+  font-family: 'Bebas Neue';
+  font-size: clamp(52px, 7vw, 96px);
+  line-height: 0.88; letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 24px;
+  animation: slideUp 0.9s ease both;
+}
+.contact-h1 .r { color: var(--red); }
+.contact-h1 .o { -webkit-text-stroke: 1.5px rgba(255,255,255,0.12); color: transparent; }
+
+.contact-sub {
+  font-size: 14px; color: rgba(255,255,255,0.45); font-weight: 600;
+  line-height: 1.9; max-width: 400px; margin-bottom: 48px;
+  animation: slideUp 0.9s 0.1s ease both;
+}
+.contact-sub em { color: var(--white); font-style: normal; }
+
+/* Contact channels */
+.contact-channels { display: flex; flex-direction: column; gap: 2px; animation: slideUp 0.9s 0.2s ease both; }
+.channel {
+  display: flex; align-items: center; gap: 20px;
+  padding: 22px 24px; background: var(--g2);
+  border-left: 2px solid rgba(230,0,0,0.2);
+  text-decoration: none; transition: all 0.3s;
+  position: relative; overflow: hidden;
+}
+.channel::before {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(230,0,0,0.05);
+  transform: translateX(-101%); transition: transform 0.3s;
+}
+.channel:hover::before { transform: translateX(0); }
+.channel:hover { border-color: var(--red); }
+.ch-icon { font-size: 22px; flex-shrink: 0; width: 32px; text-align: center; }
+.ch-body {}
+.ch-label { font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+.ch-val { font-size: 14px; font-weight: 700; color: var(--white); }
+.ch-note { font-size: 11px; color: var(--muted2); margin-top: 2px; }
+.ch-arrow { margin-left: auto; font-size: 12px; color: var(--muted); transition: transform 0.3s, color 0.3s; }
+.channel:hover .ch-arrow { transform: translateX(4px); color: var(--red); }
+
+/* Photo inset */
+.contact-photo {
+  margin-top: 40px; animation: slideUp 0.9s 0.3s ease both;
+  position: relative; display: inline-block;
+}
+.contact-photo img {
+  width: 180px; height: 220px; object-fit: cover; object-position: center top;
+  filter: grayscale(20%);
+}
+.contact-photo-badge {
+  position: absolute; bottom: -8px; right: -8px;
+  background: var(--red); padding: 10px 14px;
+  font-size: 9px; font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Right panel — form */
+.contact-right {
+  background: var(--black);
+  padding: 100px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+.form-title {
+  font-family: 'Bebas Neue'; font-size: 32px; letter-spacing: 2px; margin-bottom: 8px;
+  animation: slideUp 0.9s 0.05s ease both;
+}
+.form-sub {
+  font-size: 12px; color: var(--muted2); margin-bottom: 36px; line-height: 1.7;
+  animation: slideUp 0.9s 0.15s ease both;
+}
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; animation: slideUp 0.9s 0.2s ease both; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group.full { grid-column: span 2; }
+.form-label { font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--muted2); }
+.form-input, .form-select, .form-textarea {
+  background: var(--g2); border: 1px solid rgba(255,255,255,0.06);
+  color: var(--white); font-family: 'Montserrat'; font-size: 13px; font-weight: 500;
+  padding: 14px 16px; border-radius: 1px; outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  appearance: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: rgba(230,0,0,0.5); background: var(--g3);
+}
+.form-input::placeholder, .form-textarea::placeholder { color: var(--muted); }
+.form-textarea { height: 120px; resize: vertical; }
+.form-select option { background: var(--g2); }
+
+.form-submit-wrap { margin-top: 20px; animation: slideUp 0.9s 0.3s ease both; }
+.form-submit {
+  width: 100%; padding: 18px; background: var(--red);
+  color: var(--white); font-family: 'Montserrat'; font-size: 11px;
+  font-weight: 900; letter-spacing: 2.5px; text-transform: uppercase;
+  border: none; cursor: pointer; position: relative; overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.form-submit::before {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(255,255,255,0.1);
+  transform: translateX(-101%); transition: transform 0.4s;
+}
+.form-submit:hover::before { transform: translateX(0); }
+.form-submit:hover { transform: translateY(-2px); box-shadow: 0 16px 48px rgba(230,0,0,0.35); }
+
+.form-note {
+  margin-top: 14px; font-size: 10px; color: rgba(255,255,255,0.2);
+  letter-spacing: 1px; line-height: 1.6;
+}
+
+/* Success message */
+.form-success {
+  display: none; text-align: center; padding: 40px 20px;
+}
+.form-success.show { display: block; }
+.form-success h3 { font-family: 'Bebas Neue'; font-size: 36px; color: var(--red); margin-bottom: 12px; }
+.form-success p { font-size: 13px; color: var(--muted2); line-height: 1.8; }
+
+@keyframes slideUp { from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)} }
+
+/* ═══ SOCIAL SECTION ═══ */
+.social-section {
+  background: var(--g1);
+  padding: 80px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.social-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  margin-top: 40px;
+}
+.social-card {
+  padding: 36px 32px; background: var(--g2);
+  display: flex; flex-direction: column; gap: 12px;
+  text-decoration: none; transition: background 0.3s;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+}
+.social-card:hover { background: var(--g3); border-bottom-color: var(--red); }
+.sc-platform { font-size: 9px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+.sc-handle { font-family: 'Bebas Neue'; font-size: 28px; letter-spacing: 2px; color: var(--white); }
+.sc-desc { font-size: 12px; color: var(--muted2); line-height: 1.7; }
+.sc-arrow { font-size: 18px; color: var(--red); margin-top: auto; }
+
+/* RESPONSIVE */
+@media (max-width: 1000px) {
+  .contact-wrap { grid-template-columns: 1fr; }
+  .contact-left { padding: 100px 32px 60px; }
+  .cl-giant { display: none; }
+  .contact-right { padding: 60px 32px 80px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group.full { grid-column: span 1; }
+  .social-section { padding: 60px 32px; }
+  .social-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="scroll-progress" id="sp"></div>
+<div class="cursor" id="cursor"><div class="cursor-dot"></div></div>
+<div class="cursor-ring" id="cring"></div>
+
+<nav class="nav scrolled" id="nav">
+  <a href="index.html" class="nav-logo">EP<span class="dot">.</span>COACHING</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Accueil</a>
+    <a href="parcours.html" class="nav-link">Mon Parcours</a>
+    <a href="coaching.html" class="nav-link">Coaching</a>
+    <a href="contact.html" class="nav-link active">Contact</a>
+  </div>
+  <a href="https://wa.me/33766834777" class="nav-cta" target="_blank">WhatsApp</a>
+  <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Accueil</a>
+  <a href="parcours.html">Parcours</a>
+  <a href="coaching.html">Coaching</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="contact-wrap">
+  <!-- LEFT -->
+  <div class="contact-left">
+    <div class="cl-giant">TALK</div>
+    <div class="cl-content">
+      <div class="s-tag" style="animation:slideUp 0.9s ease both;">Me contacter</div>
+      <h1 class="contact-h1">
+        Parlons<br>
+        <span class="r">de toi</span><br>
+        <span class="o">ensemble.</span>
+      </h1>
+      <p class="contact-sub">
+        Tu as des questions, tu veux en savoir plus sur le coaching, ou t'es prêt à démarrer ?
+        <em>Écris-moi.</em> La méthode la plus directe reste WhatsApp — je réponds chaque jour.
+      </p>
+
+      <div class="contact-channels">
+        <a href="https://wa.me/33766834777?text=Bonjour%20Emmanuel%2C%20je%20veux%20en%20savoir%20plus%20sur%20le%20suivi" class="channel" target="_blank">
+          <div class="ch-icon">💬</div>
+          <div class="ch-body">
+            <div class="ch-label">WhatsApp — Recommandé</div>
+            <div class="ch-val">+33 7 66 83 47 77</div>
+            <div class="ch-note">Réponse garantie sous 24h · La voie principale</div>
+          </div>
+          <div class="ch-arrow">→</div>
+        </a>
+        <a href="https://www.instagram.com/emmanuelpccoux" class="channel" target="_blank">
+          <div class="ch-icon">📸</div>
+          <div class="ch-body">
+            <div class="ch-label">Instagram</div>
+            <div class="ch-val">@emmanuelpccoux</div>
+            <div class="ch-note">Contenu, lifestyle, bodybuilding naturel</div>
+          </div>
+          <div class="ch-arrow">→</div>
+        </a>
+        <a href="https://www.tiktok.com/@emmanuelpccoux" class="channel" target="_blank">
+          <div class="ch-icon">🎵</div>
+          <div class="ch-body">
+            <div class="ch-label">TikTok</div>
+            <div class="ch-val">@emmanuelpccoux</div>
+            <div class="ch-note">Éducation · Bodybuilding · Science</div>
+          </div>
+          <div class="ch-arrow">→</div>
+        </a>
+      </div>
+
+      <div class="contact-photo">
+        <img src="images/hero_current.png" alt="Emmanuel">
+        <div class="contact-photo-badge">EP · Coach</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT — FORM -->
+  <div class="contact-right">
+    <h2 class="form-title">Formulaire de contact</h2>
+    <p class="form-sub">Tu préfères un message structuré ? Remplis ce formulaire et je te reviens rapidement. Ou utilise directement WhatsApp — c'est plus simple.</p>
+
+    <form id="contactForm">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="fname">Prénom</label>
+          <input class="form-input" type="text" id="fname" placeholder="Ton prénom" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="lname">Nom</label>
+          <input class="form-input" type="text" id="lname" placeholder="Ton nom">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" placeholder="ton@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="age">Âge</label>
+          <input class="form-input" type="number" id="age" placeholder="Ton âge" min="14" max="60">
+        </div>
+        <div class="form-group full">
+          <label class="form-label" for="objectif">Objectif principal</label>
+          <select class="form-select" id="objectif">
+            <option value="" disabled selected>Sélectionne ton objectif</option>
+            <option value="prise-masse">Prise de masse musculaire</option>
+            <option value="seche">Sèche / Définition</option>
+            <option value="recompo">Recomposition corporelle</option>
+            <option value="competition">Préparation compétition</option>
+            <option value="autre">Autre / Je ne sais pas encore</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label class="form-label" for="niveau">Niveau d'expérience</label>
+          <select class="form-select" id="niveau">
+            <option value="" disabled selected>Ton niveau actuel</option>
+            <option value="debutant">Débutant (moins de 6 mois)</option>
+            <option value="intermediaire">Intermédiaire (6 mois – 2 ans)</option>
+            <option value="avance">Avancé (2+ ans)</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label class="form-label" for="message">Message</label>
+          <textarea class="form-textarea" id="message" placeholder="Dis-moi ce qui t'amène, ton historique, tes questions…" required></textarea>
+        </div>
+      </div>
+
+      <div class="form-submit-wrap">
+        <button type="submit" class="form-submit">Envoyer le message</button>
+        <p class="form-note">En envoyant ce formulaire, tu acceptes d'être recontacté par email ou WhatsApp. Tes données ne sont pas partagées.</p>
+      </div>
+    </form>
+
+    <div class="form-success" id="formSuccess">
+      <h3>Message reçu ✓</h3>
+      <p>Merci pour ton message. Je vais revenir vers toi très rapidement.<br>Tu peux aussi m'écrire directement sur WhatsApp pour une réponse immédiate.</p>
+      <div style="margin-top:24px;">
+        <a href="https://wa.me/33766834777" class="btn" target="_blank">Ouvrir WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL -->
+<section class="social-section">
+  <div class="rv">
+    <div class="s-tag">Réseaux sociaux</div>
+    <h2 class="s-title">Suis<br><span class="r">l'aventure.</span></h2>
+  </div>
+  <div class="social-grid rv2">
+    <a href="https://www.instagram.com/emmanuelpccoux" class="social-card" target="_blank">
+      <div class="sc-platform">Instagram</div>
+      <div class="sc-handle">@emmanuelpccoux</div>
+      <div class="sc-desc">Photos de physique, lifestyle, coulisses de la prep compétition et du coaching.</div>
+      <div class="sc-arrow">↗</div>
+    </a>
+    <a href="https://www.tiktok.com/@emmanuelpccoux" class="social-card" target="_blank">
+      <div class="sc-platform">TikTok</div>
+      <div class="sc-handle">@emmanuelpccoux</div>
+      <div class="sc-desc">Vidéos éducatives sur le bodybuilding naturel, les fondamentaux, la science derrière l'entraînement.</div>
+      <div class="sc-arrow">↗</div>
+    </a>
+    <a href="https://open.spotify.com" class="social-card" target="_blank">
+      <div class="sc-platform">Spotify Podcast</div>
+      <div class="sc-handle">Natty'Cast</div>
+      <div class="sc-desc">Le podcast sur le bodybuilding naturel — éducation, mindset, science appliquée.</div>
+      <div class="sc-arrow">↗</div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">EP<span class="dot">.</span>COACHING</div>
+  <div class="footer-links">
+    <a href="index.html">Accueil</a>
+    <a href="parcours.html">Parcours</a>
+    <a href="coaching.html">Coaching</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Emmanuel Peccoux — Tous droits réservés</div>
+</footer>
+
+<script>
+const sp=document.getElementById('sp');
+window.addEventListener('scroll',()=>{const s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight;sp.style.transform=`scaleX(${s/h})`;});
+const dot=document.getElementById('cursor'),ring=document.getElementById('cring');
+let rx=0,ry=0,mx=0,my=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px)`;});
+(function raf(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(raf);})();
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('hovered'));el.addEventListener('mouseleave',()=>ring.classList.remove('hovered'));});
+const burger=document.getElementById('burger'),mm=document.getElementById('mobileMenu');
+burger.addEventListener('click',()=>{mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
+mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mm.classList.remove('open');document.body.style.overflow='';}));
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:0.07});
+document.querySelectorAll('.rv,.rv2').forEach(el=>obs.observe(el));
+// Form
+document.getElementById('contactForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const form=document.getElementById('contactForm');
+  const success=document.getElementById('formSuccess');
+  form.style.opacity='0';form.style.transition='opacity 0.3s';
+  setTimeout(()=>{form.style.display='none';success.classList.add('show');},300);
+});
+</script>
+</body>
+</html>

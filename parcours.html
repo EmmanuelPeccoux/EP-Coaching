@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon Parcours — Emmanuel Peccoux Coach</title>
+<link rel="stylesheet" href="style.css">
+<style>
+
+/* ═══ HERO PARCOURS ═══ */
+.parcours-hero {
+  min-height: 90vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 140px 80px 100px;
+  position: relative; overflow: hidden;
+  background: var(--black);
+}
+.ph-bg {
+  position: absolute; inset: 0; z-index: 0;
+}
+.ph-bg-img {
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: center top;
+  filter: grayscale(30%) contrast(1.15);
+}
+.ph-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to right, rgba(5,5,5,0.97) 40%, rgba(5,5,5,0.4) 100%),
+    linear-gradient(to top, rgba(5,5,5,1) 0%, transparent 50%);
+}
+.ph-content {
+  position: relative; z-index: 2;
+  max-width: 800px;
+}
+.ph-giant {
+  position: absolute; bottom: -20px; right: 60px; z-index: 1;
+  font-family: 'Bebas Neue'; font-size: 22vw;
+  color: rgba(255,255,255,0.02); line-height: 1; pointer-events: none;
+  letter-spacing: -4px;
+}
+.ph-h1 {
+  font-family: 'Bebas Neue';
+  font-size: clamp(64px, 10vw, 140px);
+  line-height: 0.88; letter-spacing: 3px; text-transform: uppercase;
+}
+.ph-h1 .r { color: var(--red); }
+.ph-h1 .o { -webkit-text-stroke: 1.5px rgba(255,255,255,0.15); color: transparent; }
+
+.ph-sub {
+  font-size: 14px; color: rgba(255,255,255,0.45); font-weight: 600;
+  line-height: 1.9; margin-top: 24px; max-width: 500px;
+}
+.ph-sub em { color: var(--white); font-style: normal; }
+
+.ph-years {
+  display: flex; align-items: center; gap: 12px; margin-top: 40px;
+}
+.ph-year {
+  font-family: 'Bebas Neue'; font-size: 12px; letter-spacing: 3px;
+  color: var(--muted); padding: 8px 14px;
+  border: 1px solid rgba(255,255,255,0.07);
+  transition: all 0.3s;
+}
+.ph-year.active { color: var(--red); border-color: rgba(230,0,0,0.4); }
+.ph-year-sep { color: var(--muted); font-size: 10px; }
+
+/* ═══ INTRO CHIFFRES ═══ */
+.numbers-row {
+  background: var(--red);
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.number-item {
+  padding: 40px 36px;
+  border-right: 1px solid rgba(0,0,0,0.15);
+}
+.number-item:last-child { border: none; }
+.ni-num { font-family: 'Bebas Neue'; font-size: 56px; line-height: 1; }
+.ni-lbl { font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; opacity: 0.75; margin-top: 4px; }
+
+/* ═══ TIMELINE ═══ */
+.timeline-section {
+  background: var(--g1);
+  position: relative;
+}
+
+.timeline-intro {
+  padding: 100px 80px 60px;
+}
+.timeline-intro p {
+  font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.9;
+  max-width: 640px; margin-top: 20px; font-weight: 500;
+}
+.timeline-intro p em { color: var(--white); font-style: normal; }
+
+/* Timeline central line */
+.timeline {
+  padding: 0 80px 120px;
+  position: relative;
+}
+.timeline::before {
+  content: ''; position: absolute;
+  left: 50%; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom, var(--red), rgba(230,0,0,0.1));
+  transform: translateX(-50%);
+}
+
+/* Epoch item */
+.epoch {
+  display: grid; grid-template-columns: 1fr 80px 1fr;
+  gap: 0; margin-bottom: 120px; position: relative;
+}
+.epoch-left { padding-right: 60px; text-align: right; }
+.epoch-right { padding-left: 60px; }
+
+/* Node */
+.epoch-node {
+  display: flex; flex-direction: column; align-items: center; gap: 0;
+  position: relative; z-index: 2;
+}
+.epoch-dot {
+  width: 14px; height: 14px; background: var(--red); border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(230,0,0,0.2), 0 0 20px rgba(230,0,0,0.3);
+  flex-shrink: 0;
+}
+.epoch-line { flex: 1; width: 1px; background: rgba(230,0,0,0.2); }
+.epoch-year-badge {
+  background: var(--red); color: var(--white);
+  font-family: 'Bebas Neue'; font-size: 12px; letter-spacing: 2px;
+  padding: 4px 8px; margin-top: 8px; white-space: nowrap;
+}
+
+/* Content */
+.epoch-year {
+  font-family: 'Bebas Neue'; font-size: 80px; line-height: 0.9;
+  color: rgba(255,255,255,0.04); margin-bottom: 12px;
+}
+.epoch-label {
+  font-size: 9px; font-weight: 800; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--red); margin-bottom: 10px;
+}
+.epoch-title {
+  font-family: 'Bebas Neue'; font-size: 28px; letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+.epoch-text {
+  font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.9; font-weight: 500;
+}
+.epoch-text em { color: var(--white); font-style: normal; font-weight: 700; }
+.epoch-text strong { color: var(--red); }
+
+/* Photo */
+.epoch-photo {
+  position: relative; overflow: hidden; margin-top: 20px;
+  display: inline-block;
+}
+.epoch-photo img {
+  display: block;
+  max-height: 400px; width: auto;
+  filter: grayscale(20%) contrast(1.1);
+  transition: filter 0.5s, transform 0.6s;
+}
+.epoch-photo:hover img { filter: grayscale(0%); transform: scale(1.03); }
+.epoch-photo::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(5,5,5,0.3), transparent 60%);
+  z-index: 1; pointer-events: none;
+}
+
+/* Alternating — left content right photo / right content left photo */
+.epoch.alt .epoch-left { order: 3; padding-left: 60px; padding-right: 0; text-align: left; }
+.epoch.alt .epoch-node { order: 2; }
+.epoch.alt .epoch-right { order: 1; padding-right: 60px; padding-left: 0; text-align: right; }
+.epoch.alt .epoch-right .epoch-photo { float: right; }
+
+/* Tags */
+.epoch-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.epoch.alt .epoch-tags { justify-content: flex-end; }
+.epoch-tag {
+  font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 5px 10px; background: rgba(230,0,0,0.1); color: var(--red);
+  border: 1px solid rgba(230,0,0,0.2);
+}
+
+/* Multi-photos */
+.epoch-photos-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 20px;
+}
+.epoch-photos-grid img {
+  width: 100%; height: 200px; object-fit: cover;
+  filter: grayscale(20%) contrast(1.1);
+  transition: filter 0.4s;
+}
+.epoch-photos-grid img:hover { filter: grayscale(0%); }
+
+/* ═══ VISION SECTION ═══ */
+.vision {
+  background: var(--black);
+  padding: 140px 80px;
+  position: relative; overflow: hidden;
+}
+.vision::before {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(230,0,0,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.vision-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
+  align-items: center; position: relative; z-index: 2;
+}
+.vision-txt {}
+.vision-txt p {
+  font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.95;
+  font-weight: 500; margin-bottom: 20px;
+}
+.vision-txt p em { color: var(--white); font-style: normal; font-weight: 700; }
+.vision-txt p strong { color: var(--red); }
+
+.vision-targets {
+  display: flex; flex-direction: column; gap: 2px; margin-top: 36px;
+}
+.vision-target {
+  display: flex; align-items: center; gap: 20px;
+  padding: 18px 20px; background: var(--g2);
+  border-left: 2px solid rgba(230,0,0,0.25);
+  transition: border-color 0.3s, background 0.3s;
+}
+.vision-target:hover { border-color: var(--red); background: var(--g3); }
+.vt-year {
+  font-family: 'Bebas Neue'; font-size: 24px; color: var(--red); min-width: 56px;
+}
+.vt-txt { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+.vt-txt strong { color: var(--white); font-weight: 700; }
+
+.vision-photo { position: relative; }
+.vision-photo img {
+  width: 100%; height: 500px; object-fit: cover; object-position: center top;
+  filter: grayscale(15%) contrast(1.1);
+}
+.vision-photo::before {
+  content: ''; position: absolute;
+  top: -16px; right: -16px; bottom: 16px; left: 16px;
+  border: 1px solid rgba(230,0,0,0.15); z-index: -1;
+}
+.vision-quote {
+  position: absolute; bottom: -24px; left: -24px;
+  background: var(--red); padding: 24px 28px; max-width: 280px;
+}
+.vq-txt {
+  font-size: 14px; font-weight: 700; line-height: 1.5;
+  font-style: italic;
+}
+.vq-auth { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; margin-top: 8px; }
+
+/* ═══ LIFESTYLE ═══ */
+.lifestyle {
+  background: var(--g1);
+  padding: 120px 80px;
+}
+.lifestyle-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 4px; margin-top: 60px;
+}
+.ls-item {
+  overflow: hidden; position: relative;
+}
+.ls-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(30%) contrast(1.1);
+  transition: filter 0.5s, transform 0.7s;
+}
+.ls-item:hover img { filter: grayscale(0%); transform: scale(1.04); }
+.ls-item::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(5,5,5,0.5) 0%, transparent 60%);
+  pointer-events: none;
+}
+.ls-item-label {
+  position: absolute; bottom: 12px; left: 14px; z-index: 2;
+  font-size: 8px; font-weight: 800; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.7);
+}
+.ls-big { grid-row: span 2; min-height: 500px; }
+.ls-sm { min-height: 240px; }
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 1000px) {
+  .parcours-hero { padding: 140px 32px 80px; }
+  .timeline { padding: 0 32px 80px; }
+  .timeline-intro { padding: 80px 32px 40px; }
+  .timeline::before { left: 30px; }
+  .epoch { grid-template-columns: 1fr; }
+  .epoch-left, .epoch-right { padding: 0 0 0 60px; text-align: left; }
+  .epoch-node { flex-direction: row; position: absolute; left: 0; top: 0; width: 30px; }
+  .epoch-line { display: none; }
+  .epoch.alt .epoch-left, .epoch.alt .epoch-right { order: unset; padding: 0 0 0 60px; text-align: left; }
+  .epoch.alt .epoch-right .epoch-photo { float: none; }
+  .epoch.alt .epoch-tags { justify-content: flex-start; }
+  .vision { padding: 80px 32px; }
+  .vision-grid { grid-template-columns: 1fr; gap: 48px; }
+  .vision-photo { display: none; }
+  .lifestyle { padding: 80px 32px; }
+  .lifestyle-grid { grid-template-columns: 1fr 1fr; }
+  .ls-big { grid-row: span 1; }
+  .numbers-row { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 600px) {
+  .ph-h1 { font-size: clamp(52px, 14vw, 90px); }
+  .lifestyle-grid { grid-template-columns: 1fr; }
+  .epoch-photos-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="scroll-progress" id="sp"></div>
+<div class="cursor" id="cursor"><div class="cursor-dot"></div></div>
+<div class="cursor-ring" id="cring"></div>
+
+<!-- NAV -->
+<nav class="nav scrolled" id="nav">
+  <a href="index.html" class="nav-logo">EP<span class="dot">.</span>COACHING</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Accueil</a>
+    <a href="parcours.html" class="nav-link active">Mon Parcours</a>
+    <a href="coaching.html" class="nav-link">Coaching</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </div>
+  <a href="contact.html" class="nav-cta">Me contacter</a>
+  <button class="nav-burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Accueil</a>
+  <a href="parcours.html">Parcours</a>
+  <a href="coaching.html">Coaching</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="parcours-hero">
+  <div class="ph-bg">
+    <img class="ph-bg-img" src="images/green_front.png" alt="Emmanuel">
+  </div>
+  <div class="ph-giant">2026</div>
+  <div class="ph-content">
+    <div class="s-tag" style="animation:slideUp 0.9s ease both;">Mon histoire</div>
+    <h1 class="ph-h1" style="animation:slideUp 0.9s 0.1s ease both;">
+      3 ans.<br>
+      <span class="r">Un seul</span><br>
+      <span class="o">objectif.</span>
+    </h1>
+    <p class="ph-sub" style="animation:slideUp 0.9s 0.2s ease both;">
+      Du lycéen qui découvrait le bodybuilding au compétiteur qui se prépare pour la scène nationale.
+      <em>Voici la vraie histoire</em>, sans filtre et sans embellissement.
+    </p>
+    <div class="ph-years" style="animation:slideUp 0.9s 0.3s ease both;">
+      <div class="ph-year">2023</div>
+      <span class="ph-year-sep">→</span>
+      <div class="ph-year">2024</div>
+      <span class="ph-year-sep">→</span>
+      <div class="ph-year">2025</div>
+      <span class="ph-year-sep">→</span>
+      <div class="ph-year active">2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<div class="numbers-row">
+  <div class="number-item rv">
+    <div class="ni-num">3+</div>
+    <div class="ni-lbl">Ans d'entraînement</div>
+  </div>
+  <div class="number-item rv2">
+    <div class="ni-num">19</div>
+    <div class="ni-lbl">Semaines de prep</div>
+  </div>
+  <div class="number-item rv3">
+    <div class="ni-num">100%</div>
+    <div class="ni-lbl">Naturel</div>
+  </div>
+  <div class="number-item rv4">
+    <div class="ni-num">2027</div>
+    <div class="ni-lbl">Heroes Cup WNBF</div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="timeline-section">
+  <div class="timeline-intro rv">
+    <div class="s-tag">La timeline</div>
+    <h2 class="s-title">Chaque étape<br><span class="r">a compté.</span></h2>
+    <p>Ce n'est pas une success story fantasmée. C'est le récit <em>brut et authentique</em> d'un gamin de 16 ans qui a décidé de construire quelque chose de réel à partir de rien — avec <em>de la discipline, de la curiosité</em> et une obsession pour le bodybuilding naturel.</p>
+  </div>
+
+  <!-- ── TIMELINE ── -->
+  <div class="timeline">
+
+    <!-- EPOCH 1 - Début -->
+    <div class="epoch rv">
+      <div class="epoch-left">
+        <div class="epoch-year">2023</div>
+        <div class="epoch-label">Le point de départ</div>
+        <div class="epoch-title">Le déclic.</div>
+        <div class="epoch-text">
+          <p>Tout commence en 2023. Un lycéen comme les autres — curieux, passionné, cherchant quelque chose à construire. Le bodybuilding s'impose comme une évidence : <em>un sport de données, de rigueur, de patience</em>. Exactement ce qui me correspond.</p>
+          <p>Les premières séances sont chaotiques. Pas de programme, pas de plan alimentaire, <em>juste une barre et une envie de comprendre</em>. Mais très vite, la passion pour le "pourquoi" derrière chaque exercice prend le dessus.</p>
+        </div>
+        <div class="epoch-tags">
+          <span class="epoch-tag">Premier gym</span>
+          <span class="epoch-tag">Autodidacte</span>
+          <span class="epoch-tag">Colombie familiale</span>
+        </div>
+      </div>
+      <div class="epoch-node">
+        <div class="epoch-dot"></div>
+        <div class="epoch-line"></div>
+        <div class="epoch-year-badge">2023</div>
+      </div>
+      <div class="epoch-right">
+        <div class="epoch-photo">
+          <img src="images/school.png" alt="Emmanuel - Début">
+        </div>
+        <div style="margin-top:12px;font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;">Avant le gym. Le point de départ.</div>
+      </div>
+    </div>
+
+    <!-- EPOCH 2 - Premières bases -->
+    <div class="epoch alt rv">
+      <div class="epoch-left">
+        <div class="epoch-photo">
+          <img src="images/lifestyle_pink.png" alt="Emmanuel">
+        </div>
+        <div style="margin-top:12px;font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;text-align:right;">La progression commence.</div>
+      </div>
+      <div class="epoch-node">
+        <div class="epoch-dot"></div>
+        <div class="epoch-line"></div>
+        <div class="epoch-year-badge">2023–24</div>
+      </div>
+      <div class="epoch-right">
+        <div class="epoch-year">2024</div>
+        <div class="epoch-label">Premiers fondamentaux</div>
+        <div class="epoch-title">Les bases qui changent tout.</div>
+        <div class="epoch-text">
+          <p>Je plonge dans les ressources sérieuses — PubMed, chercheurs de référence, créateurs sérieux. Je comprends les principes fondamentaux : <em>surcharge progressive, gestion du volume, MEV/MAV/MRV</em>.</p>
+          <p>Je construis mes premiers programmes structurés. L'alimentation devient précise — macros trackées, flexibilité intégrée. <em>Je vois la différence</em>.</p>
+          <p>C'est aussi à cette période que l'idée du coaching germe : pourquoi ne pas transmettre ce que j'apprends ?</p>
+        </div>
+        <div class="epoch-tags">
+          <span class="epoch-tag">PPL Split</span>
+          <span class="epoch-tag">Tracking macros</span>
+          <span class="epoch-tag">Première structure</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EPOCH 3 - Physique intermédiaire -->
+    <div class="epoch rv">
+      <div class="epoch-left">
+        <div class="epoch-year">2024</div>
+        <div class="epoch-label">La transformation visible</div>
+        <div class="epoch-title">Le physique prend forme.</div>
+        <div class="epoch-text">
+          <p>Fin 2024, le physique commence à parler. Les poses de scène, les photos de progression — <em>les chiffres ne mentent pas</em>. La mass musculaire est là, la condition aussi.</p>
+          <p>Je commence à documenter systématiquement. <em>Google Sheets, données hebdomadaires</em>, graphiques de progression. Rien ne se fait au hasard.</p>
+        </div>
+        <div class="epoch-tags">
+          <span class="epoch-tag">Poses de scène</span>
+          <span class="epoch-tag">Suivi données</span>
+          <span class="epoch-tag">Mass building</span>
+        </div>
+      </div>
+      <div class="epoch-node">
+        <div class="epoch-dot"></div>
+        <div class="epoch-line"></div>
+        <div class="epoch-year-badge">2024</div>
+      </div>
+      <div class="epoch-right">
+        <div class="epoch-photos-grid">
+          <img src="images/dark_front.png" alt="Emmanuel progression">
+          <img src="images/dark_back.png" alt="Emmanuel dos">
+          <img src="images/dark_hips.png" alt="Emmanuel">
+          <img src="images/training_bench.png" alt="Bench press">
+        </div>
+      </div>
+    </div>
+
+    <!-- EPOCH 4 - Coaching commence -->
+    <div class="epoch alt rv">
+      <div class="epoch-left">
+        <div class="epoch-photo">
+          <img src="images/nutrimuscle.png" alt="Event Nutrimuscle">
+        </div>
+        <div style="margin-top:12px;font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;text-align:right;">Event Nutrimuscle — Partenariat.</div>
+      </div>
+      <div class="epoch-node">
+        <div class="epoch-dot"></div>
+        <div class="epoch-line"></div>
+        <div class="epoch-year-badge">2025</div>
+      </div>
+      <div class="epoch-right">
+        <div class="epoch-year">2025</div>
+        <div class="epoch-label">L'écosystème se construit</div>
+        <div class="epoch-title">Coach, créateur, compétiteur.</div>
+        <div class="epoch-text">
+          <p>2025 marque le début de l'écosystème professionnel. Je lance mes réseaux sociaux avec une intention claire : <em>créer du contenu de qualité sur le bodybuilding naturel</em>, pas du bruit.</p>
+          <p>Je signe un partenariat avec <strong>Nutrimuscle</strong> — série de 10 vidéos sur la créatine, sources PubMed vérifiées. Premier coaching client. Première rémunération.</p>
+          <p>Je construis le <em>Google Sheet de coaching complet</em> — Dashboard, Road Map, Checking hebdomadaire, Apps Script, formulaire HTML. Un système professionnel dès le départ.</p>
+        </div>
+        <div class="epoch-tags">
+          <span class="epoch-tag">@emmanuelpccoux</span>
+          <span class="epoch-tag">Nutrimuscle</span>
+          <span class="epoch-tag">Premier client</span>
+          <span class="epoch-tag">TikTok / Instagram</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EPOCH 5 - Aujourd'hui & prep -->
+    <div class="epoch rv">
+      <div class="epoch-left">
+        <div class="epoch-year">2026</div>
+        <div class="epoch-label">Aujourd'hui — Prep compétition</div>
+        <div class="epoch-title">19 semaines pour la scène.</div>
+        <div class="epoch-text">
+          <p>Depuis le <em>9 mars 2026</em> — prep compétition de 19 semaines. Objectif : <strong>Heroes Cup WNBF France 2027</strong>, Classic Physique. Chaque journée est planifiée.</p>
+          <p>Réveil entre 4h et 5h. Entraînement haute fréquence PPL. Calories et steps trackés quotidiennement via <em>Oura Ring Gen 3 + Google Sheets</em>. Supplémentation : créatine Creapure, oméga-3, collagène type 1, vitamine D3, ZMP.</p>
+          <p>En parallèle : développement du coaching (offre, prospection Instagram/TikTok), production de contenu, construction de l'audience. <em>Tout en même temps.</em></p>
+        </div>
+        <div class="epoch-tags">
+          <span class="epoch-tag">Prep 19 semaines</span>
+          <span class="epoch-tag">Oura Ring</span>
+          <span class="epoch-tag">IIFYM</span>
+          <span class="epoch-tag">Classic Physique</span>
+        </div>
+      </div>
+      <div class="epoch-node">
+        <div class="epoch-dot"></div>
+        <div class="epoch-line"></div>
+        <div class="epoch-year-badge">2026</div>
+      </div>
+      <div class="epoch-right">
+        <div class="epoch-photos-grid">
+          <img src="images/green_front.png" alt="Emmanuel aujourd'hui">
+          <img src="images/green_side.png" alt="Emmanuel côté">
+          <img src="images/gym_pose.png" alt="Emmanuel pose">
+          <img src="images/gym_locker.png" alt="Emmanuel vestiaire">
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end timeline -->
+</section>
+
+<!-- VISION -->
+<section class="vision">
+  <div class="vision-grid">
+    <div class="vision-txt rv-left">
+      <div class="s-tag">Ce qui m'attend</div>
+      <h2 class="s-title">La vision.<br><span class="r">L'horizon.</span></h2>
+      <div class="redbar"></div>
+      <p>Je ne construis pas juste un physique. Je construis <em>une plateforme, un écosystème, une marque</em>. Le coaching est la première brique — pas la dernière.</p>
+      <p>À 18 ans, <em>Paris</em>. Scaler le coaching, concourir, continuer à créer. En 2027, <strong>Heroes Cup WNBF France</strong> — Classic Physique. Ce ne sont pas des rêves, c'est un plan.</p>
+
+      <div class="vision-targets">
+        <div class="vision-target">
+          <div class="vt-year">2026</div>
+          <div class="vt-txt"><strong>Compétition d'été + développement coaching</strong> — Prep 19 semaines, Heroes Cup automne, clients actifs.</div>
+        </div>
+        <div class="vision-target">
+          <div class="vt-year">2027</div>
+          <div class="vt-txt"><strong>Heroes Cup WNBF France</strong> — Classic Physique. Montée sur scène nationale. Paris.</div>
+        </div>
+        <div class="vision-target">
+          <div class="vt-year">2028</div>
+          <div class="vt-txt"><strong>Scaling complet</strong> — équipe, YouTube, podcast, coaching premium.</div>
+        </div>
+      </div>
+
+      <div style="margin-top:36px;">
+        <a href="coaching.html" class="btn">Rejoindre le coaching</a>
+      </div>
+    </div>
+    <div class="vision-photo rv-right">
+      <img src="images/green_front.png" alt="Emmanuel - Vision">
+      <div class="vision-quote">
+        <div class="vq-txt">« Construire quelque chose de vrai. Pas de raccourcis, jamais. »</div>
+        <div class="vq-auth">— Emmanuel Peccoux</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIFESTYLE -->
+<section class="lifestyle">
+  <div class="rv">
+    <div class="s-tag">Au-delà du gym</div>
+    <h2 class="s-title">Une vie<br><span class="r">entière.</span></h2>
+    <div class="redbar"></div>
+  </div>
+  <div class="lifestyle-grid rv2">
+    <div class="ls-item ls-big">
+      <img src="images/hero_current.png" alt="Emmanuel">
+      <div class="ls-item-label">Quotidien</div>
+    </div>
+    <div class="ls-item ls-sm">
+      <img src="images/paris.png" alt="Paris">
+      <div class="ls-item-label">Paris — la prochaine étape</div>
+    </div>
+    <div class="ls-item ls-sm">
+      <img src="images/beach.png" alt="Beach">
+      <div class="ls-item-label">L'été autour du lac</div>
+    </div>
+    <div class="ls-item ls-sm">
+      <img src="images/food1.png" alt="Alimentation">
+      <div class="ls-item-label">L'alimentation précise</div>
+    </div>
+    <div class="ls-item ls-sm">
+      <img src="images/lifestyle_flag.png" alt="Colombie">
+      <div class="ls-item-label">Les racines</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:var(--g1);padding:120px 80px;text-align:center;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(230,0,0,0.1)0%,transparent 70%);pointer-events:none;"></div>
+  <div class="rv" style="position:relative;z-index:2;">
+    <div class="s-tag" style="justify-content:center;color:rgba(255,255,255,0.2);">Tu veux changer ?</div>
+    <h2 class="s-title" style="font-size:clamp(48px,8vw,96px);">Écris-moi.<br><span class="r">On commence.</span></h2>
+    <p style="font-size:14px;color:rgba(255,255,255,0.4);font-weight:600;max-width:360px;margin:20px auto 40px;line-height:1.8;">Si tu m'as lu jusqu'ici, tu sais déjà que c'est sérieux. Le reste se passe sur WhatsApp.</p>
+    <a href="https://wa.me/33766834777?text=Bonjour%20Emmanuel%2C%20je%20veux%20en%20savoir%20plus%20sur%20le%20suivi" class="btn" target="_blank" style="font-size:12px;padding:20px 48px;">
+      Démarrer sur WhatsApp
+    </a>
+    <div style="margin-top:20px;font-size:10px;letter-spacing:1.5px;color:rgba(255,255,255,0.15);text-transform:uppercase;">Réponse garantie sous 24h</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">EP<span class="dot">.</span>COACHING</div>
+  <div class="footer-links">
+    <a href="index.html">Accueil</a>
+    <a href="parcours.html">Parcours</a>
+    <a href="coaching.html">Coaching</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Emmanuel Peccoux — Tous droits réservés</div>
+</footer>
+
+<script>
+@keyframes slideUp {
+  from { opacity:0;transform:translateY(32px); }
+  to { opacity:1;transform:translateY(0); }
+}
+const sp = document.getElementById('sp');
+window.addEventListener('scroll', () => {
+  const s = document.documentElement.scrollTop;
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  sp.style.transform = `scaleX(${s/h})`;
+  document.getElementById('nav').classList.add('scrolled');
+});
+const dot = document.getElementById('cursor');
+const ring = document.getElementById('cring');
+let rx=0,ry=0,mx=0,my=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px)`;});
+(function raf(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(raf);})();
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('hovered'));el.addEventListener('mouseleave',()=>ring.classList.remove('hovered'));});
+const burger=document.getElementById('burger');const mm=document.getElementById('mobileMenu');
+burger.addEventListener('click',()=>{mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
+mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mm.classList.remove('open');document.body.style.overflow='';}));
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:0.07});
+document.querySelectorAll('.rv,.rv2,.rv3,.rv4,.rv-left,.rv-right').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

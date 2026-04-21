@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emmanuel Peccoux — Coach Bodybuilding Naturel</title>
+<link rel="stylesheet" href="style.css">
+<style>
+
+/* ═══ HERO ═══ */
+.hero {
+  min-height: 100vh;
+  position: relative; overflow: hidden;
+  display: flex; align-items: flex-end;
+}
+
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+}
+.hero-bg-img {
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: center top;
+  filter: grayscale(20%) contrast(1.1);
+}
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to right, rgba(5,5,5,0.97) 35%, rgba(5,5,5,0.3) 80%),
+    linear-gradient(to top, rgba(5,5,5,0.9) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(230,0,0,0.06) 0%, transparent 70%);
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 80px 100px;
+  max-width: 900px;
+}
+
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 9px; font-weight: 800; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--red);
+  margin-bottom: 32px;
+  animation: slideUp 1s ease both;
+}
+.hero-eyebrow-line { width: 28px; height: 1px; background: var(--red); }
+.eyebrow-dot {
+  width: 5px; height: 5px; background: var(--red); border-radius: 50%;
+  animation: blink 2.5s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+.hero-h1 {
+  font-family: 'Bebas Neue';
+  font-size: clamp(72px, 10vw, 148px);
+  line-height: 0.88; letter-spacing: 3px;
+  text-transform: uppercase;
+  animation: slideUp 1s 0.08s ease both;
+}
+.hero-h1 .line-red { color: var(--red); }
+.hero-h1 .line-outline {
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.15);
+  color: transparent;
+}
+
+.hero-sub {
+  font-size: 15px; color: rgba(255,255,255,0.45); font-weight: 600;
+  line-height: 1.9; max-width: 480px; margin-top: 28px;
+  animation: slideUp 1s 0.18s ease both;
+}
+.hero-sub em { color: var(--white); font-style: normal; }
+
+.hero-stats {
+  display: flex; gap: 0; margin-top: 56px;
+  animation: slideUp 1s 0.28s ease both;
+}
+.hero-stat {
+  padding-right: 36px; margin-right: 36px;
+  border-right: 1px solid rgba(255,255,255,0.07);
+}
+.hero-stat:last-child { border: none; margin: 0; padding: 0; }
+.hs-num {
+  font-family: 'Bebas Neue'; font-size: 48px; line-height: 1;
+  color: var(--red);
+}
+.hs-lbl {
+  font-size: 8px; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--muted); margin-top: 4px;
+}
+
+.hero-btns {
+  display: flex; align-items: center; gap: 16px; margin-top: 48px;
+  animation: slideUp 1s 0.38s ease both;
+}
+
+.hero-scroll {
+  position: absolute; bottom: 40px; right: 80px; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  animation: fadeIn 1.5s 1s ease both;
+}
+.hero-scroll-line {
+  width: 1px; height: 60px;
+  background: linear-gradient(to bottom, var(--red), transparent);
+  animation: scrollDrop 2s 1.5s ease infinite;
+}
+.hero-scroll-txt {
+  font-size: 8px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--muted); writing-mode: vertical-rl;
+}
+@keyframes scrollDrop {
+  0%,100%{ transform: scaleY(1); transform-origin: top; }
+  50%{ transform: scaleY(0.5); transform-origin: bottom; }
+}
+
+/* Red accent corner */
+.hero-red-corner {
+  position: absolute; top: 0; right: 0; z-index: 1;
+  width: 3px; height: 40%;
+  background: linear-gradient(to bottom, var(--red), transparent);
+  animation: fadeIn 1s 0.5s ease both;
+}
+
+/* Hero badge */
+.hero-badge {
+  position: absolute; bottom: 100px; right: 120px; z-index: 3;
+  background: var(--red); padding: 20px 24px;
+  text-align: center;
+  box-shadow: 0 24px 80px rgba(230,0,0,0.35);
+  animation: slideUp 1s 0.5s ease both;
+}
+.hero-badge-n { font-family: 'Bebas Neue'; font-size: 52px; line-height: 1; }
+.hero-badge-l { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; margin-top: 4px; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+
+/* ═══ MARQUEE SECTION ═══ */
+/* uses shared .marquee-wrap */
+
+/* ═══ ABOUT ═══ */
+.about {
+  background: var(--g1);
+  position: relative; overflow: hidden;
+}
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
+  align-items: center;
+}
+.about-photos {
+  position: relative; height: 600px;
+}
+.about-photo-main {
+  position: absolute; width: 72%; height: 100%;
+  object-fit: cover; object-position: center top;
+  left: 0; top: 0;
+  filter: grayscale(15%) contrast(1.08);
+}
+.about-photo-inset {
+  position: absolute; width: 44%; height: 55%;
+  object-fit: cover; object-position: center;
+  right: 0; bottom: 0;
+  border: 3px solid var(--black);
+  filter: grayscale(20%);
+}
+.about-red-bar {
+  position: absolute; left: 68%; top: 0; bottom: 0; width: 3px;
+  background: linear-gradient(to bottom, var(--red), transparent);
+}
+.about-number {
+  position: absolute; bottom: 60%; right: -10px; z-index: 2;
+  background: var(--red); color: var(--white);
+  font-family: 'Bebas Neue'; font-size: 11px; letter-spacing: 3px;
+  padding: 8px 14px; writing-mode: vertical-rl;
+}
+
+.about-txt p {
+  font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.95;
+  font-weight: 500; margin-bottom: 20px;
+}
+.about-txt p em { color: var(--white); font-style: normal; font-weight: 700; }
+.about-txt p strong { color: var(--red); font-weight: 700; }
+
+.about-values {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  margin-top: 36px;
+}
+.about-val {
+  background: var(--g2); padding: 20px 22px;
+  border-left: 2px solid rgba(230,0,0,0.3);
+  transition: border-color 0.3s, background 0.3s;
+}
+.about-val:hover { border-color: var(--red); background: var(--g3); }
+.about-val-title {
+  font-size: 10px; font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--white); margin-bottom: 6px;
+}
+.about-val-desc { font-size: 12px; color: var(--muted2); line-height: 1.7; }
+
+/* ═══ PHYSIQUE TEASER ═══ */
+.physique {
+  background: var(--black);
+  position: relative; overflow: hidden;
+}
+.physique-intro {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+  align-items: end; margin-bottom: 60px;
+}
+.physique-desc {
+  font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.9; font-weight: 500;
+}
+.physique-photos {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
+}
+.physique-photo-wrap {
+  position: relative; overflow: hidden; aspect-ratio: 3/4;
+}
+.physique-photo-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s;
+  filter: grayscale(30%) contrast(1.1);
+}
+.physique-photo-wrap:hover img {
+  transform: scale(1.06);
+  filter: grayscale(0%) contrast(1.05);
+}
+.physique-photo-wrap::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(5,5,5,0.6) 0%, transparent 60%);
+  pointer-events: none;
+}
+.physique-photo-label {
+  position: absolute; bottom: 12px; left: 12px; z-index: 2;
+  font-size: 8px; font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.7);
+}
+
+.physique-cta {
+  display: flex; justify-content: center; margin-top: 52px;
+}
+
+/* ═══ COACHING TEASER ═══ */
+.coaching-teaser {
+  background: var(--g1);
+}
+.coaching-teaser-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
+  align-items: center;
+}
+.coaching-teaser-steps {
+  display: flex; flex-direction: column; gap: 2px;
+}
+.c-step {
+  display: flex; gap: 24px; padding: 28px;
+  background: var(--g2);
+  position: relative; overflow: hidden;
+  transition: background 0.3s;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.c-step:hover { background: var(--g3); }
+.c-step::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 2px; height: 0; background: var(--red);
+  transition: height 0.4s;
+}
+.c-step:hover::before { height: 100%; }
+.c-step-num {
+  font-family: 'Bebas Neue'; font-size: 36px; color: rgba(230,0,0,0.2);
+  line-height: 1; flex-shrink: 0; width: 36px;
+}
+.c-step-body {}
+.c-step-title {
+  font-family: 'Bebas Neue'; font-size: 18px; letter-spacing: 1px; margin-bottom: 6px;
+}
+.c-step-desc { font-size: 12px; color: var(--muted2); line-height: 1.75; }
+.c-step-desc em { color: rgba(255,255,255,0.75); font-style: normal; }
+
+.coaching-teaser-img {
+  position: relative;
+}
+.coaching-teaser-img img {
+  width: 100%; height: 550px;
+  object-fit: cover; object-position: center top;
+  filter: grayscale(20%) contrast(1.1);
+}
+.coaching-teaser-img::before {
+  content: ''; position: absolute;
+  top: -20px; right: -20px; bottom: 20px; left: 20px;
+  border: 1px solid rgba(230,0,0,0.2); z-index: -1;
+}
+.coaching-badge {
+  position: absolute; bottom: -16px; left: -16px;
+  background: var(--black); border: 1px solid rgba(230,0,0,0.25);
+  padding: 20px 24px;
+}
+.coaching-badge-n { font-family: 'Bebas Neue'; font-size: 40px; color: var(--red); line-height: 1; }
+.coaching-badge-l { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted2); margin-top: 4px; }
+
+/* ═══ TRAINING PHOTOS STRIP ═══ */
+.strip {
+  background: var(--black);
+  overflow: hidden;
+}
+.strip-track {
+  display: flex; gap: 4px;
+  animation: stripScroll 30s linear infinite;
+}
+.strip-track:hover { animation-play-state: paused; }
+.strip-photo {
+  flex-shrink: 0; width: 280px; height: 380px;
+  overflow: hidden; position: relative;
+}
+.strip-photo img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(40%) contrast(1.1);
+  transition: filter 0.4s, transform 0.6s;
+}
+.strip-photo:hover img { filter: grayscale(0%); transform: scale(1.05); }
+@keyframes stripScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ═══ CTA FINAL ═══ */
+.cta-final {
+  background: var(--g1);
+  position: relative; overflow: hidden; text-align: center;
+}
+.cta-final::before {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(230,0,0,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-final-content { position: relative; z-index: 2; }
+.cta-big {
+  font-family: 'Bebas Neue';
+  font-size: clamp(56px, 10vw, 120px);
+  line-height: 0.88; letter-spacing: 3px; text-transform: uppercase;
+  margin: 20px 0 40px;
+}
+.cta-big .r { color: var(--red); }
+.cta-big .o { -webkit-text-stroke: 1.5px rgba(255,255,255,0.15); color: transparent; }
+
+.cta-sub {
+  font-size: 14px; color: rgba(255,255,255,0.4); font-weight: 600;
+  max-width: 380px; margin: 0 auto 48px; line-height: 1.8;
+}
+.cta-final .btns {
+  display: flex; justify-content: center; align-items: center; gap: 16px;
+}
+.cta-note {
+  margin-top: 24px; font-size: 10px; letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.15); text-transform: uppercase;
+}
+
+/* ═══ INSTAGRAM TEASER ═══ */
+.insta {
+  background: var(--black);
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.insta-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;
+  margin-top: 48px;
+}
+.insta-item {
+  aspect-ratio: 1; overflow: hidden; position: relative;
+  background: var(--g2);
+}
+.insta-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(50%);
+  transition: filter 0.4s, transform 0.6s;
+}
+.insta-item:hover img { filter: grayscale(0%); transform: scale(1.06); }
+.insta-item::after {
+  content: '@emmanuelpccoux';
+  position: absolute; inset: 0;
+  background: rgba(5,5,5,0.7);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  opacity: 0; transition: opacity 0.3s;
+}
+.insta-item:hover::after { opacity: 1; }
+
+/* ═══ MOBILE ═══ */
+@media (max-width: 1100px) {
+  .hero-content { padding: 0 32px 80px; }
+  .hero-badge { display: none; }
+  .hero-scroll { display: none; }
+  .about-grid { grid-template-columns: 1fr; gap: 50px; }
+  .about-photos { height: 380px; }
+  .physique-intro { grid-template-columns: 1fr; gap: 24px; }
+  .coaching-teaser-grid { grid-template-columns: 1fr; gap: 48px; }
+  .coaching-teaser-img { display: none; }
+  .insta-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .hero-h1 { font-size: clamp(56px, 14vw, 90px); }
+  .hero-stats { flex-wrap: wrap; gap: 24px; }
+  .hero-stat { border: none; padding: 0; margin: 0; }
+  .physique-photos { grid-template-columns: repeat(2, 1fr); }
+  .about-values { grid-template-columns: 1fr; }
+  .hero-btns { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="scroll-progress" id="sp"></div>
+<div class="cursor" id="cursor"><div class="cursor-dot"></div></div>
+<div class="cursor-ring" id="cring"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">EP<span class="dot">.</span>COACHING</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link active">Accueil</a>
+    <a href="parcours.html" class="nav-link">Mon Parcours</a>
+    <a href="coaching.html" class="nav-link">Coaching</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </div>
+  <a href="https://wa.me/33766834777?text=Bonjour%20Emmanuel%2C%20je%20veux%20en%20savoir%20plus%20sur%20le%20suivi" class="nav-cta" target="_blank">Me contacter</a>
+  <button class="nav-burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Accueil</a>
+  <a href="parcours.html">Parcours</a>
+  <a href="coaching.html">Coaching</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg">
+    <img class="hero-bg-img" src="images/gym_locker.png" alt="Emmanuel Peccoux">
+  </div>
+  <div class="hero-red-corner"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="eyebrow-dot"></span>
+      Coach Bodybuilding Naturel · Compétiteur WNBF
+    </div>
+
+    <h1 class="hero-h1">
+      Construis<br>
+      <span class="line-red">le physique</span><br>
+      <span class="line-outline">que tu mérites</span>
+    </h1>
+
+    <p class="hero-sub">
+      Je suis <em>Emmanuel Peccoux</em>, 16 ans, compétiteur et coach <em>100% naturel</em>.
+      Je construis avec toi un physique solide et te transmets une passion pour le bodybuilding qui dure toute ta vie.
+    </p>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hs-num" data-count="3">0</div>
+        <div class="hs-lbl">Ans d'entraîn.</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hs-num">100%</div>
+        <div class="hs-lbl">Naturel</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hs-num" data-count="16">0</div>
+        <div class="hs-lbl">Ans</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hs-num">2027</div>
+        <div class="hs-lbl">Heroes Cup</div>
+      </div>
+    </div>
+
+    <div class="hero-btns">
+      <a href="coaching.html" class="btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13 5l7 7-7 7M5 12h15"/></svg>
+        Voir le coaching
+      </a>
+      <a href="parcours.html" class="btn btn-outline">Mon parcours</a>
+    </div>
+  </div>
+
+  <div class="hero-badge">
+    <div class="hero-badge-n">WNBF</div>
+    <div class="hero-badge-l">Heroes Cup 2027</div>
+  </div>
+
+  <div class="hero-scroll">
+    <span class="hero-scroll-txt">Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Bodybuilding Naturel <span class="dot">·</span></span>
+    <span class="marquee-item">Classic Physique <span class="dot">·</span></span>
+    <span class="marquee-item">WNBF France <span class="dot">·</span></span>
+    <span class="marquee-item">Suivi Personnalisé <span class="dot">·</span></span>
+    <span class="marquee-item">Heroes Cup 2027 <span class="dot">·</span></span>
+    <span class="marquee-item">Google Sheet Coaching <span class="dot">·</span></span>
+    <span class="marquee-item">@emmanuelpccoux <span class="dot">·</span></span>
+    <span class="marquee-item">Bodybuilding Naturel <span class="dot">·</span></span>
+    <span class="marquee-item">Classic Physique <span class="dot">·</span></span>
+    <span class="marquee-item">WNBF France <span class="dot">·</span></span>
+    <span class="marquee-item">Suivi Personnalisé <span class="dot">·</span></span>
+    <span class="marquee-item">Heroes Cup 2027 <span class="dot">·</span></span>
+    <span class="marquee-item">Google Sheet Coaching <span class="dot">·</span></span>
+    <span class="marquee-item">@emmanuelpccoux <span class="dot">·</span></span>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section class="about section">
+  <div class="about-grid">
+    <div class="about-photos rv-left">
+      <img class="about-photo-main" src="images/gym_pose.png" alt="Emmanuel Peccoux">
+      <img class="about-photo-inset" src="images/hero_current.png" alt="Emmanuel Peccoux">
+      <div class="about-red-bar"></div>
+      <div class="about-number">EP · 16</div>
+    </div>
+    <div class="about-txt rv-right">
+      <div class="s-tag">Qui je suis</div>
+      <h2 class="s-title">Passionné.<br><span class="r">Discipliné.</span><br><span class="o">Naturel.</span></h2>
+      <div class="redbar"></div>
+      <p>Je m'appelle Emmanuel Peccoux, j'ai 16 ans et je m'entraîne depuis <em>3 ans avec une obsession</em> pour le bodybuilding naturel. Je me lève à 4h–5h du matin, j'enchaîne l'entraînement, l'école, le coaching et le contenu. Pas parce que je dois — parce que <em>je le veux profondément</em>.</p>
+      <p>Actuellement en <em>préparation compétition de 19 semaines</em> pour l'été 2026, je vis et respire ce sport au quotidien. Je ne vends pas du rêve — je construis quelque chose de réel, <strong>avec méthode et avec les données</strong>.</p>
+      <p>Mon objectif à long terme : concourir en <em>Classic Physique à la Heroes Cup WNBF France 2027</em>, et construire une des meilleures plateformes de coaching naturel en France.</p>
+      <div class="about-values">
+        <div class="about-val">
+          <div class="about-val-title">Science</div>
+          <div class="about-val-desc">Chaque décision est basée sur les données, pas sur les intuitions.</div>
+        </div>
+        <div class="about-val">
+          <div class="about-val-title">Rigueur</div>
+          <div class="about-val-desc">4h du matin, chaque matin. La discipline avant tout.</div>
+        </div>
+        <div class="about-val">
+          <div class="about-val-title">Naturel</div>
+          <div class="about-val-desc">100% sans aucune substance. Zéro compromis, jamais.</div>
+        </div>
+        <div class="about-val">
+          <div class="about-val-title">Passion</div>
+          <div class="about-val-desc">Transmettre ce feu, c'est ma raison d'être coach.</div>
+        </div>
+      </div>
+      <div style="margin-top:36px;">
+        <a href="parcours.html" class="btn">Voir mon parcours complet</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PHYSIQUE ── -->
+<section class="physique section">
+  <div class="physique-intro">
+    <div class="rv">
+      <div class="s-tag">Progression physique</div>
+      <h2 class="s-title">3 ans de<br><span class="r">travail</span><br><span class="o">visible</span></h2>
+      <div class="redbar"></div>
+    </div>
+    <div class="rv2">
+      <p class="physique-desc">Du gamin qui entrait au gym pour la première fois, au compétiteur qui se prépare pour la scène nationale. Chaque kilo, chaque séance, chaque sacrifice est visible dans ces photos.</p>
+      <div style="margin-top:28px;">
+        <a href="parcours.html" class="btn btn-outline">Voir la timeline complète</a>
+      </div>
+    </div>
+  </div>
+  <div class="physique-photos">
+    <div class="physique-photo-wrap rv">
+      <img src="images/dark_front.png" alt="Emmanuel - Début">
+      <div class="physique-photo-label">Début</div>
+    </div>
+    <div class="physique-photo-wrap rv2">
+      <img src="images/green_front.png" alt="Emmanuel - Progression">
+      <div class="physique-photo-label">Progression</div>
+    </div>
+    <div class="physique-photo-wrap rv3">
+      <img src="images/gym_pose.png" alt="Emmanuel - Aujourd'hui">
+      <div class="physique-photo-label">Aujourd'hui</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COACHING TEASER ── -->
+<section class="coaching-teaser section">
+  <div class="coaching-teaser-grid">
+    <div>
+      <div class="rv">
+        <div class="s-tag">Le Coaching</div>
+        <h2 class="s-title">Un suivi<br><span class="r">construit</span><br>pour toi</h2>
+        <div class="redbar"></div>
+        <p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.9;font-weight:500;margin-bottom:32px;">Pas de plan générique. Pas de programme copié-collé. Chaque suivi est architectural — bâti sur ta vie, ton niveau, tes données.</p>
+      </div>
+      <div class="coaching-teaser-steps rv2">
+        <div class="c-step">
+          <div class="c-step-num">01</div>
+          <div class="c-step-body">
+            <div class="c-step-title">Appel Découverte</div>
+            <div class="c-step-desc">Tu remplis un questionnaire. On se parle. Je comprends <em>ton quotidien réel</em> avant de toucher quoi que ce soit.</div>
+          </div>
+        </div>
+        <div class="c-step">
+          <div class="c-step-num">02</div>
+          <div class="c-step-body">
+            <div class="c-step-title">Semaine Calibrage</div>
+            <div class="c-step-desc">Une semaine d'observation sans changement. Je regarde, j'analyse, <em>je construis la Road Map</em>.</div>
+          </div>
+        </div>
+        <div class="c-step">
+          <div class="c-step-num">03</div>
+          <div class="c-step-body">
+            <div class="c-step-title">Suivi Complet</div>
+            <div class="c-step-desc">Programme + nutrition + check-in hebdo + <em>disponibilité WhatsApp quotidienne</em>. Ajustements semaine après semaine.</div>
+          </div>
+        </div>
+        <div class="c-step">
+          <div class="c-step-num">04</div>
+          <div class="c-step-body">
+            <div class="c-step-title">Résultats & Autonomie</div>
+            <div class="c-step-desc">Au-delà du physique, <em>tu comprends ton corps</em>. Tu deviens autonome. C'est l'objectif final.</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:32px;" class="rv3">
+        <a href="coaching.html" class="btn">Découvrir l'offre complète</a>
+      </div>
+    </div>
+    <div class="coaching-teaser-img rv-right">
+      <img src="images/training_deadlift.png" alt="Training">
+      <div class="coaching-badge">
+        <div class="coaching-badge-n">100%</div>
+        <div class="coaching-badge-l">Personnalisé</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STRIP ── -->
+<div class="strip section-sm" style="padding:0;">
+  <div class="strip-track">
+    <div class="strip-photo"><img src="images/training_bench.png" alt="Training"></div>
+    <div class="strip-photo"><img src="images/training_pulldown.png" alt="Training"></div>
+    <div class="strip-photo"><img src="images/training_chest.png" alt="Training"></div>
+    <div class="strip-photo"><img src="images/training_deadlift.png" alt="Training"></div>
+    <div class="strip-photo"><img src="images/gym_pose.png" alt="Emmanuel"></div>
+    <div class="strip-photo"><img src="images/green_side.png" alt="Emmanuel"></div>
+    <div class="strip-photo"><img src="images/gym_locker.png" alt="Emmanuel"></div>
+    <!-- dupliqué pour loop -->
+    <div class="strip-photo"><img src="images/training_bench.png" alt="Training"></div>
+    <div class="strip-photo"><img src="images/training_pulldown.png" alt="Training"></div>
+    <div class="strip-photo"><img src="images/training_chest.png" alt="Training"></div>
+    <div class="strip-photo"><img src="images/training_deadlift.png" alt="Training"></div>
+    <div class="strip-photo"><img src="images/gym_pose.png" alt="Emmanuel"></div>
+    <div class="strip-photo"><img src="images/green_side.png" alt="Emmanuel"></div>
+    <div class="strip-photo"><img src="images/gym_locker.png" alt="Emmanuel"></div>
+  </div>
+</div>
+
+<!-- ── CTA FINAL ── -->
+<section class="cta-final section">
+  <div class="cta-final-content rv">
+    <div class="s-tag" style="justify-content:center;color:rgba(255,255,255,0.2);">Prêt à commencer ?</div>
+    <div class="cta-big">
+      On travaille<br><span class="r">ensemble</span><br><span class="o">dès maintenant ?</span>
+    </div>
+    <p class="cta-sub">Envoie-moi un message sur WhatsApp. Je réponds dans la journée et on voit ensemble si le suivi est fait pour toi.</p>
+    <div class="btns">
+      <a href="https://wa.me/33766834777?text=Bonjour%20Emmanuel%2C%20je%20veux%20en%20savoir%20plus%20sur%20le%20suivi" class="btn" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Démarrer sur WhatsApp
+      </a>
+      <a href="coaching.html" class="btn btn-outline">Voir l'offre</a>
+    </div>
+    <div class="cta-note">@emmanuelpccoux · Réponse garantie sous 24h</div>
+  </div>
+</section>
+
+<!-- ── INSTAGRAM TEASER ── -->
+<section class="insta section-sm">
+  <div class="rv" style="text-align:center;margin-bottom:8px;">
+    <div class="s-tag" style="justify-content:center;">Rejoins la communauté</div>
+    <h2 class="s-title" style="font-size:clamp(32px,5vw,56px);">@<span class="r">emmanuelpccoux</span></h2>
+  </div>
+  <div class="insta-grid rv2">
+    <div class="insta-item"><img src="images/gym_pose.png" alt="EP"></div>
+    <div class="insta-item"><img src="images/training_deadlift.png" alt="EP"></div>
+    <div class="insta-item"><img src="images/green_side.png" alt="EP"></div>
+    <div class="insta-item"><img src="images/nutrimuscle.png" alt="EP"></div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">EP<span class="dot">.</span>COACHING</div>
+  <div class="footer-links">
+    <a href="index.html">Accueil</a>
+    <a href="parcours.html">Parcours</a>
+    <a href="coaching.html">Coaching</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Emmanuel Peccoux — Tous droits réservés</div>
+</footer>
+
+<script>
+// Scroll progress
+const sp = document.getElementById('sp');
+window.addEventListener('scroll', () => {
+  const s = document.documentElement.scrollTop;
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  sp.style.transform = `scaleX(${s/h})`;
+});
+
+// Nav scrolled
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Cursor
+const dot = document.getElementById('cursor');
+const ring = document.getElementById('cring');
+let rx = 0, ry = 0, mx = 0, my = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.transform = `translate(${mx}px,${my}px)`;
+});
+(function raf() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+  requestAnimationFrame(raf);
+})();
+document.querySelectorAll('a,button').forEach(el => {
+  el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
+  el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
+});
+
+// Burger
+const burger = document.getElementById('burger');
+const mm = document.getElementById('mobileMenu');
+burger.addEventListener('click', () => {
+  mm.classList.toggle('open');
+  document.body.style.overflow = mm.classList.contains('open') ? 'hidden' : '';
+});
+mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  mm.classList.remove('open');
+  document.body.style.overflow = '';
+}));
+
+// Reveal
+const obs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) e.target.classList.add('on');
+}), { threshold: 0.08 });
+document.querySelectorAll('.rv,.rv2,.rv3,.rv4,.rv-left,.rv-right').forEach(el => obs.observe(el));
+
+// Counter
+const counters = document.querySelectorAll('[data-count]');
+const co = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  const el = e.target;
+  const target = +el.dataset.count;
+  let cur = 0;
+  const step = target / 40;
+  const t = setInterval(() => {
+    cur = Math.min(cur + step, target);
+    el.textContent = Math.floor(cur) + '+';
+    if (cur >= target) { el.textContent = target + '+'; clearInterval(t); }
+  }, 30);
+  co.unobserve(el);
+}), { threshold: 0.5 });
+counters.forEach(c => co.observe(c));
+</script>
+</body>
+</html>
