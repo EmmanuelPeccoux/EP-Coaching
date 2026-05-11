@@ -3,100 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mon Parcours — Emmanuel Peccoux Coach</title>
+<title>Mon Parcours — Emmanuel Peccoux</title>
 <link rel="stylesheet" href="style.css">
 <style>
 
-/* ═══ HERO PARCOURS ═══ */
-.parcours-hero {
+/* ═══ HERO ═══ */
+.ph-hero {
   min-height: 90vh;
   display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 140px 80px 100px;
+  padding: 160px 80px 120px;
   position: relative; overflow: hidden;
   background: var(--black);
 }
-.ph-bg {
-  position: absolute; inset: 0; z-index: 0;
-}
-.ph-bg-img {
-  width: 100%; height: 100%; object-fit: cover;
-  object-position: center top;
-  filter: grayscale(30%) contrast(1.15);
+.ph-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.ph-bg img {
+  width: 100%; height: 110%; object-fit: cover; object-position: center top;
+  filter: grayscale(35%) contrast(1.15) brightness(0.7);
+  will-change: transform;
 }
 .ph-bg::after {
   content: '';
   position: absolute; inset: 0;
-  background:
-    linear-gradient(to right, rgba(5,5,5,0.97) 40%, rgba(5,5,5,0.4) 100%),
-    linear-gradient(to top, rgba(5,5,5,1) 0%, transparent 50%);
-}
-.ph-content {
-  position: relative; z-index: 2;
-  max-width: 800px;
+  background: linear-gradient(to right, rgba(5,5,5,0.95) 35%, rgba(5,5,5,0.3) 100%),
+              linear-gradient(to top, rgba(5,5,5,1) 0%, transparent 50%);
 }
 .ph-giant {
-  position: absolute; bottom: -20px; right: 60px; z-index: 1;
-  font-family: 'Bebas Neue'; font-size: 22vw;
-  color: rgba(255,255,255,0.02); line-height: 1; pointer-events: none;
-  letter-spacing: -4px;
+  position: absolute; bottom: -30px; right: 60px; z-index: 1;
+  font-family: 'Bebas Neue'; font-size: 26vw;
+  color: rgba(230,0,0,0.04); line-height: 0.9; pointer-events: none;
+  letter-spacing: -6px;
 }
+.ph-content { position: relative; z-index: 2; max-width: 1000px; }
 .ph-h1 {
   font-family: 'Bebas Neue';
-  font-size: clamp(64px, 10vw, 140px);
-  line-height: 0.88; letter-spacing: 3px; text-transform: uppercase;
+  font-size: clamp(72px, 11vw, 160px);
+  line-height: 0.85; letter-spacing: 2px; text-transform: uppercase;
 }
+.ph-h1 .line { display: block; overflow: hidden; padding-bottom: 0.06em; }
+.ph-h1 .line-inner {
+  display: inline-block;
+  transform: translateY(100%);
+  transition: transform 1.4s var(--ease-expo);
+}
+.ph-h1.on .line-inner { transform: translateY(0); }
+.ph-h1 .line:nth-child(2) .line-inner { transition-delay: 0.12s; }
+.ph-h1 .line:nth-child(3) .line-inner { transition-delay: 0.24s; }
 .ph-h1 .r { color: var(--red); }
 .ph-h1 .o { -webkit-text-stroke: 1.5px rgba(255,255,255,0.15); color: transparent; }
 
 .ph-sub {
-  font-size: 14px; color: rgba(255,255,255,0.45); font-weight: 600;
-  line-height: 1.9; margin-top: 24px; max-width: 500px;
+  font-size: 15px; color: rgba(255,255,255,0.5); font-weight: 500;
+  line-height: 1.95; margin-top: 28px; max-width: 540px;
+  opacity: 0; animation: fadeUp 1s 1.8s var(--ease-out) both;
 }
-.ph-sub em { color: var(--white); font-style: normal; }
+.ph-sub em { color: var(--white); font-style: normal; font-weight: 700; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
 
 .ph-years {
-  display: flex; align-items: center; gap: 12px; margin-top: 40px;
+  display: flex; align-items: center; gap: 14px; margin-top: 48px;
+  opacity: 0; animation: fadeUp 1s 2s var(--ease-out) both;
 }
 .ph-year {
-  font-family: 'Bebas Neue'; font-size: 12px; letter-spacing: 3px;
-  color: var(--muted); padding: 8px 14px;
+  font-family: 'Bebas Neue'; font-size: 13px; letter-spacing: 4px;
+  color: var(--muted); padding: 10px 16px;
   border: 1px solid rgba(255,255,255,0.07);
-  transition: all 0.3s;
+  transition: all 0.4s;
 }
-.ph-year.active { color: var(--red); border-color: rgba(230,0,0,0.4); }
-.ph-year-sep { color: var(--muted); font-size: 10px; }
+.ph-year.active { color: var(--red); border-color: rgba(230,0,0,0.5); }
+.ph-year-sep { color: var(--muted); font-size: 12px; }
 
-/* ═══ INTRO CHIFFRES ═══ */
+/* ═══ NUMBERS ═══ */
 .numbers-row {
   background: var(--red);
   display: grid; grid-template-columns: repeat(4, 1fr);
+  position: relative; overflow: hidden;
 }
 .number-item {
-  padding: 40px 36px;
-  border-right: 1px solid rgba(0,0,0,0.15);
+  padding: 48px 40px;
+  border-right: 1px solid rgba(0,0,0,0.2);
+  position: relative; overflow: hidden;
 }
 .number-item:last-child { border: none; }
-.ni-num { font-family: 'Bebas Neue'; font-size: 56px; line-height: 1; }
-.ni-lbl { font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; opacity: 0.75; margin-top: 4px; }
+.number-item::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--black);
+  transform: translateY(100%);
+  transition: transform 0.6s var(--ease-out);
+  z-index: 0;
+}
+.number-item:hover::before { transform: translateY(0); }
+.number-item > * { position: relative; z-index: 1; }
+.ni-num { font-family: 'Bebas Neue'; font-size: 64px; line-height: 1; }
+.ni-lbl { font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; margin-top: 6px; }
 
 /* ═══ TIMELINE ═══ */
 .timeline-section {
   background: var(--g1);
   position: relative;
 }
-
 .timeline-intro {
-  padding: 100px 80px 60px;
+  padding: 140px 80px 80px;
 }
 .timeline-intro p {
-  font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.9;
-  max-width: 640px; margin-top: 20px; font-weight: 500;
+  font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.95;
+  max-width: 700px; margin-top: 24px; font-weight: 500;
 }
-.timeline-intro p em { color: var(--white); font-style: normal; }
+.timeline-intro p em { color: var(--white); font-style: normal; font-weight: 700; }
 
-/* Timeline central line */
 .timeline {
-  padding: 0 80px 120px;
+  padding: 0 80px 160px;
   position: relative;
 }
 .timeline::before {
@@ -106,196 +121,230 @@
   transform: translateX(-50%);
 }
 
-/* Epoch item */
 .epoch {
-  display: grid; grid-template-columns: 1fr 80px 1fr;
-  gap: 0; margin-bottom: 120px; position: relative;
+  display: grid; grid-template-columns: 1fr 100px 1fr;
+  margin-bottom: 140px; position: relative;
 }
-.epoch-left { padding-right: 60px; text-align: right; }
-.epoch-right { padding-left: 60px; }
-
-/* Node */
+.epoch-left { padding-right: 70px; text-align: right; }
+.epoch-right { padding-left: 70px; }
 .epoch-node {
-  display: flex; flex-direction: column; align-items: center; gap: 0;
+  display: flex; flex-direction: column; align-items: center;
   position: relative; z-index: 2;
 }
 .epoch-dot {
-  width: 14px; height: 14px; background: var(--red); border-radius: 50%;
-  box-shadow: 0 0 0 4px rgba(230,0,0,0.2), 0 0 20px rgba(230,0,0,0.3);
+  width: 16px; height: 16px; background: var(--red); border-radius: 50%;
+  box-shadow: 0 0 0 5px rgba(230,0,0,0.15), 0 0 30px rgba(230,0,0,0.5);
   flex-shrink: 0;
+  transform: scale(0);
+  transition: transform 0.6s var(--ease-out);
 }
+.epoch.on .epoch-dot { transform: scale(1); }
 .epoch-line { flex: 1; width: 1px; background: rgba(230,0,0,0.2); }
 .epoch-year-badge {
   background: var(--red); color: var(--white);
-  font-family: 'Bebas Neue'; font-size: 12px; letter-spacing: 2px;
-  padding: 4px 8px; margin-top: 8px; white-space: nowrap;
+  font-family: 'Bebas Neue'; font-size: 12px; letter-spacing: 3px;
+  padding: 6px 10px; margin-top: 12px; white-space: nowrap;
 }
 
-/* Content */
 .epoch-year {
-  font-family: 'Bebas Neue'; font-size: 80px; line-height: 0.9;
-  color: rgba(255,255,255,0.04); margin-bottom: 12px;
+  font-family: 'Bebas Neue'; font-size: 96px; line-height: 0.9;
+  color: rgba(230,0,0,0.06); margin-bottom: 16px;
+  letter-spacing: 1px;
 }
 .epoch-label {
   font-size: 9px; font-weight: 800; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--red); margin-bottom: 10px;
+  text-transform: uppercase; color: var(--red); margin-bottom: 14px;
 }
 .epoch-title {
-  font-family: 'Bebas Neue'; font-size: 28px; letter-spacing: 1px;
-  margin-bottom: 14px;
+  font-family: 'Bebas Neue'; font-size: 36px; letter-spacing: 1px; margin-bottom: 20px;
+  line-height: 1;
 }
-.epoch-text {
-  font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.9; font-weight: 500;
+.epoch-text p {
+  font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.95;
+  font-weight: 500; margin-bottom: 14px;
 }
 .epoch-text em { color: var(--white); font-style: normal; font-weight: 700; }
 .epoch-text strong { color: var(--red); }
 
-/* Photo */
-.epoch-photo {
-  position: relative; overflow: hidden; margin-top: 20px;
-  display: inline-block;
-}
+.epoch-photo { position: relative; overflow: hidden; margin-top: 28px; display: inline-block; }
 .epoch-photo img {
-  display: block;
-  max-height: 480px; width: auto;
+  max-height: 500px; width: auto;
   object-fit: cover; object-position: top center;
   filter: grayscale(20%) contrast(1.1);
-  transition: filter 0.5s, transform 0.6s;
+  transition: filter 0.5s, transform 0.7s var(--ease-out);
 }
 .epoch-photo:hover img { filter: grayscale(0%); transform: scale(1.03); }
-.epoch-photo::before {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(5,5,5,0.3), transparent 60%);
-  z-index: 1; pointer-events: none;
-}
 
-/* Alternating — left content right photo / right content left photo */
-.epoch.alt .epoch-left { order: 3; padding-left: 60px; padding-right: 0; text-align: left; }
+.epoch.alt .epoch-left { order: 3; padding-left: 70px; padding-right: 0; text-align: left; }
 .epoch.alt .epoch-node { order: 2; }
-.epoch.alt .epoch-right { order: 1; padding-right: 60px; padding-left: 0; text-align: right; }
+.epoch.alt .epoch-right { order: 1; padding-right: 70px; padding-left: 0; text-align: right; }
 .epoch.alt .epoch-right .epoch-photo { float: right; }
 
-/* Tags */
-.epoch-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.epoch-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 .epoch.alt .epoch-tags { justify-content: flex-end; }
 .epoch-tag {
   font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
-  padding: 5px 10px; background: rgba(230,0,0,0.1); color: var(--red);
+  padding: 6px 12px;
+  background: rgba(230,0,0,0.08); color: var(--red);
   border: 1px solid rgba(230,0,0,0.2);
+  transition: all 0.3s;
 }
+.epoch-tag:hover { background: var(--red); color: var(--white); }
 
-/* Multi-photos */
 .epoch-photos-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 20px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 28px;
 }
 .epoch-photos-grid img {
-  width: 100%; height: 220px; object-fit: cover; object-position: top center;
+  width: 100%; height: 240px; object-fit: cover; object-position: top center;
   filter: grayscale(20%) contrast(1.1);
-  transition: filter 0.4s;
+  transition: filter 0.4s, transform 0.6s;
 }
-.epoch-photos-grid img:hover { filter: grayscale(0%); }
+.epoch-photos-grid img:hover { filter: grayscale(0%); transform: scale(1.04); }
 
-/* ═══ VISION SECTION ═══ */
+.epoch-caption {
+  margin-top: 16px; font-size: 10px;
+  color: var(--muted); letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.epoch.alt .epoch-caption { text-align: right; }
+
+/* ═══ VISION ═══ */
 .vision {
   background: var(--black);
-  padding: 140px 80px;
+  padding: 160px 80px;
   position: relative; overflow: hidden;
 }
 .vision::before {
   content: '';
   position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px; height: 600px;
+  width: 700px; height: 700px;
   background: radial-gradient(circle, rgba(230,0,0,0.08) 0%, transparent 70%);
   pointer-events: none;
+  animation: pulseSlow 5s ease-in-out infinite;
+}
+@keyframes pulseSlow {
+  0%,100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%,-50%) scale(1.1); }
 }
 .vision-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
   align-items: center; position: relative; z-index: 2;
 }
-.vision-txt {}
 .vision-txt p {
-  font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.95;
-  font-weight: 500; margin-bottom: 20px;
+  font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.95;
+  font-weight: 500; margin-bottom: 22px;
 }
 .vision-txt p em { color: var(--white); font-style: normal; font-weight: 700; }
 .vision-txt p strong { color: var(--red); }
 
 .vision-targets {
-  display: flex; flex-direction: column; gap: 2px; margin-top: 36px;
+  display: flex; flex-direction: column; gap: 2px; margin-top: 44px;
 }
 .vision-target {
-  display: flex; align-items: center; gap: 20px;
-  padding: 18px 20px; background: var(--g2);
-  border-left: 2px solid rgba(230,0,0,0.25);
-  transition: border-color 0.3s, background 0.3s;
+  display: flex; align-items: center; gap: 24px;
+  padding: 22px 24px; background: var(--g2);
+  border-left: 2px solid rgba(230,0,0,0.3);
+  transition: all 0.4s;
+  position: relative; overflow: hidden;
 }
-.vision-target:hover { border-color: var(--red); background: var(--g3); }
+.vision-target::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--g3);
+  transform: translateX(-100%);
+  transition: transform 0.5s var(--ease-out);
+  z-index: 0;
+}
+.vision-target:hover::before { transform: translateX(0); }
+.vision-target:hover { border-color: var(--red); padding-left: 32px; }
+.vision-target > * { position: relative; z-index: 1; }
 .vt-year {
-  font-family: 'Bebas Neue'; font-size: 24px; color: var(--red); min-width: 56px;
+  font-family: 'Bebas Neue'; font-size: 28px; color: var(--red); min-width: 64px;
 }
-.vt-txt { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+.vt-txt { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.65; }
 .vt-txt strong { color: var(--white); font-weight: 700; }
 
 .vision-photo { position: relative; }
+.vision-photo > div {
+  width: 100%; height: 560px;
+  overflow: hidden; position: relative;
+}
 .vision-photo img {
-  width: 100%; height: 500px; object-fit: cover; object-position: center top;
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
   filter: grayscale(15%) contrast(1.1);
 }
 .vision-photo::before {
   content: ''; position: absolute;
-  top: -16px; right: -16px; bottom: 16px; left: 16px;
-  border: 1px solid rgba(230,0,0,0.15); z-index: -1;
+  top: -20px; right: -20px; bottom: 20px; left: 20px;
+  border: 1px solid rgba(230,0,0,0.2); z-index: -1;
 }
 .vision-quote {
-  position: absolute; bottom: -24px; left: -24px;
-  background: var(--red); padding: 24px 28px; max-width: 280px;
+  position: absolute; bottom: -28px; left: -28px;
+  background: var(--red); padding: 26px 30px; max-width: 320px;
+  z-index: 2;
 }
-.vq-txt {
-  font-size: 14px; font-weight: 700; line-height: 1.5;
-  font-style: italic;
-}
-.vq-auth { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; margin-top: 8px; }
+.vq-txt { font-size: 14px; font-weight: 700; line-height: 1.55; font-style: italic; }
+.vq-auth { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; opacity: 0.75; margin-top: 10px; }
 
 /* ═══ LIFESTYLE ═══ */
 .lifestyle {
   background: var(--g1);
-  padding: 120px 80px;
+  padding: 140px 80px;
 }
 .lifestyle-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   grid-template-rows: auto auto;
-  gap: 4px; margin-top: 60px;
+  gap: 4px; margin-top: 70px;
 }
 .ls-item {
   overflow: hidden; position: relative;
 }
 .ls-item img {
-  width: 100%; height: 100%; object-fit: cover;
-  filter: grayscale(30%) contrast(1.1);
-  transition: filter 0.5s, transform 0.7s;
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+  filter: grayscale(35%) contrast(1.1);
+  transition: filter 0.5s, transform 0.8s var(--ease-out);
 }
-.ls-item:hover img { filter: grayscale(0%); transform: scale(1.04); }
+.ls-item:hover img { filter: grayscale(0%); transform: scale(1.06); }
 .ls-item::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(5,5,5,0.5) 0%, transparent 60%);
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(5,5,5,0.6), transparent 60%);
   pointer-events: none;
 }
 .ls-item-label {
-  position: absolute; bottom: 12px; left: 14px; z-index: 2;
-  font-size: 8px; font-weight: 800; letter-spacing: 2.5px;
-  text-transform: uppercase; color: rgba(255,255,255,0.7);
+  position: absolute; bottom: 14px; left: 16px; z-index: 2;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 9px; font-weight: 800; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.85);
 }
-.ls-big { grid-row: span 2; min-height: 500px; }
-.ls-sm { min-height: 240px; }
+.ls-item-label::before { content: ''; width: 14px; height: 1px; background: var(--red); }
+.ls-big { grid-row: span 2; min-height: 540px; }
+.ls-sm { min-height: 260px; }
+
+/* ═══ CTA ═══ */
+.parcours-cta {
+  background: var(--black);
+  padding: 160px 80px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.parcours-cta::before {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(230,0,0,0.12) 0%, transparent 70%);
+  pointer-events: none;
+  animation: pulseSlow 5s ease-in-out infinite;
+}
+.pc-content { position: relative; z-index: 2; }
 
 /* ═══ RESPONSIVE ═══ */
-@media (max-width: 1000px) {
-  .parcours-hero { padding: 140px 32px 80px; }
+@media (max-width: 1100px) {
+  .ph-hero { padding: 140px 32px 100px; }
+  .ph-giant { right: 20px; }
   .timeline { padding: 0 32px 80px; }
-  .timeline-intro { padding: 80px 32px 40px; }
+  .timeline-intro { padding: 100px 32px 60px; }
   .timeline::before { left: 30px; }
   .epoch { grid-template-columns: 1fr; }
   .epoch-left, .epoch-right { padding: 0 0 0 60px; text-align: left; }
@@ -304,29 +353,37 @@
   .epoch.alt .epoch-left, .epoch.alt .epoch-right { order: unset; padding: 0 0 0 60px; text-align: left; }
   .epoch.alt .epoch-right .epoch-photo { float: none; }
   .epoch.alt .epoch-tags { justify-content: flex-start; }
-  .vision { padding: 80px 32px; }
-  .vision-grid { grid-template-columns: 1fr; gap: 48px; }
+  .epoch.alt .epoch-caption { text-align: left; }
+  .vision { padding: 100px 32px; }
+  .vision-grid { grid-template-columns: 1fr; gap: 60px; }
   .vision-photo { display: none; }
-  .lifestyle { padding: 80px 32px; }
+  .lifestyle { padding: 100px 32px; }
   .lifestyle-grid { grid-template-columns: 1fr 1fr; }
   .ls-big { grid-row: span 1; }
   .numbers-row { grid-template-columns: repeat(2,1fr); }
+  .parcours-cta { padding: 100px 32px; }
 }
 @media (max-width: 600px) {
-  .ph-h1 { font-size: clamp(52px, 14vw, 90px); }
+  .ph-h1 { font-size: clamp(56px, 14vw, 96px); }
   .lifestyle-grid { grid-template-columns: 1fr; }
   .epoch-photos-grid { grid-template-columns: 1fr; }
+  .epoch-year { font-size: 64px; }
 }
 </style>
 </head>
 <body>
 
+<div class="preloader" id="preloader">
+  <div class="preloader-logo"><span>E</span><span>P</span><span class="dot">.</span><span>C</span><span>O</span><span>A</span><span>C</span><span>H</span><span>I</span><span>N</span><span>G</span></div>
+  <div class="preloader-bar"></div>
+  <div class="preloader-pct">CHARGEMENT</div>
+</div>
+
 <div class="grain"></div>
 <div class="scroll-progress" id="sp"></div>
-<div class="cursor" id="cursor"><div class="cursor-dot"></div></div>
-<div class="cursor-ring" id="cring"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cring"><span class="cursor-label" id="cursorLabel"></span></div>
 
-<!-- NAV -->
 <nav class="nav scrolled" id="nav">
   <a href="index.html" class="nav-logo">EP<span class="dot">.</span>COACHING</a>
   <div class="nav-links">
@@ -336,9 +393,7 @@
     <a href="contact.html" class="nav-link">Contact</a>
   </div>
   <a href="contact.html" class="nav-cta">Me contacter</a>
-  <button class="nav-burger" id="burger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html">Accueil</a>
@@ -348,29 +403,23 @@
 </div>
 
 <!-- HERO -->
-<section class="parcours-hero">
+<section class="ph-hero">
   <div class="ph-bg">
-    <img class="ph-bg-img" src="images/images/green_front.png" alt="Emmanuel">
+    <img src="images/images/green_front.png" alt="Emmanuel" class="parallax" data-parallax="0.3">
   </div>
   <div class="ph-giant">2026</div>
   <div class="ph-content">
-    <div class="s-tag" style="animation:slideUp 0.9s ease both;">Mon histoire</div>
-    <h1 class="ph-h1" style="animation:slideUp 0.9s 0.1s ease both;">
-      3 ans.<br>
-      <span class="r">Un seul</span><br>
-      <span class="o">objectif.</span>
+    <div class="s-tag" style="animation:fadeUp 0.9s 1.5s var(--ease-out) both;">Mon histoire</div>
+    <h1 class="ph-h1 on">
+      <span class="line"><span class="line-inner">3 ans.</span></span>
+      <span class="line"><span class="line-inner r">Un seul</span></span>
+      <span class="line"><span class="line-inner o">objectif.</span></span>
     </h1>
-    <p class="ph-sub" style="animation:slideUp 0.9s 0.2s ease both;">
-      Du lycéen qui découvrait le bodybuilding au compétiteur qui se prépare pour la scène nationale.
-      <em>Voici la vraie histoire</em>, sans filtre et sans embellissement.
-    </p>
-    <div class="ph-years" style="animation:slideUp 0.9s 0.3s ease both;">
-      <div class="ph-year">2023</div>
-      <span class="ph-year-sep">→</span>
-      <div class="ph-year">2024</div>
-      <span class="ph-year-sep">→</span>
-      <div class="ph-year">2025</div>
-      <span class="ph-year-sep">→</span>
+    <p class="ph-sub">Du lycéen qui découvrait le bodybuilding au compétiteur qui se prépare pour la scène nationale. <em>Voici la vraie histoire</em>, sans filtre et sans embellissement.</p>
+    <div class="ph-years">
+      <div class="ph-year">2023</div><span class="ph-year-sep">→</span>
+      <div class="ph-year">2024</div><span class="ph-year-sep">→</span>
+      <div class="ph-year">2025</div><span class="ph-year-sep">→</span>
       <div class="ph-year active">2026</div>
     </div>
   </div>
@@ -378,44 +427,31 @@
 
 <!-- NUMBERS -->
 <div class="numbers-row">
-  <div class="number-item rv">
-    <div class="ni-num">3+</div>
-    <div class="ni-lbl">Ans d'entraînement</div>
-  </div>
-  <div class="number-item rv2">
-    <div class="ni-num">2027</div>
-    <div class="ni-lbl">Prep WNBF</div>
-  </div>
-  <div class="number-item rv3">
-    <div class="ni-num">100%</div>
-    <div class="ni-lbl">Naturel</div>
-  </div>
-  <div class="number-item rv4">
-    <div class="ni-num">SEPT</div>
-    <div class="ni-lbl">2027 — Compétition</div>
-  </div>
+  <div class="number-item rv"><div class="ni-num">3+</div><div class="ni-lbl">Ans d'entraînement</div></div>
+  <div class="number-item rv2"><div class="ni-num">2027</div><div class="ni-lbl">Prep WNBF</div></div>
+  <div class="number-item rv3"><div class="ni-num">100%</div><div class="ni-lbl">Naturel</div></div>
+  <div class="number-item rv4"><div class="ni-num">SEPT</div><div class="ni-lbl">2027 — Compétition</div></div>
 </div>
 
-<!-- INTRO -->
+<!-- TIMELINE -->
 <section class="timeline-section">
-  <div class="timeline-intro rv">
-    <div class="s-tag">La timeline</div>
-    <h2 class="s-title">Chaque étape<br><span class="r">a compté.</span></h2>
-    <p>Ce n'est pas une success story fantasmée. C'est le récit <em>brut et authentique</em> d'un gamin de 16 ans qui a décidé de construire quelque chose de réel à partir de rien — avec <em>de la discipline, de la curiosité</em> et une obsession pour le bodybuilding naturel.</p>
+  <div class="timeline-intro">
+    <div class="s-tag rv">La timeline</div>
+    <h2 class="s-title rv2">Chaque étape<br><span class="r">a compté.</span></h2>
+    <p class="rv3">Ce n'est pas une success story fantasmée. C'est le récit <em>brut et authentique</em> d'un gamin de 16 ans qui a décidé de construire quelque chose de réel à partir de rien — avec <em>de la discipline, de la curiosité</em> et une obsession pour le bodybuilding naturel.</p>
   </div>
 
-  <!-- ── TIMELINE ── -->
   <div class="timeline">
 
-    <!-- EPOCH 1 - Début -->
+    <!-- 2023 -->
     <div class="epoch rv">
       <div class="epoch-left">
         <div class="epoch-year">2023</div>
         <div class="epoch-label">Le point de départ</div>
         <div class="epoch-title">Le déclic.</div>
         <div class="epoch-text">
-          <p>Tout commence en 2023. Un lycéen comme les autres — curieux, passionné, cherchant quelque chose à construire. Le bodybuilding s'impose comme une évidence : <em>un sport de données, de rigueur, de patience</em>. Exactement ce qui me correspond.</p>
-          <p>Les premières séances sont chaotiques. Pas de programme, pas de plan alimentaire, <em>juste une barre et une envie de comprendre</em>. Mais très vite, la passion pour le "pourquoi" derrière chaque exercice prend le dessus.</p>
+          <p>Tout commence en 2023. Un lycéen comme les autres — curieux, passionné, cherchant quelque chose à construire. Le bodybuilding s'impose comme une évidence : <em>un sport de données, de rigueur, de patience</em>.</p>
+          <p>Les premières séances sont chaotiques. Pas de programme, pas de plan alimentaire, <em>juste une barre et une envie de comprendre</em>.</p>
         </div>
         <div class="epoch-tags">
           <span class="epoch-tag">Premier gym</span>
@@ -429,20 +465,20 @@
         <div class="epoch-year-badge">2023</div>
       </div>
       <div class="epoch-right">
-        <div class="epoch-photo">
+        <div class="epoch-photo img-mask">
           <img src="images/images/debut_2022a.png" alt="Emmanuel 2023">
         </div>
-        <div style="margin-top:12px;font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;">Le début. 2023.</div>
+        <div class="epoch-caption">Le début. 2023.</div>
       </div>
     </div>
 
-    <!-- EPOCH 2 - Premières bases -->
+    <!-- 2024 -->
     <div class="epoch alt rv">
       <div class="epoch-left">
-        <div class="epoch-photo">
+        <div class="epoch-photo img-mask">
           <img src="images/images/debut_2022b.png" alt="Emmanuel">
         </div>
-        <div style="margin-top:12px;font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;text-align:right;">La progression commence.</div>
+        <div class="epoch-caption">La progression commence.</div>
       </div>
       <div class="epoch-node">
         <div class="epoch-dot"></div>
@@ -466,7 +502,7 @@
       </div>
     </div>
 
-    <!-- EPOCH 3 - Physique intermédiaire -->
+    <!-- 2024 progression -->
     <div class="epoch rv">
       <div class="epoch-left">
         <div class="epoch-year">2024</div>
@@ -489,21 +525,21 @@
       </div>
       <div class="epoch-right">
         <div class="epoch-photos-grid">
-          <img src="images/images/dark_front.png" alt="Emmanuel progression">
-          <img src="images/images/dark_back.png" alt="Emmanuel dos">
+          <img src="images/images/dark_front.png" alt="Emmanuel">
+          <img src="images/images/dark_back.png" alt="Emmanuel">
           <img src="images/images/dark_hips.png" alt="Emmanuel">
           <img src="images/images/training_bench.png" alt="Bench press">
         </div>
       </div>
     </div>
 
-    <!-- EPOCH 4 - Coaching commence -->
+    <!-- 2025 -->
     <div class="epoch alt rv">
       <div class="epoch-left">
-        <div class="epoch-photo">
-          <img src="images/images/nutrimuscle.png" alt="Event Nutrimuscle">
+        <div class="epoch-photo img-mask">
+          <img src="images/images/nutrimuscle.png" alt="Nutrimuscle">
         </div>
-        <div style="margin-top:12px;font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;text-align:right;">Event Nutrimuscle — Partenariat.</div>
+        <div class="epoch-caption">Event Nutrimuscle.</div>
       </div>
       <div class="epoch-node">
         <div class="epoch-dot"></div>
@@ -517,7 +553,7 @@
         <div class="epoch-text">
           <p>2025 marque le début de l'écosystème professionnel. Je lance mes réseaux sociaux avec une intention claire : <em>créer du contenu de qualité sur le bodybuilding naturel</em>, pas du bruit.</p>
           <p>Je produis une série de 10 vidéos sur la créatine avec <strong>Nutrimuscle</strong> — sources PubMed vérifiées. Une marque à laquelle je suis fidèle, pas un partenariat commercial. Premier coaching client. Première rémunération.</p>
-          <p>Je construis le <em>Google Sheet de coaching complet</em> — Dashboard, Road Map, Checking hebdomadaire, Apps Script, formulaire HTML. Un système professionnel dès le départ.</p>
+          <p>Je construis le <em>Google Sheet de coaching complet</em> — Dashboard, Road Map, Checking hebdomadaire, Apps Script, formulaire HTML.</p>
         </div>
         <div class="epoch-tags">
           <span class="epoch-tag">@emmanuelpccoux</span>
@@ -528,14 +564,14 @@
       </div>
     </div>
 
-    <!-- EPOCH 5 - Aujourd'hui & prep -->
+    <!-- 2026 -->
     <div class="epoch rv">
       <div class="epoch-left">
         <div class="epoch-year">2026</div>
         <div class="epoch-label">Aujourd'hui — Construction</div>
         <div class="epoch-title">Bâtir les fondations.</div>
         <div class="epoch-text">
-          <p>2026 est l'année de la <em>construction physique et technique</em>. Pas de prep en cours — je travaille la mass musculaire, la qualité de mouvement, et la maîtrise de mes données. Tout est en place pour attaquer la prep en 2027.</p>
+          <p>2026 est l'année de la <em>construction physique et technique</em>. Pas de prep en cours — je travaille la masse musculaire, la qualité de mouvement, et la maîtrise de mes données. Tout est en place pour attaquer la prep en 2027.</p>
           <p>Entraînement haute fréquence PPL. Calories et steps trackés quotidiennement. Supplémentation : <em>créatine Creapure, oméga-3, collagène type 1, vitamine D3, ZMP</em>.</p>
           <p>En parallèle : développement du coaching, production de contenu, construction de l'audience. <em>Tout est aligné vers septembre 2027.</em></p>
         </div>
@@ -553,15 +589,15 @@
       </div>
       <div class="epoch-right">
         <div class="epoch-photos-grid">
-          <img src="images/images/green_front.png" alt="Emmanuel aujourd'hui">
-          <img src="images/images/green_side.png" alt="Emmanuel côté">
-          <img src="images/images/gym_pose.png" alt="Emmanuel pose">
-          <img src="images/images/gym_locker.png" alt="Emmanuel vestiaire">
+          <img src="images/images/green_front.png" alt="Emmanuel">
+          <img src="images/images/green_side.png" alt="Emmanuel">
+          <img src="images/images/gym_pose.png" alt="Emmanuel">
+          <img src="images/images/gym_locker.png" alt="Emmanuel">
         </div>
       </div>
     </div>
 
-  </div><!-- end timeline -->
+  </div>
 </section>
 
 <!-- VISION -->
@@ -589,12 +625,18 @@
         </div>
       </div>
 
-      <div style="margin-top:36px;">
-        <a href="coaching.html" class="btn">Rejoindre le coaching</a>
+      <div style="margin-top:44px;">
+        <a href="coaching.html" class="btn magnetic" data-cursor="Voir">
+          <span class="btn-inner">Rejoindre le coaching
+            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </a>
       </div>
     </div>
     <div class="vision-photo rv-right">
-      <img src="images/images/green_front.png" alt="Emmanuel - Vision">
+      <div class="img-mask">
+        <img src="images/images/green_front.png" alt="Vision">
+      </div>
       <div class="vision-quote">
         <div class="vq-txt">« Construire quelque chose de vrai. Pas de raccourcis, jamais. »</div>
         <div class="vq-auth">— Emmanuel Peccoux</div>
@@ -605,29 +647,27 @@
 
 <!-- LIFESTYLE -->
 <section class="lifestyle">
-  <div class="rv">
-    <div class="s-tag">Au-delà du gym</div>
-    <h2 class="s-title">Une vie<br><span class="r">entière.</span></h2>
-    <div class="redbar"></div>
-  </div>
-  <div class="lifestyle-grid rv2">
-    <div class="ls-item ls-big">
-      <img src="images/images/hero_current.png" alt="Emmanuel">
+  <div class="s-tag rv">Au-delà du gym</div>
+  <h2 class="s-title rv2">Une vie<br><span class="r">entière.</span></h2>
+  <div class="redbar rv3"></div>
+  <div class="lifestyle-grid">
+    <div class="ls-item ls-big rv img-mask">
+      <img src="images/images/hero_current.png" alt="Quotidien">
       <div class="ls-item-label">Quotidien</div>
     </div>
-    <div class="ls-item ls-sm">
+    <div class="ls-item ls-sm rv2 img-mask">
       <img src="images/images/paris.png" alt="Paris">
       <div class="ls-item-label">Paris — la prochaine étape</div>
     </div>
-    <div class="ls-item ls-sm">
+    <div class="ls-item ls-sm rv3 img-mask">
       <img src="images/images/beach.png" alt="Beach">
       <div class="ls-item-label">L'été autour du lac</div>
     </div>
-    <div class="ls-item ls-sm">
+    <div class="ls-item ls-sm rv2 img-mask">
       <img src="images/images/food1.png" alt="Alimentation">
       <div class="ls-item-label">L'alimentation précise</div>
     </div>
-    <div class="ls-item ls-sm">
+    <div class="ls-item ls-sm rv3 img-mask">
       <img src="images/images/lifestyle_flag.png" alt="Colombie">
       <div class="ls-item-label">Les racines</div>
     </div>
@@ -635,49 +675,38 @@
 </section>
 
 <!-- CTA -->
-<section style="background:var(--g1);padding:120px 80px;text-align:center;position:relative;overflow:hidden;">
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(230,0,0,0.1)0%,transparent 70%);pointer-events:none;"></div>
-  <div class="rv" style="position:relative;z-index:2;">
-    <div class="s-tag" style="justify-content:center;color:rgba(255,255,255,0.2);">Tu veux changer ?</div>
-    <h2 class="s-title" style="font-size:clamp(48px,8vw,96px);">Écris-moi.<br><span class="r">On commence.</span></h2>
-    <p style="font-size:14px;color:rgba(255,255,255,0.4);font-weight:600;max-width:360px;margin:20px auto 40px;line-height:1.8;">Si tu m'as lu jusqu'ici, tu sais déjà que c'est sérieux. Le reste se passe sur WhatsApp.</p>
-    <a href="https://wa.me/33766834777?text=Bonjour%20Emmanuel%2C%20je%20veux%20en%20savoir%20plus%20sur%20le%20suivi" class="btn" target="_blank" style="font-size:12px;padding:20px 48px;">
-      Démarrer sur WhatsApp
-    </a>
-    <div style="margin-top:20px;font-size:10px;letter-spacing:1.5px;color:rgba(255,255,255,0.15);text-transform:uppercase;">Réponse garantie sous 24h</div>
+<section class="parcours-cta">
+  <div class="pc-content">
+    <div class="s-tag rv" style="justify-content:center;color:rgba(255,255,255,0.3);">Tu veux changer ?</div>
+    <h2 class="s-title rv2" style="font-size:clamp(56px,8vw,110px);">Écris-moi.<br><span class="r">On commence.</span></h2>
+    <p class="rv3" style="font-size:14px;color:rgba(255,255,255,0.4);font-weight:500;max-width:380px;margin:24px auto 44px;line-height:1.85;">Si tu m'as lu jusqu'ici, tu sais déjà que c'est sérieux. Le reste se passe sur WhatsApp.</p>
+    <div class="rv4">
+      <a href="https://wa.me/33766834777?text=Bonjour%20Emmanuel%2C%20je%20veux%20en%20savoir%20plus%20sur%20le%20suivi" target="_blank" class="btn magnetic" data-cursor="Go">
+        <span class="btn-inner">Démarrer sur WhatsApp →</span>
+      </a>
+    </div>
+    <div style="margin-top:24px;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.15);text-transform:uppercase;">Réponse garantie sous 24h</div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">EP<span class="dot">.</span>COACHING</div>
-  <div class="footer-links">
-    <a href="index.html">Accueil</a>
-    <a href="parcours.html">Parcours</a>
-    <a href="coaching.html">Coaching</a>
-    <a href="contact.html">Contact</a>
+  <div class="footer-top">
+    <div class="footer-big rv">3 ans.<br><span class="r">Une obsession.</span></div>
+    <div class="footer-cta rv2">
+      <p>L'histoire continue chaque jour. Le coaching, la prep, la communauté — tout se construit en parallèle.</p>
+      <a href="contact.html" class="btn magnetic" data-cursor="Voir"><span class="btn-inner">Me contacter →</span></a>
+    </div>
   </div>
-  <div class="footer-copy">© 2026 Emmanuel Peccoux — Tous droits réservés</div>
+  <div class="footer-bottom">
+    <div class="footer-logo">EP<span class="dot">.</span>COACHING</div>
+    <div class="footer-links">
+      <a href="index.html">Accueil</a><a href="parcours.html">Parcours</a><a href="coaching.html">Coaching</a><a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-copy">© 2026 Emmanuel Peccoux</div>
+  </div>
 </footer>
 
-<script>
-const sp = document.getElementById('sp');
-window.addEventListener('scroll', () => {
-  const s = document.documentElement.scrollTop;
-  const h = document.documentElement.scrollHeight - window.innerHeight;
-  sp.style.transform = `scaleX(${s/h})`;
-  document.getElementById('nav').classList.add('scrolled');
-});
-const dot = document.getElementById('cursor');
-const ring = document.getElementById('cring');
-let rx=0,ry=0,mx=0,my=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px)`;});
-(function raf(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(raf);})();
-document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('hovered'));el.addEventListener('mouseleave',()=>ring.classList.remove('hovered'));});
-const burger=document.getElementById('burger');const mm=document.getElementById('mobileMenu');
-burger.addEventListener('click',()=>{mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
-mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mm.classList.remove('open');document.body.style.overflow='';}));
-const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:0.07});
-document.querySelectorAll('.rv,.rv2,.rv3,.rv4,.rv-left,.rv-right').forEach(el=>obs.observe(el));
-</script>
+<script src="motion.js"></script>
 </body>
 </html>
