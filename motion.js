@@ -5,7 +5,75 @@
 (function() {
   'use strict';
 
-  // ── PRELOADER ──
+  // ── PAGE TRANSITION SYSTEM ──
+  (function() {
+    // Inject overlay if not present
+    let overlay = document.getElementById('page-transition');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'page-transition';
+      document.body.appendChild(overlay);
+    }
+
+    // On page enter: animate out
+    window.addEventListener('DOMContentLoaded', () => {
+      overlay.classList.add('entering');
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          overlay.classList.remove('entering');
+          overlay.classList.add('leaving');
+          setTimeout(() => overlay.classList.remove('leaving'), 500);
+        });
+      });
+    });
+
+    // On internal link click: animate in then navigate
+    document.addEventListener('click', e => {
+      const link = e.target.closest('a[href]');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('http') || href.startsWith('//') ||
+          href.startsWith('mailto') || href.startsWith('tel') ||
+          href.startsWith('#') || link.target === '_blank') return;
+
+      e.preventDefault();
+      overlay.classList.remove('leaving');
+      overlay.classList.add('entering');
+      setTimeout(() => { window.location.href = href; }, 480);
+    });
+  })();
+
+  // ── PRELOADER V2 ──
+  (function() {
+    // Inject subtitle if missing
+    const bar = document.querySelector('.preloader-bar');
+    if (bar && !document.querySelector('.preloader-subtitle')) {
+      const sub = document.createElement('div');
+      sub.className = 'preloader-subtitle';
+      sub.textContent = 'Compétiteur · Coach';
+      bar.insertAdjacentElement('afterend', sub);
+    }
+
+    // Animated percentage counter
+    const pct = document.querySelector('.preloader-pct');
+    if (pct) {
+      pct.className = 'preloader-count';
+      const dur = 1700;
+      const start = performance.now();
+      function updatePct(t) {
+        const p = Math.min((t - start) / dur, 1);
+        // Non-linear: accelerates early, slows at end
+        const eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+        const val = Math.floor(eased * 100);
+        pct.textContent = val + '%';
+        if (p < 1) requestAnimationFrame(updatePct);
+        else pct.textContent = '100%';
+      }
+      requestAnimationFrame(updatePct);
+    }
+  })();
+
+  // ── PRELOADER HIDE ──
   window.addEventListener('load', () => {
     setTimeout(() => {
       const pl = document.getElementById('preloader');
