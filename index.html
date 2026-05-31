@@ -550,8 +550,16 @@
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
+  <style>
+    .hero-overlay-lines { position:absolute; inset:0; z-index:1; pointer-events:none; background: repeating-linear-gradient(180deg, transparent, transparent calc(33.33% - 0.5px), rgba(255,255,255,0.025) calc(33.33% - 0.5px), rgba(255,255,255,0.025) calc(33.33% + 0.5px)); }
+    .hero-scroll-dot { width:4px; height:4px; border-radius:50%; background:var(--red); animation: scrollPulse 1.8s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%,100% { opacity:0.3; transform:translateY(0); } 50% { opacity:1; transform:translateY(4px); } }
+    .hero-badge-pulse { position:absolute; inset:-8px; border-radius:50%; border:1px solid rgba(230,0,0,0.2); animation:badgePulse 2.5s ease-in-out infinite; pointer-events:none; }
+    @keyframes badgePulse { 0%,100%{transform:scale(1);opacity:0.6;} 50%{transform:scale(1.08);opacity:0.2;} }
+  </style>
   <div class="hero-bg-wrap">
     <img class="hero-bg-img parallax" data-parallax="0.4" src="images/images/gym_locker.png" alt="Emmanuel Peccoux">
+    <div class="hero-overlay-lines"></div>
   </div>
   <div class="hero-vignette"></div>
   <div class="hero-corner"></div>
@@ -560,13 +568,13 @@
     <div class="hero-eyebrow">
       <span class="hero-eyebrow-line"></span>
       <span class="hero-eyebrow-dot"></span>
-      <span class="hero-eyebrow-txt">Coach Bodybuilding Naturel · Compétiteur WNBF</span>
+      <span class="hero-eyebrow-txt" data-split="chars">EP · COACHING — COMPÉTITEUR WNBF 2027</span>
     </div>
 
-    <h1 class="hero-h1 on">
+    <h1 class="hero-h1 on" data-split-words>
       <span class="line"><span class="line-inner">Construis</span></span>
       <span class="line"><span class="line-inner r">le physique</span></span>
-      <span class="line"><span class="line-inner o">que tu mérites</span></span>
+      <span class="line"><span class="line-inner o">qui s'impose.</span></span>
     </h1>
 
     <div class="hero-bottom">
@@ -575,19 +583,19 @@
         Je construis avec toi un physique solide et te transmets une passion pour le bodybuilding qui dure toute ta vie.
       </p>
       <div class="hero-stats">
-        <div class="hero-stat">
+        <div class="hero-stat rv-clip">
           <div class="hs-num" data-count="3" data-suffix="+">0</div>
           <div class="hs-lbl">Ans</div>
         </div>
-        <div class="hero-stat">
+        <div class="hero-stat rv-clip">
           <div class="hs-num">100%</div>
           <div class="hs-lbl">Naturel</div>
         </div>
-        <div class="hero-stat">
+        <div class="hero-stat rv-clip">
           <div class="hs-num" data-count="16">0</div>
           <div class="hs-lbl">Ans</div>
         </div>
-        <div class="hero-stat">
+        <div class="hero-stat rv-clip">
           <div class="hs-num">2027</div>
           <div class="hs-lbl">WNBF</div>
         </div>
@@ -605,14 +613,18 @@
   </div>
 
   <div class="hero-badge">
+    <div class="hero-badge-pulse"></div>
     <div class="hero-badge-line"></div>
     <div class="hero-badge-num">WNBF · 2027</div>
     <div class="hero-badge-txt">Septembre</div>
   </div>
 
   <div class="hero-scroll">
-    <span class="hero-scroll-txt">Scroll</span>
-    <div class="hero-scroll-line"></div>
+    <div class="hero-scroll-inner">
+      <span class="hero-scroll-txt">Scroll</span>
+      <div class="hero-scroll-line"></div>
+      <div class="hero-scroll-dot"></div>
+    </div>
   </div>
 </section>
 
