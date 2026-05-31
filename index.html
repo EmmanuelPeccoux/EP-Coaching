@@ -628,8 +628,9 @@
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-wrap">
+<!-- MARQUEE DUAL -->
+<style>.marquee-reverse { animation-direction: reverse; } .marquee-dual { display:flex; flex-direction:column; gap:0; }</style>
+<div class="marquee-wrap marquee-dual">
   <div class="marquee-track">
     <span class="marquee-item">Bodybuilding Naturel <span class="dot">·</span></span>
     <span class="marquee-item">Classic Physique <span class="dot">·</span></span>
@@ -646,12 +647,28 @@
     <span class="marquee-item">Google Sheet Coaching <span class="dot">·</span></span>
     <span class="marquee-item">@emmanuelpeccoux <span class="dot">·</span></span>
   </div>
+  <div class="marquee-track marquee-reverse">
+    <span class="marquee-item">Classic Physique <span class="dot">·</span></span>
+    <span class="marquee-item">Heroes Cup <span class="dot">·</span></span>
+    <span class="marquee-item">Suivi Data <span class="dot">·</span></span>
+    <span class="marquee-item">Oura Ring <span class="dot">·</span></span>
+    <span class="marquee-item">Google Sheet <span class="dot">·</span></span>
+    <span class="marquee-item">WhatsApp Daily <span class="dot">·</span></span>
+    <span class="marquee-item">Annecy / Paris <span class="dot">·</span></span>
+    <span class="marquee-item">Classic Physique <span class="dot">·</span></span>
+    <span class="marquee-item">Heroes Cup <span class="dot">·</span></span>
+    <span class="marquee-item">Suivi Data <span class="dot">·</span></span>
+    <span class="marquee-item">Oura Ring <span class="dot">·</span></span>
+    <span class="marquee-item">Google Sheet <span class="dot">·</span></span>
+    <span class="marquee-item">WhatsApp Daily <span class="dot">·</span></span>
+    <span class="marquee-item">Annecy / Paris <span class="dot">·</span></span>
+  </div>
 </div>
 
 <!-- ═══ ABOUT ═══ -->
 <section class="about section">
   <div class="about-grid">
-    <div class="about-photos rv-left img-mask">
+    <div class="about-photos rv-left rv-clip img-mask">
       <div class="about-photo-main">
         <img src="images/images/gym_pose.png" alt="Emmanuel Peccoux">
       </div>
@@ -663,7 +680,7 @@
     </div>
     <div class="about-txt">
       <div class="s-tag rv">Qui je suis</div>
-      <h2 class="s-title rv2">Passionné.<br><span class="r">Discipliné.</span><br><span class="o">Naturel.</span></h2>
+      <h2 class="s-title rv2" data-split-words>Passionné.<br><span class="r">Discipliné.</span><br><span class="o">Naturel.</span></h2>
       <div class="redbar rv3"></div>
       <p class="rv3">Je m'appelle Emmanuel Peccoux, j'ai 16 ans et je m'entraîne depuis <em>3 ans avec une obsession</em> pour le bodybuilding naturel. Je me lève à 4h–5h du matin, j'enchaîne l'entraînement, l'école, le coaching et le contenu. Pas parce que je dois — parce que <em>je le veux profondément</em>.</p>
       <p class="rv3">Je construis aujourd'hui les fondations physiques et techniques pour ma première compétition. <em>Ma prep officielle débutera en 2027</em> — d'ici là, je vis et respire ce sport au quotidien.</p>
@@ -704,7 +721,7 @@
   <div class="physique-intro">
     <div>
       <div class="s-tag rv">Progression physique</div>
-      <h2 class="s-title rv2">3 ans de<br><span class="r">travail</span><br><span class="o">visible</span></h2>
+      <h2 class="s-title rv2" data-split-words>3 ans de<br><span class="r">travail</span><br><span class="o">visible</span></h2>
       <div class="redbar rv3"></div>
     </div>
     <div>
@@ -747,7 +764,7 @@
   <div class="coaching-teaser-grid">
     <div>
       <div class="s-tag rv">Le Coaching</div>
-      <h2 class="s-title rv2">Un suivi<br><span class="r">construit</span><br>pour toi</h2>
+      <h2 class="s-title rv2" data-split-words>Un suivi<br><span class="r">construit</span><br>pour toi</h2>
       <div class="redbar rv3"></div>
       <p class="rv3" style="font-size:14px;color:rgba(255,255,255,0.55);line-height:1.95;font-weight:500;margin-bottom:36px;">Pas de plan générique. Pas de programme copié-collé. Chaque suivi est architectural — bâti sur ta vie, ton niveau, tes données.</p>
 
