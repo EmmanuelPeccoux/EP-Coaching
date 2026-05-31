@@ -1,0 +1,13 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "site-ep-coaching",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-s", ".", "-l", "4000", "--no-clipboard"],
+      "cwd": "C:\\Users\\valen\\ep-site",
+      "port": 4000,
+      "autoPort": false
+    }
+  ]
+}
