@@ -245,4 +245,156 @@
     });
   });
 
+
+  // ── CLIP-PATH REVEAL ──
+  (function() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .rv-clip {
+        clip-path: inset(0 100% 0 0);
+        transition: clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .rv-clip.on {
+        clip-path: inset(0 0% 0 0);
+      }
+    `;
+    document.head.appendChild(style);
+
+    const clips = document.querySelectorAll('.rv-clip');
+    // Group by parent for stagger
+    const parents = new Map();
+    clips.forEach(el => {
+      const p = el.parentElement;
+      if (!parents.has(p)) parents.set(p, []);
+      parents.get(p).push(el);
+    });
+    parents.forEach(els => {
+      els.forEach((el, i) => {
+        el.style.transitionDelay = (i * 0.12) + 's';
+      });
+    });
+
+    const clipObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('on');
+          clipObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    clips.forEach(el => clipObs.observe(el));
+  })();
+
+  // ── SPLIT TEXT: data-split="words" support + will-change ──
+  document.querySelectorAll('[data-split="words"]').forEach(el => {
+    const words = el.textContent.trim().split(' ');
+    el.innerHTML = '';
+    words.forEach((w, i) => {
+      const span = document.createElement('span');
+      span.className = 'split';
+      const inner = document.createElement('span');
+      inner.className = 'split-char';
+      inner.style.transitionDelay = (i * 0.08) + 's';
+      inner.style.willChange = 'transform';
+      inner.textContent = w + (i < words.length - 1 ? ' ' : '');
+      span.appendChild(inner);
+      el.appendChild(span);
+    });
+    obs.observe(el);
+  });
+
+  // ── SMOOTH SCROLL WHEEL LERP (desktop) ──
+  if (window.innerWidth > 1100) {
+    let currentY = window.scrollY;
+    let targetY = window.scrollY;
+    let lerpRunning = false;
+
+    window.addEventListener('wheel', e => {
+      e.preventDefault();
+      targetY = Math.max(0, Math.min(
+        targetY + e.deltaY,
+        document.documentElement.scrollHeight - window.innerHeight
+      ));
+      if (!lerpRunning) {
+        lerpRunning = true;
+        lerpScroll();
+      }
+    }, { passive: false });
+
+    function lerpScroll() {
+      const diff = targetY - currentY;
+      if (Math.abs(diff) < 0.5) {
+        currentY = targetY;
+        window.scrollTo(0, currentY);
+        lerpRunning = false;
+        return;
+      }
+      currentY += diff * 0.085;
+      window.scrollTo(0, currentY);
+      requestAnimationFrame(lerpScroll);
+    }
+  }
+
+  // ── HOVER LINE NAV (pure JS) ──
+  (function() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .nav-line {
+        position: absolute; bottom: -3px; left: 0;
+        width: 100%; height: 1px;
+        background: var(--red);
+        transform: scaleX(0); transform-origin: right;
+        transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+        pointer-events: none;
+      }
+    `;
+    document.head.appendChild(style);
+
+    document.querySelectorAll('.nav-links a, .nav-link').forEach(a => {
+      if (a.querySelector('.nav-line')) return;
+      a.style.position = 'relative';
+      const line = document.createElement('span');
+      line.className = 'nav-line';
+      a.appendChild(line);
+      a.addEventListener('mouseenter', () => {
+        line.style.transformOrigin = 'left';
+        line.style.transform = 'scaleX(1)';
+      });
+      a.addEventListener('mouseleave', () => {
+        line.style.transformOrigin = 'right';
+        line.style.transform = 'scaleX(0)';
+      });
+    });
+  })();
+
+  // ── SECTION NUMBER REVEAL ──
+  document.querySelectorAll('[data-section-num]').forEach(el => {
+    const num = document.createElement('span');
+    num.textContent = el.dataset.sectionNum;
+    num.style.cssText = `
+      position: absolute; font-family: 'Bebas Neue';
+      font-size: clamp(120px, 18vw, 220px); font-weight: 400;
+      color: rgba(255,255,255,0.04); line-height: 1;
+      pointer-events: none; user-select: none;
+      right: 0; top: 50%; transform: translateX(-20px) translateY(-50%);
+      transition: opacity 1.2s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1);
+      opacity: 0;
+      z-index: 0;
+    `;
+    el.style.position = el.style.position || 'relative';
+    el.appendChild(num);
+
+    const numObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          num.style.opacity = '1';
+          num.style.transform = 'translateX(0) translateY(-50%)';
+          numObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    numObs.observe(el);
+  });
+
 })();
+
