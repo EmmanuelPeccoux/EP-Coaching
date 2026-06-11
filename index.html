@@ -18,165 +18,213 @@
     <div class="orb orb-c"></div>
   </div>
   <div class="grain" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><i id="progressFill"></i></div>
 
   <!-- NAV -->
   <nav class="nav" id="nav">
-    <a href="#hero" class="nav-logo">EP<span class="dot">·</span>COACHING</a>
+    <a href="#" class="nav-logo" data-scene="0">EP<span class="dot">·</span>COACHING</a>
     <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     <div class="nav-right" id="navRight">
-      <a href="#preuve" class="nav-link">Preuve</a>
-      <a href="#methode" class="nav-link">Méthode</a>
-      <a href="#athlete" class="nav-link">L'athlète</a>
+      <button class="nav-link" data-scene="2">Preuve</button>
+      <button class="nav-link" data-scene="3">Méthode</button>
+      <button class="nav-link" data-scene="4">L'athlète</button>
       <a href="https://www.instagram.com/emmanuelpeccoux" target="_blank" rel="noopener" class="nav-link">Instagram</a>
       <a href="https://calendly.com/peccoux-manu/30min" target="_blank" rel="noopener" class="nav-cta">Réserver</a>
     </div>
   </nav>
 
+  <!-- POINTS DE SCÈNE -->
+  <nav class="scene-dots" id="sceneDots" aria-label="Scènes">
+    <button data-i="0" data-label="Intro" class="active" aria-label="Aller à : Intro"></button>
+    <button data-i="1" data-label="Constat" aria-label="Aller à : Constat"></button>
+    <button data-i="2" data-label="Preuve" aria-label="Aller à : Preuve"></button>
+    <button data-i="3" data-label="Méthode" aria-label="Aller à : Méthode"></button>
+    <button data-i="4" data-label="Athlète" aria-label="Aller à : Athlète"></button>
+    <button data-i="5" data-label="Contact" aria-label="Aller à : Contact"></button>
+  </nav>
+
   <main>
-    <!-- ════════ HERO ════════ -->
-    <section class="hero" id="hero">
-      <div class="hero-bg"><img src="images/images/hero_current.png" alt="Emmanuel Peccoux — compétiteur bodybuilding naturel"></div>
-      <div class="hero-coords">45.8992° N · 6.1294° E — ANNECY, FR</div>
+    <div class="stage-wrap" id="stageWrap">
+      <div class="stage" id="stage">
 
-      <div class="hero-eyebrow tag rv">Coaching 1:1 <span class="num">—</span> Naturel <span class="num">—</span> Annecy</div>
+        <div class="ghost-digits" aria-hidden="true">
+          <span class="ghost" data-i="0">01</span>
+          <span class="ghost" data-i="1">02</span>
+          <span class="ghost" data-i="2">03</span>
+          <span class="ghost" data-i="3">04</span>
+          <span class="ghost" data-i="4">05</span>
+          <span class="ghost" data-i="5">06</span>
+        </div>
 
-      <h1 class="disp">
-        <span class="l"><span style="--d:.05s">Ton corps</span></span>
-        <span class="l"><span style="--d:.18s" class="outline">n'improvise</span></span>
-        <span class="l"><span style="--d:.31s"><em class="italic red">jamais.</em></span></span>
-      </h1>
+        <!-- ════════ SCÈNE 0 — HERO ════════ -->
+        <div class="layer" data-i="0" id="L-hero">
+          <div class="hero-bg"><img src="images/images/hero_current.png" alt="Emmanuel Peccoux — compétiteur bodybuilding naturel"></div>
+          <div class="hero-coords">45.8992° N · 6.1294° E — ANNECY, FR</div>
+          <div class="layer-inner hero">
+            <div class="hero-eyebrow tag rv">Coaching 1:1 <span class="num">—</span> Naturel <span class="num">—</span> Annecy</div>
+            <h1 class="disp">
+              <span class="l"><span style="--d:.05s">Ton corps</span></span>
+              <span class="l"><span style="--d:.18s" class="outline">n'improvise</span></span>
+              <span class="l"><span style="--d:.31s"><em class="italic red">jamais.</em></span></span>
+            </h1>
+            <div class="hero-foot">
+              <p class="hero-sub rv" style="--d:.5s">Coaching 1:1 avec un compétiteur de bodybuilding <em>100% naturel</em>. On part de tes chiffres, pas d'un programme générique — et on construit un système qui tient dans la durée.</p>
+              <div class="hero-scroll rv" style="--d:.6s"><span>Scroller</span><i></i></div>
+            </div>
+          </div>
+        </div>
 
-      <div class="hero-foot">
-        <p class="hero-sub rv" style="--d:.5s">Coaching 1:1 avec un compétiteur de bodybuilding <em>100% naturel</em>. On part de tes chiffres, pas d'un programme générique — et on construit un système qui tient dans la durée.</p>
-        <div class="hero-scroll rv" style="--d:.6s"><span>Défiler</span><i></i></div>
-      </div>
-    </section>
+        <!-- bandeaux mobile (entre Hero et Constat en mode empilé) -->
+        <div class="flow-marquees">
+          <div class="marquee" aria-hidden="true">
+            <div class="marquee-track">
+              <span>Discipline <b>—</b> Données <b>—</b> Résultats <b>—</b> Zéro hasard <b>—</b></span>
+              <span>Discipline <b>—</b> Données <b>—</b> Résultats <b>—</b> Zéro hasard <b>—</b></span>
+            </div>
+          </div>
+          <div class="marquee rev" aria-hidden="true">
+            <div class="marquee-track">
+              <span>100% Naturel — Coaching 1:1 — Annecy — Objectif WNBF —</span>
+              <span>100% Naturel — Coaching 1:1 — Annecy — Objectif WNBF —</span>
+            </div>
+          </div>
+        </div>
 
-    <!-- MARQUEES -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span>Discipline <b>—</b> Données <b>—</b> Résultats <b>—</b> Zéro hasard <b>—</b></span>
-        <span>Discipline <b>—</b> Données <b>—</b> Résultats <b>—</b> Zéro hasard <b>—</b></span>
+        <!-- ════════ SCÈNE 1 — CONSTAT ════════ -->
+        <div class="layer" data-i="1" id="L-constat">
+          <div class="layer-inner">
+            <div class="tag rv"><span class="num">01</span> — Le constat</div>
+            <p class="constat-text rv" style="--d:.1s">
+              Tu t'entraînes dur. Tu manges propre. Tu fais « tout comme il faut ».
+              Et pourtant, le miroir ne bouge presque pas.
+              <em>Le problème n'a jamais été ton effort</em> —
+              c'est l'absence d'un <span class="hl">système</span> capable de le transformer
+              en <span class="hl red">résultat.</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- ════════ SCÈNE 2 — PREUVE ════════ -->
+        <div class="layer" data-i="2" id="L-preuve">
+          <div class="layer-inner">
+            <div class="scn-hd">
+              <div class="tag rv"><span class="num">02</span> — La preuve</div>
+              <h2 class="disp rv" style="--d:.1s">Trois ans. <span class="outline">Zéro raccourci.</span></h2>
+              <p class="rv" style="--d:.2s">Ce que je propose à mes athlètes, je me l'applique d'abord à moi-même — chaque semaine, chaque chiffre, chaque photo.</p>
+            </div>
+            <div class="proof-years" id="proofYears">
+              <span data-year="2023">2023</span>
+              <span data-year="2024">2024</span>
+              <span data-year="2025">2025</span>
+              <span data-year="2026">2026</span>
+            </div>
+            <div class="filmstrip">
+              <div class="filmstrip-track">
+                <figure class="frame" data-year="2023">
+                  <img src="images/images/debut_2022a.png" alt="Emmanuel — point de départ 2023" loading="lazy">
+                  <figcaption class="frame-meta"><b>2023</b><span>Le point de départ</span></figcaption>
+                </figure>
+                <figure class="frame" data-year="2024">
+                  <img src="images/images/dark_back.png" alt="Emmanuel — construction 2024" loading="lazy">
+                  <figcaption class="frame-meta"><b>2024</b><span>La construction</span></figcaption>
+                </figure>
+                <figure class="frame" data-year="2025">
+                  <img src="images/images/dark_front.png" alt="Emmanuel — progression 2025" loading="lazy">
+                  <figcaption class="frame-meta"><b>2025</b><span>Le travail paie</span></figcaption>
+                </figure>
+                <figure class="frame" data-year="2026">
+                  <img src="images/images/green_front.png" alt="Emmanuel — condition 2026" loading="lazy">
+                  <figcaption class="frame-meta"><b>2026</b><span>La condition actuelle</span></figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════ SCÈNE 3 — MÉTHODE ════════ -->
+        <div class="layer" data-i="3" id="L-methode">
+          <div class="layer-inner">
+            <div class="scn-hd">
+              <div class="tag rv"><span class="num">03</span> — La méthode</div>
+              <h2 class="disp rv" style="--d:.1s">Trois piliers. <span class="outline">Aucune improvisation.</span></h2>
+            </div>
+            <div class="principles-track">
+              <div class="principles-track-inner">
+                <article class="principle rv" style="--d:.05s">
+                  <div class="principle-num">/ 01</div>
+                  <h3 class="disp">Données</h3>
+                  <p>Chaque réglage — calories, séries, charges — découle de <em>tes</em> chiffres réels, suivis semaine après semaine. Pas d'intuition, pas de copier-coller d'un programme trouvé en ligne.</p>
+                </article>
+                <article class="principle rv" style="--d:.1s">
+                  <div class="principle-num">/ 02</div>
+                  <h3 class="disp">Stratégie</h3>
+                  <p>Un plan pensé pour <em>ta vie</em> : ton emploi du temps, ton historique, tes contraintes. Le système s'adapte à toi — jamais l'inverse.</p>
+                </article>
+                <article class="principle rv" style="--d:.15s">
+                  <div class="principle-num">/ 03</div>
+                  <h3 class="disp">Présence</h3>
+                  <p>Un coach joignable <em>chaque jour</em>. Une question, un doute, un imprévu — tu m'écris, je réponds. Tu n'avances jamais seul.</p>
+                </article>
+              </div>
+            </div>
+            <div class="method-foot">
+              <a href="https://calendly.com/peccoux-manu/30min" target="_blank" rel="noopener" class="btn magnetic rv"><span>Réserver un appel</span><i></i></a>
+              <div class="method-dots" aria-hidden="true">
+                <button class="active" data-i="0"></button>
+                <button data-i="1"></button>
+                <button data-i="2"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════ SCÈNE 4 — ATHLÈTE ════════ -->
+        <div class="layer" data-i="4" id="L-athlete">
+          <div class="layer-inner">
+            <div class="athlete-visual rv">
+              <img src="images/images/gym_pose.png" alt="Emmanuel Peccoux" loading="lazy">
+              <div class="athlete-id">EP — Compétiteur · Coach</div>
+            </div>
+            <div class="athlete-text">
+              <div class="tag rv"><span class="num">04</span> — L'athlète</div>
+              <h2 class="disp rv" style="--d:.1s">Emmanuel<br>Peccoux<span class="red">.</span></h2>
+              <p class="rv" style="--d:.2s">Compétiteur de bodybuilding <em>100% naturel</em>, en préparation pour la scène WNBF. Je n'enseigne rien que je n'applique pas moi-même : la rigueur, le suivi, la patience — tous les jours, sans exception.</p>
+              <div class="stats">
+                <div class="stat rv" style="--d:.05s"><div class="stat-val"><span data-count="3">0</span><span class="red">+</span></div><div class="stat-lbl">Années documentées</div></div>
+                <div class="stat rv" style="--d:.1s"><div class="stat-val"><span data-count="100">0</span><span class="red">%</span></div><div class="stat-lbl">Naturel</div></div>
+                <div class="stat rv" style="--d:.15s"><div class="stat-val">1<span class="red">:</span>1</div><div class="stat-lbl">Accompagnement direct</div></div>
+                <div class="stat rv" style="--d:.2s"><div class="stat-val">WNBF</div><div class="stat-lbl">Objectif compétition</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════ SCÈNE 5 — CTA FINAL ════════ -->
+        <div class="layer" data-i="5" id="L-final">
+          <div class="layer-inner final">
+            <div class="final-glow" aria-hidden="true"></div>
+            <div class="tag rv"><span class="num">05</span> — On commence ?</div>
+            <h2 class="disp rv" style="--d:.1s">Prêt à <em class="italic red">construire ?</em></h2>
+            <p class="final-sub rv" style="--d:.2s">Un appel de 30 minutes, sans pression ni argumentaire. <em>On parle de toi</em>, de ton point de départ, de ton objectif — et on voit si ça a du sens d'avancer ensemble.</p>
+            <div class="final-actions rv" style="--d:.3s">
+              <a href="https://calendly.com/peccoux-manu/30min" target="_blank" rel="noopener" class="btn magnetic"><span>Réserver un appel</span><i></i></a>
+              <a href="https://wa.me/33766834777" target="_blank" rel="noopener" class="btn btn-ghost magnetic"><span>Écrire sur WhatsApp</span><i></i></a>
+            </div>
+            <div class="final-note rv" style="--d:.4s">Réponse sous 24h — c'est moi qui te lis, pas un bot</div>
+          </div>
+        </div>
+
+        <div class="stage-marquee" aria-hidden="true">
+          <div class="marquee">
+            <div class="marquee-track">
+              <span>Discipline <b>—</b> Données <b>—</b> Résultats <b>—</b> Zéro hasard <b>—</b></span>
+              <span>Discipline <b>—</b> Données <b>—</b> Résultats <b>—</b> Zéro hasard <b>—</b></span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-    <div class="marquee rev" aria-hidden="true">
-      <div class="marquee-track">
-        <span>100% Naturel — Coaching 1:1 — Annecy — Objectif WNBF —</span>
-        <span>100% Naturel — Coaching 1:1 — Annecy — Objectif WNBF —</span>
-      </div>
-    </div>
-
-    <!-- ════════ 01 — CONSTAT ════════ -->
-    <section class="section constat" id="constat">
-      <div class="constat-num" aria-hidden="true">01</div>
-      <div class="tag rv"><span class="num">01</span> — Le constat</div>
-      <p class="constat-text rv" style="--d:.1s">
-        Tu t'entraînes dur. Tu manges propre. Tu fais « tout comme il faut ».
-        Et pourtant, le miroir ne bouge presque pas.
-        <em>Le problème n'a jamais été ton effort</em> —
-        c'est l'absence d'un <span class="hl">système</span> capable de le transformer
-        en <span class="hl red">résultat.</span>
-      </p>
-    </section>
-
-    <!-- ════════ 02 — PREUVE ════════ -->
-    <section class="section proof" id="preuve">
-      <div class="proof-hd">
-        <div>
-          <div class="tag rv"><span class="num">02</span> — La preuve</div>
-          <h2 class="disp rv" style="--d:.1s">Trois ans.<br><span class="outline">Zéro raccourci.</span></h2>
-          <p class="rv" style="--d:.2s">Ce que je propose à mes athlètes, je me l'applique d'abord à moi-même — chaque semaine, chaque chiffre, chaque photo.</p>
-        </div>
-        <div class="proof-years" id="proofYears">
-          <span data-year="2023">2023</span>
-          <span data-year="2024">2024</span>
-          <span data-year="2025">2025</span>
-          <span data-year="2026">2026</span>
-        </div>
-      </div>
-
-      <div class="proof-track" id="proofTrack">
-        <figure class="proof-card rv" style="--d:.05s" data-year="2023">
-          <img src="images/images/debut_2022a.png" alt="Emmanuel — point de départ 2023" loading="lazy">
-          <figcaption class="proof-meta"><b>2023</b><span>Le point de départ</span></figcaption>
-        </figure>
-        <figure class="proof-card rv" style="--d:.1s" data-year="2024">
-          <img src="images/images/dark_back.png" alt="Emmanuel — construction 2024" loading="lazy">
-          <figcaption class="proof-meta"><b>2024</b><span>La construction</span></figcaption>
-        </figure>
-        <figure class="proof-card rv" style="--d:.15s" data-year="2025">
-          <img src="images/images/dark_front.png" alt="Emmanuel — progression 2025" loading="lazy">
-          <figcaption class="proof-meta"><b>2025</b><span>Le travail paie</span></figcaption>
-        </figure>
-        <figure class="proof-card rv" style="--d:.2s" data-year="2026">
-          <img src="images/images/green_front.png" alt="Emmanuel — condition 2026" loading="lazy">
-          <figcaption class="proof-meta"><b>2026</b><span>La condition actuelle</span></figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <!-- ════════ 03 — MÉTHODE ════════ -->
-    <section class="section method" id="methode">
-      <div class="section-hd">
-        <div class="tag rv"><span class="num">03</span> — La méthode</div>
-        <h2 class="disp rv" style="--d:.1s">Trois piliers.<br><span class="outline">Aucune improvisation.</span></h2>
-      </div>
-
-      <div class="method-list">
-        <article class="principle rv" style="--d:.05s">
-          <div class="principle-num">/ 01</div>
-          <h3 class="disp">Données</h3>
-          <p>Chaque réglage — calories, séries, charges — découle de <em>tes</em> chiffres réels, suivis semaine après semaine. Pas d'intuition, pas de copier-coller d'un programme trouvé en ligne.</p>
-        </article>
-        <article class="principle rv" style="--d:.1s">
-          <div class="principle-num">/ 02</div>
-          <h3 class="disp">Stratégie</h3>
-          <p>Un plan pensé pour <em>ta vie</em> : ton emploi du temps, ton historique, tes contraintes. Le système s'adapte à toi — jamais l'inverse.</p>
-        </article>
-        <article class="principle rv" style="--d:.15s">
-          <div class="principle-num">/ 03</div>
-          <h3 class="disp">Présence</h3>
-          <p>Un coach joignable <em>chaque jour</em>. Une question, un doute, un imprévu — tu m'écris, je réponds. Tu n'avances jamais seul.</p>
-        </article>
-      </div>
-
-      <div class="method-foot">
-        <p class="rv">Les détails de l'accompagnement — formats, suivi, tarifs — <em>on en parle de vive voix</em>. C'est plus simple, et tu sauras tout de suite si on est faits pour avancer ensemble.</p>
-        <a href="https://calendly.com/peccoux-manu/30min" target="_blank" rel="noopener" class="btn magnetic rv"><span>Réserver un appel</span><i></i></a>
-      </div>
-    </section>
-
-    <!-- ════════ 04 — ATHLÈTE ════════ -->
-    <section class="section athlete" id="athlete">
-      <div class="athlete-visual rv">
-        <img src="images/images/gym_pose.png" alt="Emmanuel Peccoux" loading="lazy">
-        <div class="athlete-id">EP — Compétiteur · Coach</div>
-      </div>
-      <div class="athlete-text">
-        <div class="tag rv"><span class="num">04</span> — L'athlète</div>
-        <h2 class="disp rv" style="--d:.1s">Emmanuel<br>Peccoux<span class="red">.</span></h2>
-        <p class="rv" style="--d:.2s">Compétiteur de bodybuilding <em>100% naturel</em>, en préparation pour la scène WNBF. Je n'enseigne rien que je n'applique pas moi-même : la rigueur, le suivi, la patience — tous les jours, sans exception.</p>
-        <div class="stats">
-          <div class="stat rv" style="--d:.05s"><div class="stat-val"><span data-count="3">0</span><span class="red">+</span></div><div class="stat-lbl">Années documentées</div></div>
-          <div class="stat rv" style="--d:.1s"><div class="stat-val"><span data-count="100">0</span><span class="red">%</span></div><div class="stat-lbl">Naturel</div></div>
-          <div class="stat rv" style="--d:.15s"><div class="stat-val">1<span class="red">:</span>1</div><div class="stat-lbl">Accompagnement direct</div></div>
-          <div class="stat rv" style="--d:.2s"><div class="stat-val">WNBF</div><div class="stat-lbl">Objectif compétition</div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ════════ 05 — CTA FINAL ════════ -->
-    <section class="section final" id="contact">
-      <div class="final-glow" aria-hidden="true"></div>
-      <div class="tag rv"><span class="num">05</span> — On commence ?</div>
-      <h2 class="disp rv" style="--d:.1s">Prêt à<br><em class="italic red">construire ?</em></h2>
-      <p class="final-sub rv" style="--d:.2s">Un appel de 30 minutes, sans pression ni argumentaire. <em>On parle de toi</em>, de ton point de départ, de ton objectif — et on voit si ça a du sens d'avancer ensemble.</p>
-      <div class="final-actions rv" style="--d:.3s">
-        <a href="https://calendly.com/peccoux-manu/30min" target="_blank" rel="noopener" class="btn magnetic"><span>Réserver un appel</span><i></i></a>
-        <a href="https://wa.me/33766834777" target="_blank" rel="noopener" class="btn btn-ghost magnetic"><span>Écrire sur WhatsApp</span><i></i></a>
-      </div>
-      <div class="final-note rv" style="--d:.4s">Réponse sous 24h — c'est moi qui te lis, pas un bot</div>
-    </section>
   </main>
 
   <!-- FOOTER -->
