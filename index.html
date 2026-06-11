@@ -3,1289 +3,198 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EP Coaching — Accompagnement bodybuilding 1:1</title>
-  <meta name="description" content="Accompagnement bodybuilding 1:1 par Emmanuel Peccoux. Programme, nutrition, suivi quotidien — conçu pour toi, uniquement.">
+  <title>EP Coaching — Emmanuel Peccoux · Coaching bodybuilding naturel</title>
+  <meta name="description" content="Coaching 1:1 par Emmanuel Peccoux, compétiteur naturel. Construis un physique qui ne ment pas. Prends rendez-vous — on en parle de vive voix.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    /* ============================================================
-       VARIABLES
-    ============================================================ */
-    :root {
-      --black:    #030303;
-      --g0:       #070707;
-      --g1:       #0d0d0d;
-      --g2:       #131313;
-      --g3:       #1a1a1a;
-      --white:    #F5F5F5;
-      --white2:   #AAAAAA;
-      --red:      #E60000;
-      --red2:     #FF2020;
-      --red3:     #8A0000;
-      --red-glow: rgba(230,0,0,0.12);
-      --ease:     cubic-bezier(0.16,1,0.3,1);
-    }
-
-    /* ============================================================
-       RESET & BASE
-    ============================================================ */
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-
-    html {
-      scrollbar-width: thin;
-      scrollbar-color: #8A0000 #030303;
-    }
-    ::-webkit-scrollbar { width:3px; }
-    ::-webkit-scrollbar-track { background:#030303; }
-    ::-webkit-scrollbar-thumb { background:#8A0000; border-radius:2px; }
-    ::selection { background:var(--red); color:#fff; }
-
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-
-    img { display:block; max-width:100%; }
-    a   { color:inherit; }
-
-    /* ============================================================
-       SMOOTH SCROLL WRAPPER
-       Position fixed + body height set by JS on desktop only
-    ============================================================ */
-    #smooth-wrapper {
-      will-change: transform;
-    }
-
-    /* ============================================================
-       GRAIN
-    ============================================================ */
-    .grain {
-      position:fixed; inset:0; z-index:9998;
-      pointer-events:none;
-      opacity:0.03;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay;
-      animation: grainAnim 0.4s steps(2) infinite;
-    }
-    @keyframes grainAnim {
-      0%   { transform:translate(0,0); }
-      25%  { transform:translate(-1%,-1%); }
-      50%  { transform:translate(1%,0); }
-      75%  { transform:translate(0,1%); }
-      100% { transform:translate(-1%,0); }
-    }
-
-    /* ============================================================
-       SCROLL PROGRESS BAR
-    ============================================================ */
-    #scroll-progress {
-      position:fixed; top:0; left:0; z-index:99999;
-      height:2px; width:100%;
-      background: linear-gradient(90deg, var(--red3), var(--red), var(--red2));
-      transform-origin:left; transform:scaleX(0);
-      box-shadow: 0 0 8px var(--red-glow);
-    }
-
-    /* ============================================================
-       CUSTOM CURSOR
-    ============================================================ */
-    #cursor-dot {
-      position:fixed; pointer-events:none; z-index:99999;
-      width:5px; height:5px; border-radius:50%;
-      background:#fff;
-      transform:translate(-50%,-50%);
-      transition:opacity .2s;
-    }
-    #cursor-ring {
-      position:fixed; pointer-events:none; z-index:99998;
-      width:30px; height:30px; border-radius:50%;
-      border:1px solid rgba(255,255,255,0.35);
-      transform:translate(-50%,-50%);
-      transition:transform .3s var(--ease), border-color .3s;
-    }
-
-    /* ============================================================
-       PRELOADER
-    ============================================================ */
-    #preloader {
-      position:fixed; inset:0; z-index:100000;
-      background:var(--black);
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      gap:28px;
-      transition:opacity .6s ease;
-    }
-    #preloader.done { opacity:0; pointer-events:none; }
-
-    .pl-title {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(40px,7vw,64px);
-      letter-spacing:8px;
-      color:var(--white);
-    }
-    .pl-bar-wrap {
-      width:200px; height:1px;
-      background:rgba(255,255,255,0.06);
-      overflow:hidden; position:relative;
-    }
-    .pl-bar {
-      position:absolute; top:0; left:0;
-      height:100%; width:100%;
-      background:var(--red);
-      transform-origin:left; transform:scaleX(0);
-      transition:transform 1.8s ease-in-out;
-    }
-    .pl-count {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:11px; color:var(--red);
-      letter-spacing:3px;
-    }
-
-    /* ============================================================
-       NAVIGATION
-    ============================================================ */
-    #nav {
-      position:fixed; top:0; left:0; width:100%; z-index:9990;
-      height:68px;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:0 clamp(24px,5vw,80px);
-      background:transparent;
-      border-bottom:1px solid transparent;
-      transition:background .4s, border-color .4s, backdrop-filter .4s;
-    }
-    #nav.scrolled {
-      background:rgba(3,3,3,0.9);
-      backdrop-filter:blur(20px);
-      -webkit-backdrop-filter:blur(20px);
-      border-bottom-color:rgba(255,255,255,0.04);
-    }
-    .nav-logo {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:22px; letter-spacing:2px;
-      color:var(--white); text-decoration:none;
-    }
-    .nav-right { display:flex; align-items:center; gap:28px; }
-    .nav-insta {
-      font-size:11px; font-weight:500;
-      color:rgba(255,255,255,0.3); text-decoration:none;
-      letter-spacing:1px;
-      transition:color .3s;
-    }
-    .nav-insta:hover { color:rgba(255,255,255,0.65); }
-    .nav-cta {
-      font-size:11px; font-weight:700;
-      letter-spacing:2.5px; text-transform:uppercase;
-      color:var(--white); text-decoration:none;
-      padding:9px 20px;
-      border:1px solid rgba(255,255,255,0.18);
-      transition:background .3s, border-color .3s;
-    }
-    .nav-cta:hover { background:var(--red); border-color:var(--red); }
-
-    /* ============================================================
-       SHARED ATOMS
-    ============================================================ */
-    .tag {
-      font-family:'Inter',sans-serif;
-      font-weight:700; font-size:10px;
-      letter-spacing:5px; text-transform:uppercase;
-      color:var(--red);
-    }
-    .h1 {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(72px,12vw,140px);
-      line-height:.9; letter-spacing:-.02em;
-      color:var(--white);
-    }
-    .h2 {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(48px,7vw,96px);
-      line-height:.92;
-      color:var(--white);
-    }
-    .body {
-      font-family:'Inter',sans-serif;
-      font-weight:400; font-size:15px;
-      line-height:1.85; color:var(--white2);
-    }
-
-    /* ============================================================
-       SCROLL-TRIGGERED ANIMATIONS
-    ============================================================ */
-    .rv {
-      opacity:0;
-      transform:translateY(48px);
-      will-change:opacity,transform;
-    }
-    .rv-l {
-      opacity:0;
-      transform:translateX(-56px);
-      will-change:opacity,transform;
-    }
-    .rv-r {
-      opacity:0;
-      transform:translateX(56px);
-      will-change:opacity,transform;
-    }
-    .rv-s {
-      opacity:0;
-      transform:scale(.88);
-      filter:blur(5px);
-      will-change:opacity,transform,filter;
-    }
-    /* Activated state — selector specificity 0,2,0 beats single class */
-    .rv.in, .rv-l.in, .rv-r.in, .rv-s.in {
-      opacity:1;
-      transform:none;
-      filter:none;
-      transition:opacity .85s var(--ease), transform .85s var(--ease), filter .85s var(--ease);
-    }
-
-    /* Text clip reveal */
-    .clip-wrap { overflow:hidden; }
-    .clip-inner {
-      clip-path:inset(100% 0 0 0);
-      will-change:clip-path;
-      transition:clip-path .75s var(--ease);
-    }
-    .clip-inner.in { clip-path:inset(0% 0 0 0); }
-
-    /* ============================================================
-       SECTION 1 — HERO
-    ============================================================ */
-    #hero {
-      min-height:100vh; position:relative; overflow:hidden;
-      display:flex; flex-direction:column;
-      justify-content:flex-end;
-      padding:0 clamp(24px,8vw,120px) 10vh;
-    }
-
-    /* Parallax layer */
-    .hero-para {
-      position:absolute; inset:-20%; z-index:0;
-      will-change:transform;
-    }
-    /* Ken Burns layer */
-    .hero-kb {
-      position:absolute; inset:0;
-      background:url('images/images/hero_current.png') center top / cover no-repeat;
-      transform:scale(1.06);
-      will-change:transform;
-    }
-    /* Gradient overlay */
-    .hero-para::after {
-      content:'';
-      position:absolute; inset:0;
-      background:linear-gradient(to bottom,
-        rgba(3,3,3,.25) 0%,
-        rgba(3,3,3,.78) 65%,
-        #030303 100%);
-      z-index:1;
-    }
-
-    .hero-content {
-      position:relative; z-index:2;
-      max-width:920px;
-      will-change:transform,opacity;
-    }
-    .hero-tag {
-      font-family:'Inter',sans-serif;
-      font-weight:700; font-size:10px;
-      letter-spacing:5px; text-transform:uppercase;
-      color:var(--red);
-      margin-bottom:22px;
-      opacity:0; transform:translateY(18px);
-    }
-    .hero-lines {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(72px,12vw,140px);
-      line-height:.9; letter-spacing:-.02em;
-      color:var(--white);
-      margin-bottom:24px;
-    }
-    .hero-line {
-      display:block; overflow:hidden;
-    }
-    .hero-line-inner {
-      display:block;
-      clip-path:inset(102% 0 0 0);
-      will-change:clip-path;
-    }
-    .hero-sub {
-      font-family:'Inter',sans-serif;
-      font-weight:500; font-size:16px;
-      color:var(--white2);
-      opacity:0;
-    }
-
-    .scroll-indicator {
-      position:absolute; bottom:36px; left:50%;
-      transform:translateX(-50%);
-      display:flex; flex-direction:column; align-items:center; gap:10px;
-      opacity:0;
-      animation:indiFade 1s ease 2.4s forwards;
-    }
-    .scroll-indicator span {
-      font-size:9px; letter-spacing:3px; text-transform:uppercase;
-      color:rgba(255,255,255,.22);
-    }
-    .scroll-line {
-      width:1px; height:38px;
-      background:linear-gradient(to bottom,rgba(255,255,255,.28),transparent);
-      animation:scrollLine 1.7s ease-in-out 2.6s infinite;
-      transform-origin:top;
-    }
-    @keyframes indiFade { to { opacity:1; } }
-    @keyframes scrollLine {
-      0%,100% { transform:scaleY(1); }
-      50%      { transform:scaleY(.35); }
-    }
-
-    /* ============================================================
-       SECTION 2 — VSL
-    ============================================================ */
-    #vsl {
-      min-height:100vh;
-      background:var(--black);
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:center;
-      padding:clamp(80px,10vh,120px) clamp(24px,5vw,80px);
-      gap:24px;
-    }
-
-    .vsl-player {
-      position:relative;
-      width:72%; max-width:900px;
-      aspect-ratio:16/9;
-      background:#000;
-      overflow:hidden;
-    }
-    .vsl-player video {
-      position:absolute; inset:0;
-      width:100%; height:100%;
-      object-fit:cover;
-    }
-    .vsl-play {
-      position:absolute; inset:0;
-      display:flex; align-items:center; justify-content:center;
-      cursor:pointer; z-index:2;
-      background:transparent; border:none;
-      transition:opacity .4s, transform .4s;
-    }
-    .vsl-play-circle {
-      width:80px; height:80px; border-radius:50%;
-      border:2px solid rgba(255,255,255,.3);
-      display:flex; align-items:center; justify-content:center;
-      transition:border-color .3s, transform .3s;
-    }
-    .vsl-play:hover .vsl-play-circle {
-      border-color:var(--red);
-      transform:scale(1.08);
-    }
-    .vsl-play svg { width:22px; height:22px; fill:#fff; margin-left:4px; }
-    .vsl-play.gone { opacity:0; pointer-events:none; transform:scale(.8); }
-
-    .vsl-caption {
-      font-family:'Inter',sans-serif;
-      font-style:italic; font-size:13px;
-      color:#555;
-    }
-
-    /* ============================================================
-       SECTION 3 — POUR QUI / POURQUOI
-    ============================================================ */
-    #about {
-      min-height:100vh;
-      background:var(--g0);
-      display:flex; align-items:center;
-      padding:clamp(100px,12vh,160px) clamp(24px,8vw,120px);
-      gap:80px;
-    }
-
-    .about-text { flex:0 0 55%; max-width:55%; }
-    .about-visual { flex:1; }
-
-    .about-body { margin-bottom:0; }
-    .about-body + .about-body { margin-top:20px; }
-
-    .sep {
-      display:flex; align-items:center; gap:14px;
-      margin:40px 0;
-    }
-    .sep-line  { width:40px; height:1px; background:var(--red); }
-    .sep-diamond {
-      width:6px; height:6px;
-      background:var(--red);
-      transform:rotate(45deg);
-    }
-
-    .stats {
-      display:flex; gap:40px; margin-top:40px; flex-wrap:wrap;
-    }
-    .stat { display:flex; flex-direction:column; gap:4px; }
-    .stat-val {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:38px; line-height:1;
-      color:var(--white);
-    }
-    .stat-lbl {
-      font-size:9px; font-weight:700;
-      letter-spacing:2.5px; text-transform:uppercase;
-      color:rgba(255,255,255,.28);
-    }
-
-    .photo-wrap {
-      position:relative; overflow:hidden;
-      aspect-ratio:3/4;
-    }
-    .photo-wrap img {
-      width:100%; height:100%;
-      object-fit:cover; object-position:top;
-      filter:grayscale(100%) contrast(1.08);
-      transition:filter .8s ease;
-    }
-    .photo-wrap:hover img { filter:grayscale(0%) contrast(1); }
-    .photo-overlay {
-      position:absolute; bottom:0; left:0; right:0; height:45%;
-      background:linear-gradient(to top,rgba(230,0,0,.13),transparent);
-      pointer-events:none;
-    }
-
-    /* ============================================================
-       SECTION 4 — CE QUE TU REÇOIS
-    ============================================================ */
-    #features {
-      min-height:100vh;
-      background:var(--black);
-      padding:clamp(100px,12vh,160px) clamp(24px,8vw,120px);
-    }
-    .features-hd { text-align:center; margin-bottom:68px; }
-    .features-hd .tag { margin-bottom:18px; }
-    .features-hd .h2 { margin:0; }
-
-    .grid-2x2 {
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:2px;
-    }
-    .card {
-      background:var(--g1);
-      border:1px solid rgba(255,255,255,.04);
-      padding:40px 36px;
-      position:relative;
-      cursor:default;
-      transition:border-color .3s;
-    }
-    .card::before {
-      content:'';
-      position:absolute; top:0; left:0;
-      width:32px; height:2px;
-      background:var(--red);
-      transition:width .42s var(--ease);
-    }
-    .card:hover { border-color:rgba(230,0,0,.14); }
-    .card:hover::before { width:100%; }
-
-    .card-num {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:12px; letter-spacing:3px;
-      color:var(--red); margin-bottom:18px;
-    }
-    .card-title {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:26px; line-height:1.05;
-      color:var(--white); margin-bottom:14px;
-      letter-spacing:.4px;
-    }
-    .card-body {
-      font-size:14px; line-height:1.85;
-      color:var(--white2);
-    }
-
-    /* ============================================================
-       SECTION 5 — PREUVE PHYSIQUE
-    ============================================================ */
-    #proof {
-      min-height:100vh;
-      background:var(--g0);
-      padding:clamp(100px,12vh,160px) clamp(24px,8vw,120px);
-      display:flex; flex-direction:column; gap:64px;
-    }
-    .proof-hd { max-width:520px; }
-    .proof-hd .tag  { margin-bottom:18px; }
-    .proof-hd .h2   { margin-bottom:16px; }
-    .proof-sub {
-      font-size:15px; line-height:1.85;
-      color:var(--white2); margin-top:4px;
-    }
-
-    .gallery {
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
-    }
-    .gal-item {
-      position:relative; overflow:hidden;
-      aspect-ratio:3/4;
-      filter:grayscale(78%);
-      transition:filter .55s ease, transform .4s var(--ease), z-index 0s;
-      cursor:default;
-    }
-    .gal-item:hover { filter:grayscale(0%); transform:scale(1.025); z-index:2; }
-    .gal-item img {
-      width:100%; height:100%;
-      object-fit:cover; object-position:top;
-    }
-    .gal-label {
-      position:absolute; bottom:14px; left:14px;
-      font-family:'Bebas Neue',sans-serif;
-      font-size:28px; letter-spacing:2px;
-      color:#fff;
-      text-shadow:0 2px 8px rgba(0,0,0,.75);
-    }
-
-    /* ============================================================
-       SECTION 6 — FAQ
-    ============================================================ */
-    #faq {
-      min-height:100vh;
-      background:var(--black);
-      display:flex; flex-direction:column; align-items:center;
-      padding:clamp(100px,12vh,160px) clamp(24px,5vw,80px);
-    }
-    .faq-wrap { width:100%; max-width:720px; }
-    .faq-hd   { margin-bottom:60px; }
-    .faq-hd .tag { margin-bottom:18px; }
-
-    .faq-item { border-bottom:1px solid rgba(255,255,255,.06); }
-    .faq-q {
-      padding:22px 0;
-      font-weight:700; font-size:15px;
-      color:var(--white); cursor:pointer;
-      display:flex; justify-content:space-between; align-items:center;
-      gap:20px; user-select:none;
-      transition:color .3s;
-    }
-    .faq-q:hover { color:var(--red); }
-    .faq-icon {
-      flex-shrink:0;
-      width:20px; height:20px;
-      position:relative; color:inherit;
-      transition:transform .42s var(--ease);
-    }
-    .faq-icon::before,
-    .faq-icon::after {
-      content:''; position:absolute;
-      background:currentColor;
-    }
-    .faq-icon::before { width:14px; height:1px; top:50%; left:3px; transform:translateY(-50%); }
-    .faq-icon::after  { width:1px; height:14px; top:3px; left:50%; transform:translateX(-50%); }
-    .faq-item.open .faq-q  { color:var(--red); }
-    .faq-item.open .faq-icon { transform:rotate(45deg); }
-
-    .faq-a {
-      max-height:0; overflow:hidden;
-      font-size:14px; line-height:1.85;
-      color:#6a6a6a; font-weight:500;
-      transition:max-height .5s var(--ease), padding-bottom .3s;
-    }
-    .faq-item.open .faq-a { max-height:300px; padding-bottom:22px; }
-
-    /* ============================================================
-       SECTION 7 — CTA FINAL
-    ============================================================ */
-    #cta {
-      min-height:100vh;
-      background:var(--black);
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:center;
-      padding:clamp(100px,12vh,160px) clamp(24px,5vw,80px);
-      text-align:center;
-      position:relative; overflow:hidden;
-    }
-    .cta-halo {
-      position:absolute; top:50%; left:50%;
-      transform:translate(-50%,-50%);
-      width:70vw; height:70vw;
-      max-width:900px; max-height:900px;
-      border-radius:50%;
-      background:radial-gradient(circle,rgba(230,0,0,.07) 0%,transparent 68%);
-      pointer-events:none;
-    }
-    .cta-inner {
-      position:relative; z-index:2;
-      display:flex; flex-direction:column;
-      align-items:center; gap:32px;
-      max-width:720px;
-    }
-    .cta-title {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(64px,10vw,120px);
-      line-height:.9; letter-spacing:-.01em;
-      color:var(--white);
-    }
-    .cta-promise {
-      font-size:16px; font-weight:500;
-      line-height:1.85; color:var(--white2);
-      max-width:460px;
-    }
-    .btn-wa {
-      display:inline-flex; align-items:center; gap:12px;
-      background:var(--white); color:#000;
-      text-decoration:none;
-      padding:18px 42px;
-      font-weight:700; font-size:13px;
-      letter-spacing:2px; text-transform:uppercase;
-      transition:background .3s, color .3s, transform .3s;
-      animation:waPulse 2.6s ease-in-out infinite;
-    }
-    .btn-wa:hover { background:var(--red); color:#fff; transform:translateY(-2px); }
-    .btn-wa svg   { width:20px; height:20px; fill:currentColor; }
-
-    @keyframes waPulse {
-      0%,100% { box-shadow:0 0 0 0 rgba(255,255,255,.16); }
-      50%      { box-shadow:0 0 0 8px rgba(255,255,255,0); }
-    }
-
-    .cta-micro {
-      font-size:11px; color:#3e3e3e;
-      letter-spacing:2px; text-transform:uppercase;
-    }
-    .cta-divider {
-      width:50px; height:1px;
-      background:rgba(255,255,255,.05);
-    }
-    .btn-stripe {
-      font-size:12px; color:#2d2d2d;
-      text-decoration:none; letter-spacing:.5px;
-      transition:color .3s;
-    }
-    .btn-stripe:hover { color:#555; }
-
-    /* ============================================================
-       FOOTER
-    ============================================================ */
-    footer {
-      background:var(--black);
-      border-top:1px solid rgba(255,255,255,.03);
-      padding:22px clamp(24px,5vw,80px);
-      display:flex; align-items:center; justify-content:center;
-      gap:20px; flex-wrap:wrap;
-    }
-    footer span,
-    footer a {
-      font-size:11px; color:#272727;
-      text-decoration:none;
-    }
-    footer a:hover { color:#444; }
-    footer .dot {
-      width:2px; height:2px; border-radius:50%;
-      background:#272727;
-    }
-
-    /* ============================================================
-       RESPONSIVE — MOBILE
-    ============================================================ */
-    @media (max-width:1023px) {
-      #cursor-dot, #cursor-ring { display:none; }
-      body { cursor:auto; }
-    }
-
-    @media (max-width:768px) {
-      #about {
-        flex-direction:column;
-        gap:48px;
-        padding-top:clamp(80px,10vh,120px);
-        padding-bottom:clamp(80px,10vh,120px);
-      }
-      .about-text  { flex:none; max-width:100%; }
-      .about-visual { width:100%; }
-      .photo-wrap  { aspect-ratio:1/1; }
-      .stats       { gap:24px; }
-
-      .grid-2x2    { grid-template-columns:1fr; gap:2px; }
-      .gallery     { grid-template-columns:1fr; gap:12px; }
-      .gal-item    { aspect-ratio:4/3; }
-      .vsl-player  { width:100%; }
-      .nav-insta   { display:none; }
-
-      #hero { padding-bottom:8vh; }
-    }
-
-    @media (max-width:480px) {
-      .hero-lines { font-size:clamp(54px,14vw,80px); }
-      .cta-title  { font-size:clamp(58px,14vw,80px); }
-      .btn-wa     { padding:16px 28px; font-size:12px; }
-    }
-  </style>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Ctext x='16' y='23' font-family='Arial Black' font-size='17' font-weight='900' fill='%23E60000' text-anchor='middle'%3EEP%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ─── PRELOADER ─── -->
-  <div id="preloader">
-    <div class="pl-title">EP.COACHING</div>
-    <div class="pl-bar-wrap"><div class="pl-bar" id="pl-bar"></div></div>
-    <div class="pl-count" id="pl-count">0%</div>
+  <!-- PRELOADER — mise en charge -->
+  <div class="loader" id="loader">
+    <div class="loader-title"><span class="loader-word">EP<span class="dot">.</span>COACHING</span></div>
+    <div class="loader-bar"><i id="loader-fill"></i></div>
+    <div class="loader-data">
+      <span>CHARGE <b class="red" id="loader-pct">000</b>%</span>
+      <span>ANNECY · FR</span>
+    </div>
   </div>
 
-  <!-- ─── SCROLL PROGRESS ─── -->
-  <div id="scroll-progress"></div>
-
-  <!-- ─── GRAIN ─── -->
   <div class="grain"></div>
+  <div class="progress" id="progress"></div>
+  <div class="cursor-dot" id="cdot"></div>
+  <div class="cursor-ring" id="cring"><span class="cursor-label" id="clabel"></span></div>
 
-  <!-- ─── CURSOR ─── -->
-  <div id="cursor-dot"></div>
-  <div id="cursor-ring"></div>
-
-  <!-- ─── NAV ─── -->
-  <nav id="nav">
-    <a href="#hero" class="nav-logo">EP.COACHING</a>
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="#hero" class="nav-logo">EP<span class="dot">.</span>COACHING</a>
     <div class="nav-right">
-      <a href="https://www.instagram.com/emmanuelpeccoux" target="_blank" rel="noopener" class="nav-insta">@emmanuelpeccoux</a>
-      <a href="#cta" class="nav-cta">Démarrer</a>
+      <a href="#preuve" class="nav-link">Preuve</a>
+      <a href="#methode" class="nav-link">Méthode</a>
+      <a href="https://www.instagram.com/emmanuelpeccoux" target="_blank" rel="noopener" class="nav-link">Instagram</a>
+      <a href="https://calendly.com/peccoux-manu/30min" target="_blank" rel="noopener" class="nav-cta magnetic" data-cursor="Go">Prendre RDV</a>
     </div>
   </nav>
 
-  <!-- ─── SMOOTH WRAPPER ─── -->
-  <div id="smooth-wrapper">
+  <!-- ════════ SCÈNE 01 — HERO ════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-media" id="hero-media">
+      <img src="images/images/green_front.png" alt="Emmanuel Peccoux — compétiteur bodybuilding naturel">
+    </div>
 
-    <!-- ════════════════════════════════════
-         SECTION 1 — HERO
-    ════════════════════════════════════ -->
-    <section id="hero">
-      <div class="hero-para" id="hero-para">
-        <div class="hero-kb" id="hero-kb"></div>
+    <div class="hero-coords">45.8992° N · 6.1294° E — ANNECY</div>
+
+    <div class="hero-content">
+      <div class="mono-tag hero-tag rv">Coaching 1:1 <span class="red">·</span> Bodybuilding naturel <span class="red">·</span> Annecy</div>
+      <h1 class="t-giant" id="hero-title">
+        <span class="line">Construis un</span>
+        <span class="line">physique qui</span>
+        <span class="line"><span class="t-red">ne ment pas.</span></span>
+      </h1>
+      <div class="hero-foot">
+        <p class="hero-sub rv">Coaché par un <em>compétiteur naturel</em> — pas par un programme générique. Chaque détail de ton suivi est construit pour toi, et pour personne d'autre.</p>
+        <div class="hero-scroll rv"><span>Défiler</span><i></i></div>
       </div>
+    </div>
+  </section>
 
-      <div class="hero-content" id="hero-content">
-        <div class="hero-tag" id="hero-tag">EP · COACHING · ANNECY</div>
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Entraînement <b>·</b></span><span>Nutrition <b>·</b></span><span>Données <b>·</b></span>
+      <span>Discipline <b>·</b></span><span>100% Naturel <b>·</b></span><span>Coaching 1:1 <b>·</b></span>
+      <span>Entraînement <b>·</b></span><span>Nutrition <b>·</b></span><span>Données <b>·</b></span>
+      <span>Discipline <b>·</b></span><span>100% Naturel <b>·</b></span><span>Coaching 1:1 <b>·</b></span>
+    </div>
+  </div>
 
-        <div class="hero-lines">
-          <span class="hero-line"><span class="hero-line-inner" id="hl0">Tu t'entraînes</span></span>
-          <span class="hero-line"><span class="hero-line-inner" id="hl1">sérieusement.</span></span>
-          <span class="hero-line"><span class="hero-line-inner" id="hl2">Tu stagnes encore.</span></span>
+  <!-- ════════ SCÈNE 02 — MANIFESTE ════════ -->
+  <section class="manifesto" id="manifesto">
+    <div class="manifesto-pin">
+      <div class="manifesto-num">02 / LE CONSTAT</div>
+      <p class="manifesto-text" id="manifesto-text">Tu t'entraînes dur. Tu manges propre. Et pourtant — ça ne se voit pas assez. Le problème n'est pas ton effort. C'est l'absence de [système.] Mon travail : transformer ton effort en [résultat.] Mesurable. Visible. Durable.</p>
+    </div>
+  </section>
+
+  <!-- ════════ SCÈNE 03 — PREUVE (horizontal) ════════ -->
+  <section class="proof" id="preuve">
+    <div class="proof-pin" id="proof-pin">
+      <div class="proof-years" id="proof-years"><span>2023</span><span>2024</span><span>2025</span><span>2026</span></div>
+      <div class="proof-track" id="proof-track">
+        <div class="proof-intro">
+          <div class="mono-tag">03 <span class="red">·</span> La preuve</div>
+          <h2 class="t-mid" style="margin-top:22px;">La progression ne se raconte pas.</h2>
+          <p>Trois ans documentés, <em>semaine après semaine</em>. Ce que j'applique à mes athlètes, je me l'applique d'abord à moi-même.</p>
         </div>
 
-        <p class="hero-sub" id="hero-sub">L'accompagnement 1:1 qui change ça.</p>
+        <div class="proof-card">
+          <figure><img src="images/images/debut_2022a.png" alt="Emmanuel — point de départ 2023" data-webgl></figure>
+          <div class="proof-meta"><b>2023</b><span>Le point de départ</span></div>
+        </div>
+
+        <div class="proof-card">
+          <figure><img src="images/images/dark_front.png" alt="Emmanuel — progression 2025" data-webgl></figure>
+          <div class="proof-meta"><b>2025</b><span>Le travail paie</span></div>
+        </div>
+
+        <div class="proof-card">
+          <figure><img src="images/images/green_front.png" alt="Emmanuel — condition 2026" data-webgl></figure>
+          <div class="proof-meta"><b>2026</b><span>La condition</span></div>
+        </div>
+
+        <div class="proof-end">
+          <h3 class="t-mid">Ton tour <span class="t-red">commence ici.</span></h3>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <div class="scroll-indicator">
-        <span>Défiler</span>
-        <div class="scroll-line"></div>
+  <!-- ════════ SCÈNE 04 — MÉTHODE ════════ -->
+  <section class="method" id="methode">
+    <div class="method-hd">
+      <div class="mono-tag rv">04 <span class="red">·</span> La méthode</div>
+      <h2 class="t-big">Trois principes.<br><span class="t-outline">Zéro hasard.</span></h2>
+    </div>
+
+    <div class="method-list">
+      <article class="principle rv" data-tilt>
+        <div class="principle-num">/ 01</div>
+        <h3>Données</h3>
+        <p>Chaque décision repose sur <em>tes chiffres</em> — pas sur des intuitions. Ton suivi vit dans mon application de coaching : tout est tracké, tout est visible, rien n'est laissé au hasard.</p>
+      </article>
+      <article class="principle rv" data-tilt>
+        <div class="principle-num">/ 02</div>
+        <h3>Précision</h3>
+        <p>Entraînement et nutrition construits autour de <em>ta vie réelle</em> — ton niveau, ton emploi du temps, tes contraintes. Pas un template. Un système taillé pour toi.</p>
+      </article>
+      <article class="principle rv" data-tilt>
+        <div class="principle-num">/ 03</div>
+        <h3>Présence</h3>
+        <p>Un coach <em>disponible chaque jour</em>. Une question, un doute, un ajustement — tu envoies, je réponds. Tu n'avances jamais seul.</p>
+      </article>
+    </div>
+
+    <div class="method-foot">
+      <p class="rv">Le détail complet de l'accompagnement ? <em>On en parle de vive voix.</em> C'est plus simple, plus honnête, et tu sauras tout de suite si ça matche.</p>
+      <a href="https://wa.me/33766834777" target="_blank" rel="noopener" class="btn magnetic rv" data-cursor="Go"><i></i><span>Réserver un appel →</span></a>
+    </div>
+  </section>
+
+  <!-- ════════ SCÈNE 05 — L'ATHLÈTE ════════ -->
+  <section class="athlete" id="athlete">
+    <div class="athlete-visual rv" id="athlete-visual">
+      <figure><img src="images/images/gym_pose.png" alt="Emmanuel Peccoux" data-webgl></figure>
+      <div class="athlete-id">EP — Compétiteur · Coach</div>
+    </div>
+    <div class="athlete-text">
+      <div class="mono-tag rv">05 <span class="red">·</span> L'athlète</div>
+      <h2 class="t-big">Emmanuel<br>Peccoux<span class="t-red">.</span></h2>
+      <p class="rv">Compétiteur de bodybuilding <em>100% naturel</em>, en route vers la scène WNBF. Je ne vends pas une théorie : je m'applique chaque jour <em>exactement ce que je transmets</em> — la rigueur, les données, la patience.</p>
+      <div class="stats">
+        <div class="stat rv"><div class="stat-val"><span data-count="3">0</span><span class="red">+</span></div><div class="stat-lbl">Années documentées</div></div>
+        <div class="stat rv"><div class="stat-val"><span data-count="100">0</span><span class="red">%</span></div><div class="stat-lbl">Naturel</div></div>
+        <div class="stat rv"><div class="stat-val">1<span class="red">:</span>1</div><div class="stat-lbl">Accompagnement direct</div></div>
+        <div class="stat rv"><div class="stat-val">WNBF</div><div class="stat-lbl">Objectif compétition</div></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ════════════════════════════════════
-         SECTION 2 — VSL VIDEO
-    ════════════════════════════════════ -->
-    <section id="vsl">
-      <div class="tag rv" style="margin-bottom:20px">Regarde avant de continuer</div>
-
-      <div class="vsl-player rv-s">
-        <video id="vsl-video" poster="images/images/gym_locker.png" preload="none">
-          <source src="video.mp4" type="video/mp4">
-        </video>
-        <button class="vsl-play" id="vsl-play" aria-label="Lancer la vidéo">
-          <div class="vsl-play-circle">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-        </button>
-      </div>
-
-      <p class="vsl-caption rv">5 minutes pour comprendre ce que tu rates depuis des mois.</p>
-    </section>
-
-    <!-- ════════════════════════════════════
-         SECTION 3 — POUR QUI / POURQUOI
-    ════════════════════════════════════ -->
-    <section id="about">
-      <div class="about-text">
-        <div class="tag rv" style="margin-bottom:18px">Pour qui</div>
-
-        <h2 class="h2 rv" style="margin-bottom:28px">
-          T'as le niveau.<br>Pas les résultats.
+  <!-- ════════ SCÈNE 06 — CTA FINAL ════════ -->
+  <section class="final" id="contact">
+    <div class="final-pin">
+      <div class="final-bg" id="final-bg">EP</div>
+      <div class="final-content">
+        <h2 class="t-giant" id="final-title">
+          <span class="line">Prêt à</span>
+          <span class="line"><span class="t-red">construire ?</span></span>
         </h2>
-
-        <div class="clip-wrap">
-          <p class="body clip-inner">
-            Tu t'entraînes depuis un moment.<br>
-            Tu suis ton alimentation.<br>
-            Tu lis, tu regardes, tu appliques.<br><br>
-            Et pourtant — ton physique stagne.<br>
-            Pas parce que t'es pas sérieux.<br>
-            Parce que t'as pas de système.
-          </p>
+        <p class="final-sub rv">Un appel. Aucune pression, aucun engagement. <em>On parle de toi</em>, de ton objectif — et on voit si on avance ensemble.</p>
+        <div class="final-actions">
+          <a href="https://calendly.com/peccoux-manu/30min" target="_blank" rel="noopener" class="btn magnetic rv" data-cursor="Go"><i></i><span>Prendre rendez-vous</span></a>
+          <a href="https://wa.me/33766834777" target="_blank" rel="noopener" class="btn btn-ghost magnetic rv" data-cursor="Go"><i></i><span>WhatsApp direct</span></a>
         </div>
-
-        <div class="sep rv" style="margin-top:40px">
-          <div class="sep-line"></div>
-          <div class="sep-diamond"></div>
-        </div>
-
-        <div class="tag rv" style="margin-bottom:18px">Pourquoi EP Coaching</div>
-
-        <div class="clip-wrap">
-          <p class="body clip-inner">
-            Je suis Emmanuel. 16 ans, compétiteur WNBF 2027.<br>
-            Je construis avec toi un système complet :<br>
-            entraînement, nutrition, récupération — adapté à ta vie réelle.<br>
-            Pas un programme. Une transformation.
-          </p>
-        </div>
-
-        <div class="stats">
-          <div class="stat rv">
-            <span class="stat-val">3 ans</span>
-            <span class="stat-lbl">d'entraînement</span>
-          </div>
-          <div class="stat rv" style="transition-delay:.1s">
-            <span class="stat-val">WNBF</span>
-            <span class="stat-lbl">2027</span>
-          </div>
-          <div class="stat rv" style="transition-delay:.2s">
-            <span class="stat-val">1:1</span>
-            <span class="stat-lbl">Accompagnement</span>
-          </div>
-        </div>
+        <div class="final-note rv">Réponse sous 24h <span class="red">·</span> C'est moi qui te lis, pas un bot</div>
       </div>
+    </div>
+  </section>
 
-      <div class="about-visual rv-r">
-        <div class="photo-wrap">
-          <img src="images/images/green_front.png" alt="Emmanuel Peccoux — progression physique">
-          <div class="photo-overlay"></div>
-        </div>
-      </div>
-    </section>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>EP<span class="dot">.</span>COACHING — © 2026 Emmanuel Peccoux</div>
+    <div style="display:flex; gap:26px;">
+      <a href="https://www.instagram.com/emmanuelpeccoux" target="_blank" rel="noopener">Instagram</a>
+      <a href="privacy-policy.html">Confidentialité</a>
+      <a href="terms-of-service.html">CGU</a>
+    </div>
+  </footer>
 
-    <!-- ════════════════════════════════════
-         SECTION 4 — CE QUE TU REÇOIS
-    ════════════════════════════════════ -->
-    <section id="features">
-      <div class="features-hd">
-        <div class="tag rv" style="margin-bottom:18px">L'accompagnement</div>
-        <h2 class="h2 rv">Tout ce dont<br>t'as besoin.</h2>
-      </div>
-
-      <div class="grid-2x2">
-        <div class="card rv">
-          <div class="card-num">01</div>
-          <div class="card-title">Un programme construit pour toi</div>
-          <p class="card-body">Pas copié-collé d'un template. Construit depuis tes données, ton niveau, ton matériel, ton emploi du temps.</p>
-        </div>
-
-        <div class="card rv" style="transition-delay:.1s">
-          <div class="card-num">02</div>
-          <div class="card-title">Une approche nutrition flexible</div>
-          <p class="card-body">Pas un régime. Un système alimentaire qui colle à ta vie, pas l'inverse.</p>
-        </div>
-
-        <div class="card rv" style="transition-delay:.2s">
-          <div class="card-num">03</div>
-          <div class="card-title">Disponible chaque jour</div>
-          <p class="card-body">WhatsApp. Tu poses une question, je réponds. Check-in hebdomadaire, ajustements constants.</p>
-        </div>
-
-        <div class="card rv" style="transition-delay:.3s">
-          <div class="card-num">04</div>
-          <div class="card-title">Ton app de coaching personnelle</div>
-          <p class="card-body">Toutes tes données au même endroit. Programme, nutrition, progression — tout suivi en temps réel.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ════════════════════════════════════
-         SECTION 5 — PREUVE PHYSIQUE
-    ════════════════════════════════════ -->
-    <section id="proof">
-      <div class="proof-hd">
-        <div class="tag rv">La progression</div>
-        <h2 class="h2 rv" style="transition-delay:.05s">3 ans.<br>Documentés.</h2>
-        <p class="proof-sub rv" style="transition-delay:.1s">
-          La progression se voit.<br>Elle ne se raconte pas.
-        </p>
-      </div>
-
-      <div class="gallery">
-        <div class="gal-item rv-l">
-          <img src="images/images/debut_2022a.png" alt="Progression 2023">
-          <div class="gal-label">2023</div>
-        </div>
-
-        <div class="gal-item rv" style="transition-delay:.15s">
-          <img src="images/images/dark_front.png" alt="Progression 2025">
-          <div class="gal-label">2025</div>
-        </div>
-
-        <div class="gal-item rv-r" style="transition-delay:.3s">
-          <img src="images/images/green_front.png" alt="Progression 2026">
-          <div class="gal-label">2026</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ════════════════════════════════════
-         SECTION 6 — FAQ
-    ════════════════════════════════════ -->
-    <section id="faq">
-      <div class="faq-wrap">
-        <div class="faq-hd">
-          <div class="tag rv">Questions</div>
-          <h2 class="h2 rv" style="transition-delay:.05s;margin-top:18px">Les réponses<br>claires.</h2>
-        </div>
-
-        <div class="faq-item rv">
-          <div class="faq-q">
-            <span>T'as 16 ans — pourquoi te faire confiance ?</span>
-            <span class="faq-icon"></span>
-          </div>
-          <div class="faq-a">L'âge n'est pas la crédibilité. Les résultats et le système le sont. Je construis mes clients avec la même rigueur que mon propre suivi : données semaine après semaine, ajustements basés sur les faits, pas sur des intuitions.</div>
-        </div>
-
-        <div class="faq-item rv" style="transition-delay:.06s">
-          <div class="faq-q">
-            <span>C'est quoi concrètement le suivi ?</span>
-            <span class="faq-icon"></span>
-          </div>
-          <div class="faq-a">Tu reçois un programme d'entraînement et une approche nutrition construits pour toi. On se parle tous les jours sur WhatsApp. Chaque semaine tu fais un check-in. J'analyse, j'ajuste. Tu progresses.</div>
-        </div>
-
-        <div class="faq-item rv" style="transition-delay:.12s">
-          <div class="faq-q">
-            <span>Je suis débutant — c'est fait pour moi ?</span>
-            <span class="faq-icon"></span>
-          </div>
-          <div class="faq-a">Oui. La première semaine est une semaine de calibrage. Je pars de ton niveau réel. Que t'aies 3 mois ou 3 ans de salle — on construit depuis là où tu es.</div>
-        </div>
-
-        <div class="faq-item rv" style="transition-delay:.18s">
-          <div class="faq-q">
-            <span>Est-ce que je dois peser ma nourriture ?</span>
-            <span class="faq-icon"></span>
-          </div>
-          <div class="faq-a">Tu choisis. Si tu pèses tout, on travaille avec les macros exactes. Si tu préfères une approche plus flexible, on adapte. L'objectif c'est que ça rentre dans ta vie, pas l'inverse.</div>
-        </div>
-
-        <div class="faq-item rv" style="transition-delay:.24s">
-          <div class="faq-q">
-            <span>Comment ça s'arrête si je veux stopper ?</span>
-            <span class="faq-icon"></span>
-          </div>
-          <div class="faq-a">Pas d'engagement forcé. Tu me le dis, ça s'arrête. Je recommande 3 mois pour voir des résultats concrets — mais la décision est toujours la tienne.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ════════════════════════════════════
-         SECTION 7 — CTA FINAL
-    ════════════════════════════════════ -->
-    <section id="cta">
-      <div class="cta-halo"></div>
-
-      <div class="cta-inner">
-        <div class="tag rv">Prêt ?</div>
-
-        <h2 class="cta-title rv-s" style="transition-delay:.05s">
-          Envoie-moi<br>un message.
-        </h2>
-
-        <p class="cta-promise rv" style="transition-delay:.12s">
-          Envoie-moi un message et je t'envoie<br>
-          une analyse personnalisée de ta situation<br>
-          et les ressources adaptées à ton objectif — gratuitement.
-        </p>
-
-        <a href="https://wa.me/33766834777?text=Bonjour%20Emmanuel%2C%20je%20veux%20une%20analyse%20personnalis%C3%A9e%20de%20ma%20situation"
-           target="_blank" rel="noopener"
-           class="btn-wa rv"
-           style="transition-delay:.22s">
-          <svg viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-          </svg>
-          Envoyer un message
-        </a>
-
-        <p class="cta-micro rv" style="transition-delay:.3s">
-          Réponse garantie sous 24h · @emmanuelpeccoux
-        </p>
-
-        <div class="cta-divider rv" style="transition-delay:.36s"></div>
-
-        <a href="https://buy.stripe.com/00wcN5cSn5CrdIg8hJfIs00"
-           target="_blank" rel="noopener"
-           class="btn-stripe rv"
-           style="transition-delay:.42s">
-          Déjà convaincu ? →
-        </a>
-      </div>
-    </section>
-
-    <!-- ─── FOOTER ─── -->
-    <footer>
-      <span>© 2026 Emmanuel Peccoux · EP Coaching</span>
-      <span class="dot"></span>
-      <a href="terms-of-service.html">Mentions légales</a>
-      <span class="dot"></span>
-      <a href="privacy-policy.html">Politique de confidentialité</a>
-    </footer>
-
-  </div><!-- /smooth-wrapper -->
-
-  <script>
-    /* ──────────────────────────────────────────
-       UTILITIES
-    ────────────────────────────────────────── */
-    const lerp = (a, b, t) => a + (b - a) * t;
-    const isMobile = () => window.innerWidth < 1024 || 'ontouchstart' in window;
-
-    /* ──────────────────────────────────────────
-       PRELOADER
-    ────────────────────────────────────────── */
-    (() => {
-      const bar     = document.getElementById('pl-bar');
-      const counter = document.getElementById('pl-count');
-      const loader  = document.getElementById('preloader');
-      let pct = 0;
-
-      // Trigger bar CSS transition
-      requestAnimationFrame(() => { bar.style.transform = 'scaleX(1)'; });
-
-      const tick = setInterval(() => {
-        pct = Math.min(pct + Math.random() * 9 + 2, 100);
-        counter.textContent = Math.floor(pct) + '%';
-        if (pct >= 100) {
-          counter.textContent = '100%';
-          clearInterval(tick);
-          setTimeout(hide, 180);
-        }
-      }, 28);
-
-      function hide() {
-        loader.classList.add('done');
-        setTimeout(() => {
-          loader.style.display = 'none';
-          launchHero();
-        }, 620);
-      }
-    })();
-
-    /* ──────────────────────────────────────────
-       HERO ENTRANCE ANIMATIONS
-    ────────────────────────────────────────── */
-    function launchHero() {
-      const tag  = document.getElementById('hero-tag');
-      const sub  = document.getElementById('hero-sub');
-      const kb   = document.getElementById('hero-kb');
-      const lines = ['hl0','hl1','hl2'].map(id => document.getElementById(id));
-
-      // Tag
-      setTimeout(() => {
-        tag.style.transition = 'opacity .6s ease, transform .6s ease';
-        tag.style.opacity    = '1';
-        tag.style.transform  = 'translateY(0)';
-      }, 280);
-
-      // Title lines — clip-path reveal staggered
-      lines.forEach((ln, i) => {
-        setTimeout(() => {
-          ln.style.transition = 'clip-path .72s var(--ease)';
-          ln.style.clipPath   = 'inset(0% 0 0 0)';
-        }, 480 + i * 145);
-      });
-
-      // Subtitle
-      setTimeout(() => {
-        sub.style.transition = 'opacity .7s ease';
-        sub.style.opacity    = '1';
-      }, 980);
-
-      // Ken Burns
-      kb.style.transition = 'transform 1.4s ease-out';
-      kb.style.transform  = 'scale(1)';
-    }
-
-    /* ──────────────────────────────────────────
-       SMOOTH SCROLL LERP — desktop only
-    ────────────────────────────────────────── */
-    const wrapper = document.getElementById('smooth-wrapper');
-    let scrollT = 0, scrollC = 0;
-    const LERP_K = 0.075;
-    let smoothActive = false;
-
-    if (!isMobile()) {
-      smoothActive = true;
-      wrapper.style.cssText = 'position:fixed;top:0;left:0;width:100%;will-change:transform;';
-
-      function setH() { document.body.style.height = wrapper.offsetHeight + 'px'; }
-      window.addEventListener('resize', setH);
-      setH();
-
-      // Re-set after fonts/images load
-      window.addEventListener('load', setH);
-
-      (function raf() {
-        scrollT  = window.scrollY;
-        scrollC  = lerp(scrollC, scrollT, LERP_K);
-        const d  = Math.abs(scrollT - scrollC);
-        if (d > 0.04) wrapper.style.transform = `translate3d(0,${-scrollC}px,0)`;
-        requestAnimationFrame(raf);
-      })();
-    }
-
-    function getScroll() { return smoothActive ? scrollC : window.scrollY; }
-
-    /* ──────────────────────────────────────────
-       SCROLL PROGRESS BAR
-    ────────────────────────────────────────── */
-    const prog = document.getElementById('scroll-progress');
-    window.addEventListener('scroll', () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      prog.style.transform = `scaleX(${window.scrollY / max})`;
-    }, { passive: true });
-
-    /* ──────────────────────────────────────────
-       NAV SCROLL EFFECT
-    ────────────────────────────────────────── */
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-    }, { passive: true });
-
-    /* ──────────────────────────────────────────
-       HERO PARALLAX + FADE
-    ────────────────────────────────────────── */
-    const heroPara    = document.getElementById('hero-para');
-    const heroContent = document.getElementById('hero-content');
-    const heroH       = () => document.getElementById('hero').offsetHeight;
-
-    window.addEventListener('scroll', () => {
-      const s = window.scrollY;
-      const h = heroH();
-      if (s > h * 1.3) return;
-
-      heroPara.style.transform    = `translateY(${s * 0.38}px)`;
-      heroContent.style.transform = `translateY(${s * 0.22}px)`;
-      heroContent.style.opacity   = String(Math.max(0, 1 - (s / h) * 2.2));
-    }, { passive: true });
-
-    /* ──────────────────────────────────────────
-       CUSTOM CURSOR — desktop only
-    ────────────────────────────────────────── */
-    if (!isMobile()) {
-      const dot  = document.getElementById('cursor-dot');
-      const ring = document.getElementById('cursor-ring');
-      let mx = 0, my = 0;
-      let dx = 0, dy = 0, rx = 0, ry = 0;
-
-      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-
-      (function cursorRaf() {
-        dx = lerp(dx, mx, 0.45);
-        dy = lerp(dy, my, 0.45);
-        rx = lerp(rx, mx, 0.12);
-        ry = lerp(ry, my, 0.12);
-        dot.style.left  = dx + 'px'; dot.style.top  = dy + 'px';
-        ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-        requestAnimationFrame(cursorRaf);
-      })();
-
-      document.querySelectorAll('a, button, .faq-q, .card').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          ring.style.transform    = 'translate(-50%,-50%) scale(1.6)';
-          ring.style.borderColor  = 'rgba(230,0,0,.45)';
-        });
-        el.addEventListener('mouseleave', () => {
-          ring.style.transform    = 'translate(-50%,-50%) scale(1)';
-          ring.style.borderColor  = 'rgba(255,255,255,.35)';
-        });
-      });
-    }
-
-    /* ──────────────────────────────────────────
-       SCROLL-TRIGGERED ANIMATIONS
-    ────────────────────────────────────────── */
-    const animIO = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('in');
-        animIO.unobserve(entry.target);
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
-
-    document.querySelectorAll('.rv, .rv-l, .rv-r, .rv-s').forEach(el => animIO.observe(el));
-
-    // Clip-path text reveal
-    const clipIO = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.querySelectorAll('.clip-inner').forEach((inner, i) => {
-          setTimeout(() => inner.classList.add('in'), i * 140);
-        });
-        clipIO.unobserve(entry.target);
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.clip-wrap').forEach(el => clipIO.observe(el));
-
-    /* ──────────────────────────────────────────
-       VIDEO PLAYER
-    ────────────────────────────────────────── */
-    const vslVideo  = document.getElementById('vsl-video');
-    const vslPlay   = document.getElementById('vsl-play');
-
-    if (vslPlay && vslVideo) {
-      vslPlay.addEventListener('click', () => {
-        vslVideo.play();
-        vslPlay.classList.add('gone');
-      });
-      vslVideo.addEventListener('pause',  () => vslPlay.classList.remove('gone'));
-      vslVideo.addEventListener('ended',  () => vslPlay.classList.remove('gone'));
-    }
-
-    /* ──────────────────────────────────────────
-       FAQ ACCORDION
-    ────────────────────────────────────────── */
-    document.querySelectorAll('.faq-item').forEach(item => {
-      item.querySelector('.faq-q').addEventListener('click', () => {
-        const wasOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item.open').forEach(o => o.classList.remove('open'));
-        if (!wasOpen) item.classList.add('open');
-      });
-    });
-
-    /* ──────────────────────────────────────────
-       FEATURE CARD 3D HOVER — desktop only
-    ────────────────────────────────────────── */
-    if (!isMobile()) {
-      document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('mousemove', e => {
-          const r = card.getBoundingClientRect();
-          const x = (e.clientX - r.left) / r.width  - 0.5;
-          const y = (e.clientY - r.top)  / r.height - 0.5;
-          card.style.transform  = `perspective(700px) rotateY(${x*8}deg) rotateX(${-y*5}deg) translateZ(6px)`;
-          card.style.transition = 'none';
-        });
-        card.addEventListener('mouseleave', () => {
-          card.style.transform  = 'perspective(700px) rotateY(0) rotateX(0) translateZ(0)';
-          card.style.transition = 'transform .7s cubic-bezier(0.16,1,0.3,1)';
-        });
-      });
-    }
-
-    /* ──────────────────────────────────────────
-       SMOOTH ANCHOR SCROLL
-    ────────────────────────────────────────── */
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (!target) return;
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+  <script src="gl.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
