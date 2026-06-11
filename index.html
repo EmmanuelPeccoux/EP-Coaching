@@ -4,197 +4,191 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EP Coaching — Emmanuel Peccoux · Coaching bodybuilding naturel</title>
-  <meta name="description" content="Coaching 1:1 par Emmanuel Peccoux, compétiteur naturel. Construis un physique qui ne ment pas. Prends rendez-vous — on en parle de vive voix.">
+  <meta name="description" content="Coaching 1:1 par Emmanuel Peccoux, compétiteur de bodybuilding naturel. Système, données, présence. Prends rendez-vous — on en parle de vive voix.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Ctext x='16' y='23' font-family='Arial Black' font-size='17' font-weight='900' fill='%23E60000' text-anchor='middle'%3EEP%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Ctext x='16' y='23' font-family='Georgia' font-size='17' font-weight='900' fill='%23E60000' text-anchor='middle'%3EEP%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- PRELOADER — mise en charge -->
-  <div class="loader" id="loader">
-    <div class="loader-title"><span class="loader-word">EP<span class="dot">.</span>COACHING</span></div>
-    <div class="loader-bar"><i id="loader-fill"></i></div>
-    <div class="loader-data">
-      <span>CHARGE <b class="red" id="loader-pct">000</b>%</span>
-      <span>ANNECY · FR</span>
-    </div>
+  <div class="ambient" aria-hidden="true">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="orb orb-c"></div>
   </div>
-
-  <div class="grain"></div>
-  <div class="progress" id="progress"></div>
-  <div class="cursor-dot" id="cdot"></div>
-  <div class="cursor-ring" id="cring"><span class="cursor-label" id="clabel"></span></div>
+  <div class="grain" aria-hidden="true"></div>
 
   <!-- NAV -->
-  <nav class="nav">
-    <a href="#hero" class="nav-logo">EP<span class="dot">.</span>COACHING</a>
-    <div class="nav-right">
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-logo">EP<span class="dot">·</span>COACHING</a>
+    <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-right" id="navRight">
       <a href="#preuve" class="nav-link">Preuve</a>
       <a href="#methode" class="nav-link">Méthode</a>
+      <a href="#athlete" class="nav-link">L'athlète</a>
       <a href="https://www.instagram.com/emmanuelpeccoux" target="_blank" rel="noopener" class="nav-link">Instagram</a>
-      <a href="https://calendly.com/peccoux-manu/30min" target="_blank" rel="noopener" class="nav-cta magnetic" data-cursor="Go">Prendre RDV</a>
+      <a href="https://calendly.com/peccoux-manu/30min" target="_blank" rel="noopener" class="nav-cta">Réserver</a>
     </div>
   </nav>
 
-  <!-- ════════ SCÈNE 01 — HERO ════════ -->
-  <section class="hero" id="hero">
-    <div class="hero-media" id="hero-media">
-      <img src="images/images/green_front.png" alt="Emmanuel Peccoux — compétiteur bodybuilding naturel">
-    </div>
+  <main>
+    <!-- ════════ HERO ════════ -->
+    <section class="hero" id="hero">
+      <div class="hero-bg"><img src="images/images/hero_current.png" alt="Emmanuel Peccoux — compétiteur bodybuilding naturel"></div>
+      <div class="hero-coords">45.8992° N · 6.1294° E — ANNECY, FR</div>
 
-    <div class="hero-coords">45.8992° N · 6.1294° E — ANNECY</div>
+      <div class="hero-eyebrow tag rv">Coaching 1:1 <span class="num">—</span> Naturel <span class="num">—</span> Annecy</div>
 
-    <div class="hero-content">
-      <div class="mono-tag hero-tag rv">Coaching 1:1 <span class="red">·</span> Bodybuilding naturel <span class="red">·</span> Annecy</div>
-      <h1 class="t-giant" id="hero-title">
-        <span class="line">Construis un</span>
-        <span class="line">physique qui</span>
-        <span class="line"><span class="t-red">ne ment pas.</span></span>
+      <h1 class="disp">
+        <span class="l"><span style="--d:.05s">Ton corps</span></span>
+        <span class="l"><span style="--d:.18s" class="outline">n'improvise</span></span>
+        <span class="l"><span style="--d:.31s"><em class="italic red">jamais.</em></span></span>
       </h1>
+
       <div class="hero-foot">
-        <p class="hero-sub rv">Coaché par un <em>compétiteur naturel</em> — pas par un programme générique. Chaque détail de ton suivi est construit pour toi, et pour personne d'autre.</p>
-        <div class="hero-scroll rv"><span>Défiler</span><i></i></div>
+        <p class="hero-sub rv" style="--d:.5s">Coaching 1:1 avec un compétiteur de bodybuilding <em>100% naturel</em>. On part de tes chiffres, pas d'un programme générique — et on construit un système qui tient dans la durée.</p>
+        <div class="hero-scroll rv" style="--d:.6s"><span>Défiler</span><i></i></div>
+      </div>
+    </section>
+
+    <!-- MARQUEES -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Discipline <b>—</b> Données <b>—</b> Résultats <b>—</b> Zéro hasard <b>—</b></span>
+        <span>Discipline <b>—</b> Données <b>—</b> Résultats <b>—</b> Zéro hasard <b>—</b></span>
       </div>
     </div>
-  </section>
-
-  <!-- MARQUEE -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>Entraînement <b>·</b></span><span>Nutrition <b>·</b></span><span>Données <b>·</b></span>
-      <span>Discipline <b>·</b></span><span>100% Naturel <b>·</b></span><span>Coaching 1:1 <b>·</b></span>
-      <span>Entraînement <b>·</b></span><span>Nutrition <b>·</b></span><span>Données <b>·</b></span>
-      <span>Discipline <b>·</b></span><span>100% Naturel <b>·</b></span><span>Coaching 1:1 <b>·</b></span>
-    </div>
-  </div>
-
-  <!-- ════════ SCÈNE 02 — MANIFESTE ════════ -->
-  <section class="manifesto" id="manifesto">
-    <div class="manifesto-pin">
-      <div class="manifesto-num">02 / LE CONSTAT</div>
-      <p class="manifesto-text" id="manifesto-text">Tu t'entraînes dur. Tu manges propre. Et pourtant — ça ne se voit pas assez. Le problème n'est pas ton effort. C'est l'absence de [système.] Mon travail : transformer ton effort en [résultat.] Mesurable. Visible. Durable.</p>
-    </div>
-  </section>
-
-  <!-- ════════ SCÈNE 03 — PREUVE (horizontal) ════════ -->
-  <section class="proof" id="preuve">
-    <div class="proof-pin" id="proof-pin">
-      <div class="proof-years" id="proof-years"><span>2023</span><span>2024</span><span>2025</span><span>2026</span></div>
-      <div class="proof-track" id="proof-track">
-        <div class="proof-intro">
-          <div class="mono-tag">03 <span class="red">·</span> La preuve</div>
-          <h2 class="t-mid" style="margin-top:22px;">La progression ne se raconte pas.</h2>
-          <p>Trois ans documentés, <em>semaine après semaine</em>. Ce que j'applique à mes athlètes, je me l'applique d'abord à moi-même.</p>
-        </div>
-
-        <div class="proof-card">
-          <figure><img src="images/images/debut_2022a.png" alt="Emmanuel — point de départ 2023" data-webgl></figure>
-          <div class="proof-meta"><b>2023</b><span>Le point de départ</span></div>
-        </div>
-
-        <div class="proof-card">
-          <figure><img src="images/images/dark_front.png" alt="Emmanuel — progression 2025" data-webgl></figure>
-          <div class="proof-meta"><b>2025</b><span>Le travail paie</span></div>
-        </div>
-
-        <div class="proof-card">
-          <figure><img src="images/images/green_front.png" alt="Emmanuel — condition 2026" data-webgl></figure>
-          <div class="proof-meta"><b>2026</b><span>La condition</span></div>
-        </div>
-
-        <div class="proof-end">
-          <h3 class="t-mid">Ton tour <span class="t-red">commence ici.</span></h3>
-        </div>
+    <div class="marquee rev" aria-hidden="true">
+      <div class="marquee-track">
+        <span>100% Naturel — Coaching 1:1 — Annecy — Objectif WNBF —</span>
+        <span>100% Naturel — Coaching 1:1 — Annecy — Objectif WNBF —</span>
       </div>
     </div>
-  </section>
 
-  <!-- ════════ SCÈNE 04 — MÉTHODE ════════ -->
-  <section class="method" id="methode">
-    <div class="method-hd">
-      <div class="mono-tag rv">04 <span class="red">·</span> La méthode</div>
-      <h2 class="t-big">Trois principes.<br><span class="t-outline">Zéro hasard.</span></h2>
-    </div>
+    <!-- ════════ 01 — CONSTAT ════════ -->
+    <section class="section constat" id="constat">
+      <div class="constat-num" aria-hidden="true">01</div>
+      <div class="tag rv"><span class="num">01</span> — Le constat</div>
+      <p class="constat-text rv" style="--d:.1s">
+        Tu t'entraînes dur. Tu manges propre. Tu fais « tout comme il faut ».
+        Et pourtant, le miroir ne bouge presque pas.
+        <em>Le problème n'a jamais été ton effort</em> —
+        c'est l'absence d'un <span class="hl">système</span> capable de le transformer
+        en <span class="hl red">résultat.</span>
+      </p>
+    </section>
 
-    <div class="method-list">
-      <article class="principle rv" data-tilt>
-        <div class="principle-num">/ 01</div>
-        <h3>Données</h3>
-        <p>Chaque décision repose sur <em>tes chiffres</em> — pas sur des intuitions. Ton suivi vit dans mon application de coaching : tout est tracké, tout est visible, rien n'est laissé au hasard.</p>
-      </article>
-      <article class="principle rv" data-tilt>
-        <div class="principle-num">/ 02</div>
-        <h3>Précision</h3>
-        <p>Entraînement et nutrition construits autour de <em>ta vie réelle</em> — ton niveau, ton emploi du temps, tes contraintes. Pas un template. Un système taillé pour toi.</p>
-      </article>
-      <article class="principle rv" data-tilt>
-        <div class="principle-num">/ 03</div>
-        <h3>Présence</h3>
-        <p>Un coach <em>disponible chaque jour</em>. Une question, un doute, un ajustement — tu envoies, je réponds. Tu n'avances jamais seul.</p>
-      </article>
-    </div>
-
-    <div class="method-foot">
-      <p class="rv">Le détail complet de l'accompagnement ? <em>On en parle de vive voix.</em> C'est plus simple, plus honnête, et tu sauras tout de suite si ça matche.</p>
-      <a href="https://wa.me/33766834777" target="_blank" rel="noopener" class="btn magnetic rv" data-cursor="Go"><i></i><span>Réserver un appel →</span></a>
-    </div>
-  </section>
-
-  <!-- ════════ SCÈNE 05 — L'ATHLÈTE ════════ -->
-  <section class="athlete" id="athlete">
-    <div class="athlete-visual rv" id="athlete-visual">
-      <figure><img src="images/images/gym_pose.png" alt="Emmanuel Peccoux" data-webgl></figure>
-      <div class="athlete-id">EP — Compétiteur · Coach</div>
-    </div>
-    <div class="athlete-text">
-      <div class="mono-tag rv">05 <span class="red">·</span> L'athlète</div>
-      <h2 class="t-big">Emmanuel<br>Peccoux<span class="t-red">.</span></h2>
-      <p class="rv">Compétiteur de bodybuilding <em>100% naturel</em>, en route vers la scène WNBF. Je ne vends pas une théorie : je m'applique chaque jour <em>exactement ce que je transmets</em> — la rigueur, les données, la patience.</p>
-      <div class="stats">
-        <div class="stat rv"><div class="stat-val"><span data-count="3">0</span><span class="red">+</span></div><div class="stat-lbl">Années documentées</div></div>
-        <div class="stat rv"><div class="stat-val"><span data-count="100">0</span><span class="red">%</span></div><div class="stat-lbl">Naturel</div></div>
-        <div class="stat rv"><div class="stat-val">1<span class="red">:</span>1</div><div class="stat-lbl">Accompagnement direct</div></div>
-        <div class="stat rv"><div class="stat-val">WNBF</div><div class="stat-lbl">Objectif compétition</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════ SCÈNE 06 — CTA FINAL ════════ -->
-  <section class="final" id="contact">
-    <div class="final-pin">
-      <div class="final-bg" id="final-bg">EP</div>
-      <div class="final-content">
-        <h2 class="t-giant" id="final-title">
-          <span class="line">Prêt à</span>
-          <span class="line"><span class="t-red">construire ?</span></span>
-        </h2>
-        <p class="final-sub rv">Un appel. Aucune pression, aucun engagement. <em>On parle de toi</em>, de ton objectif — et on voit si on avance ensemble.</p>
-        <div class="final-actions">
-          <a href="https://calendly.com/peccoux-manu/30min" target="_blank" rel="noopener" class="btn magnetic rv" data-cursor="Go"><i></i><span>Prendre rendez-vous</span></a>
-          <a href="https://wa.me/33766834777" target="_blank" rel="noopener" class="btn btn-ghost magnetic rv" data-cursor="Go"><i></i><span>WhatsApp direct</span></a>
+    <!-- ════════ 02 — PREUVE ════════ -->
+    <section class="section proof" id="preuve">
+      <div class="proof-hd">
+        <div>
+          <div class="tag rv"><span class="num">02</span> — La preuve</div>
+          <h2 class="disp rv" style="--d:.1s">Trois ans.<br><span class="outline">Zéro raccourci.</span></h2>
+          <p class="rv" style="--d:.2s">Ce que je propose à mes athlètes, je me l'applique d'abord à moi-même — chaque semaine, chaque chiffre, chaque photo.</p>
         </div>
-        <div class="final-note rv">Réponse sous 24h <span class="red">·</span> C'est moi qui te lis, pas un bot</div>
+        <div class="proof-years" id="proofYears">
+          <span data-year="2023">2023</span>
+          <span data-year="2024">2024</span>
+          <span data-year="2025">2025</span>
+          <span data-year="2026">2026</span>
+        </div>
       </div>
-    </div>
-  </section>
+
+      <div class="proof-track" id="proofTrack">
+        <figure class="proof-card rv" style="--d:.05s" data-year="2023">
+          <img src="images/images/debut_2022a.png" alt="Emmanuel — point de départ 2023" loading="lazy">
+          <figcaption class="proof-meta"><b>2023</b><span>Le point de départ</span></figcaption>
+        </figure>
+        <figure class="proof-card rv" style="--d:.1s" data-year="2024">
+          <img src="images/images/dark_back.png" alt="Emmanuel — construction 2024" loading="lazy">
+          <figcaption class="proof-meta"><b>2024</b><span>La construction</span></figcaption>
+        </figure>
+        <figure class="proof-card rv" style="--d:.15s" data-year="2025">
+          <img src="images/images/dark_front.png" alt="Emmanuel — progression 2025" loading="lazy">
+          <figcaption class="proof-meta"><b>2025</b><span>Le travail paie</span></figcaption>
+        </figure>
+        <figure class="proof-card rv" style="--d:.2s" data-year="2026">
+          <img src="images/images/green_front.png" alt="Emmanuel — condition 2026" loading="lazy">
+          <figcaption class="proof-meta"><b>2026</b><span>La condition actuelle</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ════════ 03 — MÉTHODE ════════ -->
+    <section class="section method" id="methode">
+      <div class="section-hd">
+        <div class="tag rv"><span class="num">03</span> — La méthode</div>
+        <h2 class="disp rv" style="--d:.1s">Trois piliers.<br><span class="outline">Aucune improvisation.</span></h2>
+      </div>
+
+      <div class="method-list">
+        <article class="principle rv" style="--d:.05s">
+          <div class="principle-num">/ 01</div>
+          <h3 class="disp">Données</h3>
+          <p>Chaque réglage — calories, séries, charges — découle de <em>tes</em> chiffres réels, suivis semaine après semaine. Pas d'intuition, pas de copier-coller d'un programme trouvé en ligne.</p>
+        </article>
+        <article class="principle rv" style="--d:.1s">
+          <div class="principle-num">/ 02</div>
+          <h3 class="disp">Stratégie</h3>
+          <p>Un plan pensé pour <em>ta vie</em> : ton emploi du temps, ton historique, tes contraintes. Le système s'adapte à toi — jamais l'inverse.</p>
+        </article>
+        <article class="principle rv" style="--d:.15s">
+          <div class="principle-num">/ 03</div>
+          <h3 class="disp">Présence</h3>
+          <p>Un coach joignable <em>chaque jour</em>. Une question, un doute, un imprévu — tu m'écris, je réponds. Tu n'avances jamais seul.</p>
+        </article>
+      </div>
+
+      <div class="method-foot">
+        <p class="rv">Les détails de l'accompagnement — formats, suivi, tarifs — <em>on en parle de vive voix</em>. C'est plus simple, et tu sauras tout de suite si on est faits pour avancer ensemble.</p>
+        <a href="https://calendly.com/peccoux-manu/30min" target="_blank" rel="noopener" class="btn magnetic rv"><span>Réserver un appel</span><i></i></a>
+      </div>
+    </section>
+
+    <!-- ════════ 04 — ATHLÈTE ════════ -->
+    <section class="section athlete" id="athlete">
+      <div class="athlete-visual rv">
+        <img src="images/images/gym_pose.png" alt="Emmanuel Peccoux" loading="lazy">
+        <div class="athlete-id">EP — Compétiteur · Coach</div>
+      </div>
+      <div class="athlete-text">
+        <div class="tag rv"><span class="num">04</span> — L'athlète</div>
+        <h2 class="disp rv" style="--d:.1s">Emmanuel<br>Peccoux<span class="red">.</span></h2>
+        <p class="rv" style="--d:.2s">Compétiteur de bodybuilding <em>100% naturel</em>, en préparation pour la scène WNBF. Je n'enseigne rien que je n'applique pas moi-même : la rigueur, le suivi, la patience — tous les jours, sans exception.</p>
+        <div class="stats">
+          <div class="stat rv" style="--d:.05s"><div class="stat-val"><span data-count="3">0</span><span class="red">+</span></div><div class="stat-lbl">Années documentées</div></div>
+          <div class="stat rv" style="--d:.1s"><div class="stat-val"><span data-count="100">0</span><span class="red">%</span></div><div class="stat-lbl">Naturel</div></div>
+          <div class="stat rv" style="--d:.15s"><div class="stat-val">1<span class="red">:</span>1</div><div class="stat-lbl">Accompagnement direct</div></div>
+          <div class="stat rv" style="--d:.2s"><div class="stat-val">WNBF</div><div class="stat-lbl">Objectif compétition</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ 05 — CTA FINAL ════════ -->
+    <section class="section final" id="contact">
+      <div class="final-glow" aria-hidden="true"></div>
+      <div class="tag rv"><span class="num">05</span> — On commence ?</div>
+      <h2 class="disp rv" style="--d:.1s">Prêt à<br><em class="italic red">construire ?</em></h2>
+      <p class="final-sub rv" style="--d:.2s">Un appel de 30 minutes, sans pression ni argumentaire. <em>On parle de toi</em>, de ton point de départ, de ton objectif — et on voit si ça a du sens d'avancer ensemble.</p>
+      <div class="final-actions rv" style="--d:.3s">
+        <a href="https://calendly.com/peccoux-manu/30min" target="_blank" rel="noopener" class="btn magnetic"><span>Réserver un appel</span><i></i></a>
+        <a href="https://wa.me/33766834777" target="_blank" rel="noopener" class="btn btn-ghost magnetic"><span>Écrire sur WhatsApp</span><i></i></a>
+      </div>
+      <div class="final-note rv" style="--d:.4s">Réponse sous 24h — c'est moi qui te lis, pas un bot</div>
+    </section>
+  </main>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div>EP<span class="dot">.</span>COACHING — © 2026 Emmanuel Peccoux</div>
-    <div style="display:flex; gap:26px;">
+    <div>EP<span class="red">·</span>COACHING — © 2026 Emmanuel Peccoux</div>
+    <div class="footer-links">
       <a href="https://www.instagram.com/emmanuelpeccoux" target="_blank" rel="noopener">Instagram</a>
       <a href="privacy-policy.html">Confidentialité</a>
       <a href="terms-of-service.html">CGU</a>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
-  <script src="gl.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

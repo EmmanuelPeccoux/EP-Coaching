@@ -1,63 +1,49 @@
 # EP Coaching — Site Web Statique
 
-Site de conversion pour le coaching musculation d'Emmanuel Peccoux.
-Hébergé sur GitHub Pages : https://emmanuelpeccoux.github.io/EP-Coaching/
+One-page de conversion (vente indirecte → contact/RDV) pour le coaching musculation
+d'Emmanuel Peccoux. Hébergé sur GitHub Pages : https://emmanuelpeccoux.github.io/EP-Coaching/
 
 ## Stack
-- HTML5 / CSS3 / JavaScript vanilla (aucun framework)
-- GitHub Pages (déploiement automatique sur push main)
+- HTML5 / CSS3 / JavaScript vanilla (aucun framework, aucune dépendance CDN)
+- GitHub Pages (déploiement automatique sur push `main`)
 - Aucune dépendance npm
 
 ## Structure des fichiers
-- `index.html` — Page d'accueil (hero + about + physique + coaching teaser + CTA)
-- `coaching.html` — Offre complète, tarif, process 4 étapes, FAQ
-- `parcours.html` — Timeline 2023-2027, vision compétition
-- `contact.html` — Contact WhatsApp + formulaire
-- `style.css` — Styles globaux (toutes les pages)
-- `motion.js` — Toutes les animations et interactions JS
-- `images/images/` — Photos (gym_locker, gym_pose, hero_current, dark_front, green_front, green_side, training_bench, training_pulldown, training_chest, nutrimuscle)
+- `index.html` — Page unique (hero, constat, preuve, méthode, athlète, CTA final)
+- `style.css` — Design system "Forge Noire" (toutes les animations CSS)
+- `app.js` — Reveals (IntersectionObserver), compteurs, boutons magnétiques, nav, galerie preuve
+- `images/images/` — Photos
 - `privacy-policy.html` / `terms-of-service.html` — Pages légales
+- `coaching.html` / `parcours.html` / `contact.html` — Stubs de redirection (anciennes URLs en bio Instagram) vers `/EP-Coaching/`
 
-## Design System
-- **Background:** #050505 (noir ultra deep)
-- **Rouge primaire:** #E60000 / variants: #ff1a1a, #b30000
-- **Blanc:** #f5f5f5
-- **Gris scale:** --g0 à --g5 (#111 → #303030)
-- **Font headings:** Bebas Neue (Google Fonts)
-- **Font body:** Inter + Montserrat (Google Fonts)
-- **Nav height:** 76px
+## Design System — "Forge Noire"
+- **Background:** #050505 (noir ultra deep), `--bg-soft` #0b0b0b
+- **Rouge primaire:** #E60000, `--red-deep` #5e0000
+- **Texte:** #f4f3f0 (`--ink`), gris `--g1` #bdbab4 / `--g2` #7a7872
+- **Font display:** Fraunces (serif expressive, 900 + italique)
+- **Font body:** Manrope
+- **Font mono (tags/data):** JetBrains Mono
+- Pas de curseur custom, pas de preloader.
 
-## Animations disponibles (motion.js)
-- Preloader avec lettres animées
-- Custom cursor (dot + ring) avec états magnétiques
-- Scroll progress bar
-- Split text (char + word)
-- Intersection Observer reveals (.rv, .rv2, .rv3, .rv4, .rv-left, .rv-right, .rv-scale, .img-mask)
-- Parallax (data-parallax attribute)
-- Counter animation (data-count, data-suffix)
-- Scramble text sur hover
-- Magnetic buttons (.magnetic)
-- FAQ accordion
-- Hover image follow (data-img-hover)
-- Mobile menu burger
-
-## Conventions CSS importantes
-- Les sections utilisent `.section` (160×80px padding) ou `.section-sm` (90×80px)
-- Tags de section : ligne rouge + texte uppercase 9px
-- Titres Bebas Neue : `clamp(48px, ..., 96px)`
-- Variants titre : normal / outlined (text-stroke) / rouge
-- Boutons : `.btn` (rouge plein) / `.btn-outline` (transparent + bordure)
-- Marquee : `.marquee` 28s / `.marquee-big` 40s
-- Images mask reveal : `.img-mask`
+## Mouvement
+- `.ambient` : 3 lueurs radiales (`.orb-a/b/c`) en dérive continue (CSS @keyframes), indépendantes du scroll
+- `.grain` : bruit SVG animé en overlay
+- `.marquee` / `.marquee.rev` : bandeaux défilants en boucle (sens opposés)
+- `.hero-bg img`, `.athlete-visual img` : animation "breathe" (zoom lent continu)
+- `.final-glow` : pulsation continue derrière le CTA final
+- `.rv` : reveals au scroll via IntersectionObserver (`app.js`)
+- `.magnetic` : boutons qui suivent la souris (désactivé sur tactile)
+- Galerie preuve (`#proofTrack`) : scroll horizontal natif (scroll-snap) + molette convertie en scroll horizontal sur desktop + années actives en surbrillance
 
 ## Déploiement
 Push sur la branche `main` → GitHub Pages se met à jour automatiquement (délai 1-2 min).
 
-## Objectif du site
-Tunnel de conversion : Instagram → site → Typeform → Calendly → Stripe
-Le site doit inspirer confiance, crédibilité, et donner envie d'agir.
+## Règles de contenu
+Vente INDIRECTE : objectif unique = pousser au contact/RDV. Pas de prix, pas de détail
+d'offre, pas de page parcours.
 
 ## Liens importants
+- Calendly (RDV) : https://calendly.com/peccoux-manu/30min
 - WhatsApp : https://wa.me/33766834777
 - Instagram : @emmanuelpeccoux
 - GitHub repo : https://github.com/emmanuelpeccoux/EP-Coaching
