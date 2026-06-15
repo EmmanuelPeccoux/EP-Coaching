@@ -36,8 +36,18 @@ d'Emmanuel Peccoux. Hébergé sur GitHub Pages : https://emmanuelpeccoux.github.
 - Smooth scroll Lenis (`lerp: 0.08`) branché sur le ticker GSAP
 - Reveals `.rv` : `opacity 0→1` + `translateY(30px→0)`, ScrollTrigger `start: "top 85%"`
 - `.scale-in` (section CTA) : `scale 0.9→1` + fade
-- Curseur custom (point + anneau, lerp différents) — desktop uniquement (`hover:hover` + `pointer:fine`)
+- Tilt 3D sur les cards (section 3) — desktop uniquement (`hover:hover` + `pointer:fine`)
 - Tout dégrade proprement si `prefers-reduced-motion` ou si les CDN ne chargent pas (contenu reste visible, opacité par défaut à 1)
+
+## Éléments décoratifs (couche "premium")
+- **Barre de progression de scroll** (`#scroll-progress`) — fine ligne rouge fixe en haut, largeur = avancement de la page
+- **Navigation latérale par points** (`.section-nav`) — 6 points fixes à droite, desktop only (`min-width:1024px`), point actif via IntersectionObserver
+- **Halos lumineux** (`.glow-orb`) — cercles flous rouges, légère animation flottante, positionnés en arrière-plan dans hero / difference / faq
+- **Chiffres fantômes** (`.section-num`) — grands numéros de section (02/03/04/06) en contour, décoratifs, derrière le contenu
+- **Bandeau marquee** — défilement horizontal infini (NATUREL · RIGUEUR · SUIVI RÉEL · DISCIPLINE · RÉSULTATS) entre les sections 3 et 4
+- **Cadre photo "viewfinder"** (section preuve) — coins rouges + badge "Compétiteur WNBF — Classic Physique" en overlay sur la photo
+- Bouton WhatsApp flottant : anneau de pulsation animé ; bouton CTA primaire : effet de reflet (shine) au survol
+- `::selection` et `:focus-visible` stylés en rouge pour l'accessibilité
 
 ## Déploiement
 Push sur la branche `main` → GitHub Pages se met à jour automatiquement (délai 1-2 min).
