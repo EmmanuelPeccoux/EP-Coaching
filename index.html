@@ -103,15 +103,6 @@ body::after{
   color:rgba(245,237,237,.55);
 }
 
-/* ===== CURSOR ===== */
-#cursor-dot,#cursor-ring{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;z-index:10000;display:none;}
-#cursor-dot{width:8px;height:8px;background:var(--red);}
-#cursor-ring{width:32px;height:32px;border:1px solid var(--red);transition:width .3s,height .3s,opacity .3s;}
-#cursor-ring.big{width:48px;height:48px;}
-#cursor-dot.hide{opacity:0;}
-html.has-cursor #cursor-dot,html.has-cursor #cursor-ring{display:block;}
-html.has-cursor,html.has-cursor *{cursor:none;}
-
 /* ===== FLOATING WHATSAPP ===== */
 .float-wa{
   position:fixed;bottom:20px;right:20px;z-index:500;
@@ -405,6 +396,8 @@ footer{
 .footer-links a:hover{color:var(--red);}
 .footer-links a + a{margin-left:14px;}
 .footer-copy{width:100%;text-align:center;font-size:11px;color:rgba(245,237,237,.25);margin-top:8px;}
+.footer-copy a{color:rgba(245,237,237,.35);text-decoration:none;}
+.footer-copy a:hover{color:var(--red);}
 
 /* ===== RESPONSIVE ===== */
 @media (max-width:767px){
@@ -424,9 +417,6 @@ footer{
     <feBlend in="SourceGraphic" mode="multiply"/>
   </filter>
 </svg>
-
-<div id="cursor-ring" aria-hidden="true"></div>
-<div id="cursor-dot" aria-hidden="true"></div>
 
 <a class="float-wa" href="https://wa.me/33766834777?text=Salut%20Emmanuel%2C%20je%20voudrais%20en%20savoir%20plus%20sur%20l%27accompagnement" target="_blank" rel="noopener" aria-label="Écrire sur WhatsApp">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.04 2 11c0 2.4 1.07 4.58 2.85 6.23L4 22l5.06-1.66C9.96 20.78 10.97 21 12 21c5.52 0 10-4.04 10-9s-4.48-9-10-9z"/></svg>
@@ -615,12 +605,8 @@ footer{
       <a href="https://www.instagram.com/emmanuelpeccoux" target="_blank" rel="noopener">@emmanuelpeccoux</a>
       <a href="https://wa.me/33766834777" target="_blank" rel="noopener">WhatsApp</a>
     </div>
-    <div class="footer-links">
-      <a href="privacy-policy.html">Confidentialité</a>
-      <a href="terms-of-service.html">CGU</a>
-    </div>
   </div>
-  <div class="footer-copy">© 2026 Emmanuel Peccoux — Annecy, France</div>
+  <div class="footer-copy">© 2026 Emmanuel Peccoux — Annecy, France · <a href="privacy-policy.html">Politique de confidentialité</a> · <a href="terms-of-service.html">Conditions d'utilisation</a></div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -707,26 +693,6 @@ footer{
       card.addEventListener('mouseenter', function(){
         card.style.transition = 'none';
       });
-    });
-  }
-
-  // custom cursor (desktop only)
-  if(fine && !reduceMotion){
-    document.documentElement.classList.add('has-cursor');
-    var dot = document.getElementById('cursor-dot');
-    var ring = document.getElementById('cursor-ring');
-    var mx = innerWidth/2, my = innerHeight/2, dx = mx, dy = my, rx = mx, ry = my;
-    window.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; });
-    (function raf(){
-      dx += (mx - dx) * 0.15; dy += (my - dy) * 0.15;
-      rx += (mx - rx) * 0.08; ry += (my - ry) * 0.08;
-      dot.style.transform = 'translate(' + dx + 'px,' + dy + 'px) translate(-50%,-50%)';
-      ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px) translate(-50%,-50%)';
-      requestAnimationFrame(raf);
-    })();
-    document.querySelectorAll('a, button, .tilt-card').forEach(function(el){
-      el.addEventListener('mouseenter', function(){ ring.classList.add('big'); dot.classList.add('hide'); });
-      el.addEventListener('mouseleave', function(){ ring.classList.remove('big'); dot.classList.remove('hide'); });
     });
   }
 
