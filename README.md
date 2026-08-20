@@ -48,7 +48,65 @@ de vérifier Settings → Pages → Source sur GitHub directement.
 - [x] 8/15 — Animations par section : titres en mots, cards en cascade, bio/portrait séquencés, CTA final à traitement renforcé, hover bifurcation, header au scroll — **phase animation de base terminée**
 - [x] 9/15 — WebGL évalué et non retenu (raisons ci-dessous), scroll accessible vers les ancres, robustesse ScrollTrigger (polices/bfcache), audit "règle de retrait", passe mobile 375px — **phase animation terminée**
 - [x] 10/15 — Contenu final homepage + /physique/ (copy validé intégré, mots-clés accentués dans les H1/H2, meta tags dérivés du copy)
-- [ ] 11/15 à 15/15 — Contenu /business/, formulaires/Calendly, déploiement final
+- [x] 11/15 — Contenu final /business/ (copy validé intégré, bio confirmée identique au caractère près, CTA de secours phrase+lien) — **les 3 pages ont maintenant leur copy final**
+- [ ] 12/15 à 15/15 — Formulaires/Calendly, déploiement final
+
+## Contenu /business/ (prompt 11/15)
+
+Même méthode qu'au prompt 10 : copy reproduit tel quel, sans reformulation.
+
+**Bio** : identique au caractère près à `/physique/`, vérifié avec un
+`diff` sur le bloc `<section class="bio">` des deux fichiers (demande
+explicite du prompt) — aucune différence. Toujours dupliquée en HTML (site
+statique, pas de templates), mais aucune règle de style spécifique n'a été
+ajoutée : tout vient de `base.css`, `business.css` ne définit rien pour
+cette section, exactement comme prévu depuis le prompt 5/15.
+
+**Coquille corrigée** : "jonglar" du document source remplacé par
+"jongler" (pilier 6), comme demandé explicitement par le prompt.
+
+**CTA de secours** : le copy distingue une phrase ("Tu préfères tester
+par toi-même ?...") d'un lien ("Créer mon compte"), alors que le
+placeholder n'avait qu'une seule phrase entièrement cliquable. Restructuré
+en `.fallback-intro` (texte simple) + `.btn-cta-fallback` (le vrai lien,
+seul élément cliquable désormais) : plus honnête pour un lecteur d'écran
+et au survol souris que de rendre toute une question cliquable.
+`initCtaFinalReveal()` dans `main.js` anime maintenant les deux comme un
+seul petit groupe, avec la même garantie qu'avant (aucun overlap négatif :
+ne démarre qu'une fois le CTA principal entièrement arrivé) — revérifié en
+inspectant l'ordre réel des appels à la timeline mockée (jsdom), pas
+seulement en relisant le code.
+
+**Aucune mention de prix ni de durée d'essai** : ni sur cette page ni
+ailleurs, conformément à la règle explicite de ce prompt (l'offre coach a
+un tarif et une période d'essai qui ne doivent apparaître nulle part sur
+le site).
+
+**Vérification des longueurs** : les paragraphes de piliers vont de 109 à
+140 caractères ; la ligne 1 de la grille (piliers 1-3) a un écart plus
+marqué (109-140, contre un écart de 3 caractères seulement sur
+`/physique/`) mais `align-items: stretch` (comportement Grid par défaut,
+déjà en place) aligne les cards d'une même ligne en hauteur quel que soit
+l'écart, aucun changement nécessaire. Le titre du pilier 1 ("Tous les
+outils clients, à ta main", 34 caractères) est à la même longueur que les
+titres les plus longs déjà vérifiés sur `/physique/` : même conclusion,
+retour à la ligne normal sur mobile étroit, aucun débordement. Le H2 de la
+section piliers business (48 caractères) s'est avéré quasiment identique
+en longueur à celui de physique (47 caractères) et pas "nettement plus
+long" comme le prompt le supposait : mesuré plutôt que supposé, les deux
+tiennent sans problème dans le `max-width: 42rem` du `.section-header`.
+
+## Cohérence inter-pages (contrôle final, prompt 11/15)
+
+- Bloc bio : identique au caractère près (vérifié par `diff`, voir plus haut).
+- CTA : "Réserver mon appel" + "Appel gratuit, sans engagement" partout où
+  le copy le demande (homepage n'a pas ce CTA, seulement physique et
+  business), aucune variante orpheline d'un ancien placeholder.
+- Tiret em (`—`) : recherché dans tout le repo (HTML, CSS, JS, MD),
+  aucune occurrence en dehors des commentaires de code (documentation
+  interne aux fichiers, jamais lue par un visiteur).
+- Prix / tarif / durée d'essai : recherché sur les 3 pages, aucune
+  occurrence, y compris en commentaire HTML.
 
 ## Contenu (depuis le prompt 10/15)
 

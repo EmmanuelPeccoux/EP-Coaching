@@ -294,13 +294,18 @@ function initCtaFinalReveal() {
   const body = inner.querySelector("p");
   const primaryCta = inner.querySelector(".btn-cta-primary");
   const subtext = inner.querySelector(".btn-subtext");
-  const fallbackCta = inner.querySelector(".btn-cta-fallback"); // /business/ seulement
+  // /business/ seulement : phrase + lien du CTA de secours (prompt 11/15,
+  // deux éléments distincts dans le copy, animés comme un seul petit
+  // groupe plutôt que deux temps séparés).
+  const fallbackIntro = inner.querySelector(".fallback-intro");
+  const fallbackCta = inner.querySelector(".btn-cta-fallback");
+  const fallbackUnits = [fallbackIntro, fallbackCta].filter(Boolean);
 
   const mainUnits = [diamond, body, primaryCta, subtext].filter(Boolean);
-  if (mainUnits.length === 0 && !fallbackCta) return;
+  if (mainUnits.length === 0 && fallbackUnits.length === 0) return;
 
   gsap.set(mainUnits, { opacity: 0, y: 30 });
-  if (fallbackCta) gsap.set(fallbackCta, { opacity: 0, y: 16 });
+  if (fallbackUnits.length) gsap.set(fallbackUnits, { opacity: 0, y: 16 });
 
   ScrollTrigger.create({
     trigger: inner,
@@ -312,10 +317,10 @@ function initCtaFinalReveal() {
       // demandée pour le point d'arrivée de la page.
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
       tl.to(mainUnits, { opacity: 1, y: 0, duration: 1.0, stagger: 0.12 });
-      if (fallbackCta) {
+      if (fallbackUnits.length) {
         // Volontairement sans overlap négatif : ne démarre qu'une fois
         // TOUT le groupe principal (donc le CTA principal) déjà arrivé.
-        tl.to(fallbackCta, { opacity: 1, y: 0, duration: 0.5 });
+        tl.to(fallbackUnits, { opacity: 1, y: 0, duration: 0.5, stagger: 0.08 });
       }
     },
   });

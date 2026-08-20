@@ -15,3 +15,14 @@
    base.css l'emportait, donc /business/ affichait les 3 cards critères
    en grille 3 colonnes au lieu d'empilées comme sur /physique/. Supprimé.
    ═══════════════════════════════════════════════════════════════════════ */
+
+/* CTA de secours du CTA final (prompt 11/15, /business/ uniquement) : le
+   copy distingue une phrase (question) d'un lien ("Créer mon compte") au
+   lieu d'une seule phrase entièrement cliquable comme au placeholder.
+   .btn-cta-fallback (base.css) reste inchangé pour le lien lui-même. */
+.cta-final .fallback-intro {
+  display: block;
+  margin-top: var(--space-sm);
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--blanc-casse) 55%, transparent);
+}
