@@ -41,7 +41,19 @@ de vérifier Settings → Pages → Source sur GitHub directement.
 - [x] 1/15 — Structure (squelette HTML, arborescence, variables CSS de base)
 - [x] 2/15 — Navigation, footer, SEO, câblage des CTA
 - [x] 3/15 — Clôture structure : 404, robots.txt/sitemap.xml, favicon, preconnect/defer, accessibilité de base
-- [ ] 4/15 à 15/15 — design, animations, contenu, déploiement final
+- [x] 4/15 — Système de design (tokens, typo, boutons, cards, motif diamant) + application complète au hero + bifurcation
+- [ ] 5/15 à 15/15 — design des pages physique/business, animations, contenu, déploiement final
+
+## Système de design (depuis le prompt 4/15)
+
+Tokens dans `base.css` : échelle d'espacement (`--space-xs` à `--space-3xl`,
+base 8px), échelle typographique en `clamp()` (h1/h2/h3), boutons et cards
+avec hover. **Motif signature : le diamant rouge** du logo historique,
+repris à 3 échelles — petit (puce/séparateur/logo), et en grand filigrane
+(`.hero-diamond-ghost`) derrière le hero homepage, le risque assumé de ce
+prompt (voir commentaire dans `home.css`). Les pages physique/business
+héritent déjà des boutons/cards/typo via `base.css` sans avoir été
+retouchées : leur traitement visuel complet arrive dans un prompt dédié.
 
 ## Liens externes câblés
 

@@ -1,49 +1,185 @@
 /* ═══════════════════════════════════════════════════════════════════════
    EP Coaching — Homepage
-   Structure uniquement à ce stade (prompt 1/15) : pas de style poussé,
-   pas d'ombre, pas de gradient. Le design arrive dans un prompt suivant.
+   Système de design (tokens/typo/boutons/cards) dans base.css. Ce fichier
+   applique ce système au hero + à la bifurcation (prompt 4/15) — premier
+   endroit du site à recevoir un traitement visuel fini. Pas d'animation
+   scroll-triggered ici (phase suivante), seulement des hovers simples.
    ═══════════════════════════════════════════════════════════════════════ */
 
+/* ── Header homepage : centré, esprit carte-titre plutôt que nav produit ─ */
+
 header {
-  display: flex;
-  align-items: center;
-  padding: 1.5rem;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-sm);
 }
+
+header .logo {
+  font-size: 1.75rem;
+}
+
+/* Reprend le diamant du logo historique (voir header comment) : un petit
+   accent sous le wordmark, seule occurrence "signature" à cette échelle. */
+header .logo-mark {
+  margin-top: 0.5rem;
+}
+
+/* ── Hero VSL ──────────────────────────────────────────────────────────── */
 
 .hero-vsl {
+  position: relative;
+  overflow: hidden;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 60vh;
-  padding: 2rem 1.5rem;
+  text-align: center;
+  gap: var(--space-lg);
+  padding: var(--space-xl) var(--space-md) var(--space-2xl);
+  background: radial-gradient(
+    ellipse 120% 60% at 50% 0%,
+    color-mix(in srgb, var(--rouge-tres-fonce) 70%, transparent) 0%,
+    transparent 65%
+  );
 }
 
-.hero-vsl .vsl-placeholder {
+/* Risque assumé de ce prompt : le diamant du logo, agrandi à l'échelle
+   architecturale, posé en filigrane derrière tout le hero plutôt que
+   cantonné à une petite puce décorative — la signature visuelle EP
+   devient la structure même de la section, pas un détail dessus. */
+.hero-diamond-ghost {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  width: min(75vw, 760px);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--rouge-principal) 9%, transparent);
+  transform: translate(-50%, -50%) rotate(45deg);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* :not() exclut le diamant fantôme : sans ça, cette règle (même
+   spécificité, plus tardive dans le fichier) écraserait son
+   position: absolute par relative et casserait son positionnement. */
+.hero-vsl > *:not(.hero-diamond-ghost) {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-vsl h1 {
+  max-width: 20ch;
+}
+
+.hero-vsl .eyebrow {
+  justify-content: center;
+}
+
+.vsl-placeholder {
+  position: relative;
   width: 100%;
   max-width: 900px;
   aspect-ratio: 16 / 9;
-  border: 1px solid var(--rouge-fonce);
+  border: 1px solid color-mix(in srgb, var(--rouge-principal) 20%, transparent);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--rouge-tres-fonce) 60%, var(--noir-profond));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+.vsl-placeholder:hover {
+  border-color: color-mix(in srgb, var(--rouge-principal) 55%, transparent);
+  box-shadow: 0 0 60px rgba(224, 30, 30, 0.18);
+}
+
+.vsl-play {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--rouge-principal) 45%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.vsl-placeholder:hover .vsl-play {
+  border-color: var(--rouge-principal);
+  box-shadow: 0 0 32px rgba(224, 30, 30, 0.4);
+  transform: scale(1.05);
+}
+
+.vsl-play::after {
+  content: "";
+  border-style: solid;
+  border-width: 0.75rem 0 0.75rem 1.25rem;
+  border-color: transparent transparent transparent var(--blanc-casse);
+  margin-left: 0.3rem; /* recentre optiquement le triangle dans le cercle */
+}
+
+/* ── Bifurcation ───────────────────────────────────────────────────────── */
 
 .bifurcation {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 2rem 1.5rem;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-2xl) var(--space-md) var(--space-3xl);
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+.bifurcation h2 {
+  text-align: center;
+}
+
+.bifurcation .blocs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
 }
 
 .bifurcation .bloc {
   display: block;
-  padding: 2rem 1.5rem;
-  border: 1px solid var(--rouge-fonce);
+  position: relative;
+  flex: 1;
+  padding: var(--space-lg) var(--space-md);
+  background: var(--rouge-tres-fonce);
+  border: 1px solid color-mix(in srgb, var(--rouge-principal) 15%, transparent);
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.bifurcation .bloc:hover {
+  border-color: color-mix(in srgb, var(--rouge-principal) 55%, transparent);
+  box-shadow: 0 0 50px rgba(224, 30, 30, 0.14);
+  transform: translateY(-4px);
+}
+
+/* .diamond est inline-block par défaut (voir base.css) : explicitement
+   passé en block ici, sinon margin-inline:auto ne centrerait rien. */
+.bifurcation .bloc .diamond {
+  display: block;
+  margin-inline: auto;
+  margin-bottom: var(--space-sm);
+}
+
+.bifurcation .bloc .bloc-label {
+  display: block;
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-weight: 900;
+  font-size: 1.375rem;
+  letter-spacing: -0.02em;
+  color: var(--blanc-casse);
 }
 
 @media (min-width: 768px) {
-  .bifurcation {
+  .bifurcation .blocs {
     flex-direction: row;
-  }
-
-  .bifurcation .bloc {
-    flex: 1;
   }
 }

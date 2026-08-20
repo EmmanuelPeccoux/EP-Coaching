@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;900&family=Playfair+Display:ital,wght@1,700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@1,700&display=swap" />
 
   <link rel="stylesheet" href="assets/css/base.css" />
   <link rel="stylesheet" href="assets/css/home.css" />
@@ -47,6 +47,8 @@
        ═══════════════════════════════════════════════════════════════ -->
   <header>
     <a href="./" class="logo">EP COACHING<!-- TODO: remplacer par le vrai logo PNG --></a>
+    <!-- Diamant signature sous le wordmark, comme sur l'ancien logo EP. -->
+    <span class="diamond logo-mark" aria-hidden="true"></span>
   </header>
 
   <main>
@@ -55,10 +57,21 @@
          2. HERO VSL — emplacement vidéo de vente (YouTube unlisted à venir)
          ═══════════════════════════════════════════════════════════════ -->
     <section class="hero-vsl">
-      <h1><!-- TODO: copy --></h1>
-      <!-- TODO: remplacer par l'iframe YouTube unlisted réelle -->
-      <div class="vsl-placeholder" aria-label="Emplacement vidéo de présentation">
-        <!-- TODO: copy -->
+      <!-- Diamant géant en filigrane, voir home.css pour la justification
+           de ce choix (motif signature à l'échelle architecturale). -->
+      <div class="hero-diamond-ghost" aria-hidden="true"></div>
+
+      <p class="eyebrow"><!-- TODO: copy définitive -->◆ Coaching sportif &amp; business</p>
+
+      <!-- TODO: copy finale — texte de calibrage pour dimensionner le H1 -->
+      <h1>Ce que tu deviens ne doit rien au hasard</h1>
+
+      <!-- TODO: remplacer par l'iframe YouTube unlisted réelle. Pas de
+           role="button" tant qu'aucun clic ne fait quoi que ce soit :
+           un faux affordance interactif serait pire que pas d'affordance
+           du tout pour un lecteur d'écran. -->
+      <div class="vsl-placeholder" aria-label="Emplacement de la vidéo de présentation">
+        <span class="vsl-play" aria-hidden="true"></span>
       </div>
     </section>
 
@@ -66,15 +79,20 @@
          3. BIFURCATION — 2 blocs cliquables vers /physique/ et /business/
          ═══════════════════════════════════════════════════════════════ -->
     <section class="bifurcation">
-      <h2><!-- TODO: copy --></h2>
-      <a href="physique/" class="bloc bloc-physique">
-        <!-- TODO: copy finale -->
-        <span>Progresser en musculation</span>
-      </a>
-      <a href="business/" class="bloc bloc-business">
-        <!-- TODO: copy finale -->
-        <span>Scaler mon business de coach</span>
-      </a>
+      <div class="section-divider" aria-hidden="true"><span class="diamond"></span></div>
+      <h2><!-- TODO: copy -->Choisis ton chemin</h2>
+      <div class="blocs">
+        <a href="physique/" class="bloc bloc-physique">
+          <span class="diamond diamond--outline" aria-hidden="true"></span>
+          <!-- TODO: copy finale -->
+          <span class="bloc-label">Progresser en musculation</span>
+        </a>
+        <a href="business/" class="bloc bloc-business">
+          <span class="diamond diamond--outline" aria-hidden="true"></span>
+          <!-- TODO: copy finale -->
+          <span class="bloc-label">Scaler mon business de coach</span>
+        </a>
+      </div>
     </section>
 
   </main>

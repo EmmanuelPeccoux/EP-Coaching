@@ -1,75 +1,64 @@
 /* ═══════════════════════════════════════════════════════════════════════
    EP Coaching — Page /business/
-   Structure uniquement à ce stade (prompt 1/15) : pas de style poussé,
-   pas d'ombre, pas de gradient. Le design arrive dans un prompt suivant.
+   Le système de design (tokens, typo, boutons, cards) vit dans base.css
+   depuis le prompt 4/15 — ce fichier ne garde que la mise en page propre
+   à cette page (grilles, espacements de section). Le traitement visuel
+   complet du contenu (bio/critères/piliers/accomplissements) arrive dans
+   un prompt suivant, ce prompt-ci s'est concentré sur le hero homepage.
    Squelette identique à physique.css, contenu/accent à différencier plus tard.
    ═══════════════════════════════════════════════════════════════════════ */
 
 .bio {
-  padding: 3rem 1.5rem;
+  padding: var(--space-2xl) var(--space-md);
 }
 
 .criteres {
-  padding: 3rem 1.5rem;
+  padding: var(--space-2xl) var(--space-md);
 }
 
 .criteres .cards {
   display: grid;
-  gap: 1rem;
+  gap: var(--space-sm);
   grid-template-columns: 1fr;
 }
 
-.criteres .card {
-  padding: 1.5rem;
-  border: 1px solid var(--rouge-fonce);
-}
-
 .accompagnement {
-  padding: 3rem 1.5rem;
+  padding: var(--space-2xl) var(--space-md);
 }
 
 .accompagnement .cta-slot {
-  margin-top: 1.5rem;
+  margin-top: var(--space-md);
 }
 
 .piliers {
-  padding: 3rem 1.5rem;
+  padding: var(--space-2xl) var(--space-md);
 }
 
 .piliers .cards {
   display: grid;
-  gap: 1rem;
+  gap: var(--space-sm);
   grid-template-columns: 1fr;
 }
 
-.piliers .card {
-  padding: 1.5rem;
-  border: 1px solid var(--rouge-fonce);
-}
-
 .accomplissements {
-  padding: 3rem 1.5rem;
+  padding: var(--space-2xl) var(--space-md);
 }
 
 .accomplissements .cards {
   display: grid;
-  gap: 1rem;
+  gap: var(--space-sm);
   grid-template-columns: 1fr;
 }
 
-.accomplissements .card {
-  padding: 1.5rem;
-  border: 1px solid var(--rouge-fonce);
-}
-
 .cta-final {
-  padding: 3rem 1.5rem;
+  padding: var(--space-2xl) var(--space-md);
 }
 
 .cta-final .form-slot {
-  margin-top: 1.5rem;
-  padding: 1.5rem;
+  margin-top: var(--space-md);
+  padding: var(--space-md);
   border: 1px solid var(--rouge-fonce);
+  border-radius: var(--radius-md);
 }
 
 @media (min-width: 768px) {

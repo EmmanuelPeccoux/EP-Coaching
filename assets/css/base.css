@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   EP Coaching — Variables, reset, typographie de base
+   EP Coaching — Variables, reset, système de design
    ═══════════════════════════════════════════════════════════════════════
    INTERDITS STRICTS — à respecter absolument dans TOUT le projet :
    - Jamais #080808 ni #DC0A14
@@ -19,6 +19,21 @@
   --noir-profond: #0D0000;
   --blanc-casse: #F5EDED;
   --rose-clair: #FDC4C4; /* usage rare */
+
+  /* Échelle d'espacement (base 8px, esprit cinématique — sections
+     généreusement aérées, jamais denses). */
+  --space-xs: 0.5rem;   /* 8px */
+  --space-sm: 1rem;     /* 16px */
+  --space-md: 1.5rem;   /* 24px */
+  --space-lg: 2.5rem;   /* 40px */
+  --space-xl: 4rem;     /* 64px */
+  --space-2xl: 6rem;    /* 96px */
+  --space-3xl: 8rem;    /* 128px */
+
+  /* Rayon de coin volontairement modeste — arrondi perceptible mais
+     jamais le border-radius agressif façon SaaS générique. */
+  --radius-sm: 4px;
+  --radius-md: 8px;
 }
 
 /* ── Reset ─────────────────────────────────────────────────────────────── */
@@ -43,6 +58,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* le diamant fantôme du hero déborde volontairement du viewport */
 }
 
 img,
@@ -70,13 +86,12 @@ ol {
   list-style: none;
 }
 
-/* ── Typographie de base ──────────────────────────────────────────────── */
-/* Chargement des polices géré par chaque page (prompts suivants) — ici
-   seule la déclaration des rôles/valeurs de base. */
+/* ── Typographie ───────────────────────────────────────────────────────── */
 
 body {
   font-family: "Montserrat", system-ui, sans-serif;
   font-weight: 400;
+  font-size: 1.0625rem;
 }
 
 h1,
@@ -85,41 +100,148 @@ h3,
 h4 {
   font-family: "Montserrat", system-ui, sans-serif;
   font-weight: 900;
-  letter-spacing: -0.03em;
   line-height: 1.05;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  letter-spacing: -0.04em;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: -0.03em;
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  letter-spacing: -0.02em;
+}
+
+/* Corps de texte : blanc cassé atténué pour ne jamais faire concurrence
+   aux titres (100% d'opacité, réservée aux titres et à la marque). */
+p {
+  line-height: 1.75;
+  color: color-mix(in srgb, var(--blanc-casse) 70%, transparent);
+  max-width: 60ch;
 }
 
 .logo {
   font-family: "Playfair Display", serif;
   font-style: italic;
   font-weight: 700;
+  font-size: 1.375rem;
+  letter-spacing: 0.01em;
+}
+
+/* Eyebrows/labels — Montserrat 700, petit, tracking large, rouge
+   principal. Le glyphe ◆ en préfixe est la variante texte du motif
+   diamant (voir plus bas), pour un usage inline sans CSS supplémentaire. */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rouge-principal);
+}
+
+/* ── Motif signature : le diamant ─────────────────────────────────────── */
+/* Reprend le diamant rouge du logo EP (déjà présent dessous le wordmark
+   sur les anciennes versions du site) comme motif géométrique récurrent :
+   accent de logo, séparateur de section, puce de liste, et un usage plus
+   audacieux en filigrane géant dans le hero (voir home.css). Toujours la
+   même forme simple (carré pivoté 45°), jamais surchargée. */
+
+.diamond {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--rouge-principal);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.diamond--outline {
+  background: transparent;
+  border: 1px solid var(--rouge-principal);
+}
+
+.diamond--lg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+/* Séparateur : ligne fine, diamant, ligne fine — utilisable entre deux
+   sections ou au-dessus d'un titre. */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  max-width: 12rem;
+  margin-inline: auto;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: color-mix(in srgb, var(--rouge-principal) 25%, transparent);
+}
+
+/* Puce de liste diamant (:before sur <li>, prête pour le contenu à venir
+   en phase copy — aucune liste réelle dans les placeholders actuels). */
+li.diamond-item {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+li.diamond-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 0.4rem;
+  height: 0.4rem;
+  background: var(--rouge-principal);
+  transform: rotate(45deg);
 }
 
 /* ── Header & footer communs aux 3 pages ──────────────────────────────── */
-/* Structure uniquement (prompt 2/15) : pas d'ombre, pas de gradient, le
-   style visuel poussé arrive dans un prompt suivant. */
 
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1rem;
-  padding: 1.5rem;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-md);
 }
 
 .header-switch a {
   font-size: 0.85rem;
+  color: color-mix(in srgb, var(--blanc-casse) 75%, transparent);
   border-bottom: 1px solid var(--rouge-fonce);
   padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.header-switch a:hover {
+  color: var(--blanc-casse);
+  border-color: var(--rouge-principal);
 }
 
 footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  padding: 2.5rem 1.5rem;
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-md);
   border-top: 1px solid var(--rouge-tres-fonce);
   text-align: center;
 }
@@ -128,13 +250,20 @@ footer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: var(--space-sm);
   font-size: 0.85rem;
 }
 
 .footer-legal a,
 .footer-instagram {
   opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.footer-legal a:hover,
+.footer-instagram:hover {
+  opacity: 1;
+  color: var(--rouge-principal);
 }
 
 @media (min-width: 768px) {
@@ -149,10 +278,35 @@ footer {
 
 .btn-cta-primary {
   display: inline-block;
-  padding: 1rem 1.75rem;
+  padding: 1rem 2rem;
   background: var(--rouge-principal);
   color: var(--blanc-casse);
+  font-family: "Montserrat", system-ui, sans-serif;
   font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 0 rgba(224, 30, 30, 0);
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+}
+
+.btn-cta-primary:hover {
+  background: var(--rouge-fonce);
+  box-shadow: 0 0 32px rgba(224, 30, 30, 0.35);
+}
+
+.btn-cta-primary:active {
+  transform: scale(0.98);
+}
+
+/* Sous-texte optionnel sous un CTA primaire (ex. "Appel gratuit, sans
+   engagement") — slot prêt, pas encore rempli partout. */
+.btn-cta-primary + .btn-subtext {
+  display: block;
+  margin-top: 0.625rem;
+  font-size: 0.75rem;
+  text-align: center;
+  color: color-mix(in srgb, var(--blanc-casse) 45%, transparent);
 }
 
 .btn-cta-fallback {
@@ -162,4 +316,32 @@ footer {
   font-size: 0.85rem;
   opacity: 0.7;
   border-bottom: 1px solid var(--rouge-fonce);
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-cta-fallback:hover {
+  opacity: 1;
+  border-color: var(--rouge-principal);
+}
+
+/* ── Cards ─────────────────────────────────────────────────────────────── */
+/* Système partagé par les cards de critères/piliers/accomplissements
+   (physique.css, business.css). Les blocs de bifurcation du hero (.bloc,
+   home.css) reprennent le même vocabulaire visuel (fond/bordure/rayon)
+   mais avec leur propre règle et un hover plus marqué que .card : c'est
+   la seule décision de tout le parcours homepage, elle mérite plus de
+   présence qu'une card de contenu plus bas dans une page. */
+
+.card {
+  background: var(--rouge-tres-fonce);
+  border: 1px solid color-mix(in srgb, var(--rouge-principal) 15%, transparent);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover {
+  border-color: color-mix(in srgb, var(--rouge-principal) 50%, transparent);
+  box-shadow: 0 0 40px rgba(224, 30, 30, 0.12);
+  transform: translateY(-2px);
 }
