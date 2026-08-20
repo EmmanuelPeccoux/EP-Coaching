@@ -7,11 +7,22 @@
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Quality floor posé au prompt 6/15, pour toute la phase animation à
+// venir : le smooth scroll est lui-même un effet de mouvement, désactivé
+// pour qui le demande explicitement au niveau système. Le scroll natif
+// du navigateur prend le relais, ScrollTrigger continue de fonctionner
+// normalement dessus (il ne dépend pas de Lenis pour exister).
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 const lenis = new Lenis({
   duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smoothWheel: true,
+  smoothWheel: !prefersReducedMotion,
 });
+
+if (prefersReducedMotion) {
+  lenis.stop();
+}
 
 // ScrollTrigger doit être notifié à chaque scroll Lenis pour rester
 // synchronisé (sinon les triggers se déclenchent en décalage avec la

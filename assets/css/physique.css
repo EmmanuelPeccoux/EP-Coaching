@@ -1,73 +1,9 @@
 /* ═══════════════════════════════════════════════════════════════════════
    EP Coaching — Page /physique/
-   Le système de design (tokens, typo, boutons, cards) vit dans base.css
-   depuis le prompt 4/15 — ce fichier ne garde que la mise en page propre
-   à cette page (grilles, espacements de section). Le traitement visuel
-   complet du contenu (bio/critères/piliers/accomplissements) arrive dans
-   un prompt suivant, ce prompt-ci s'est concentré sur le hero homepage.
-   Squelette identique à business.css, contenu/accent à différencier plus tard.
+   Depuis le prompt 5/15, toute la mise en page des sections (bio,
+   critères, accompagnement, piliers, accomplissements, cta-final) vit
+   dans base.css, partagée avec business.css — les deux pages utilisent
+   les mêmes classes (.split, .cards, .pilier-grid, .diamond-list...), pas
+   de raison de dupliquer. Ce fichier reste prêt pour un accent propre à
+   /physique/ si un jour physique et business doivent diverger visuellement.
    ═══════════════════════════════════════════════════════════════════════ */
-
-.bio {
-  padding: var(--space-2xl) var(--space-md);
-}
-
-.criteres {
-  padding: var(--space-2xl) var(--space-md);
-}
-
-.criteres .cards {
-  display: grid;
-  gap: var(--space-sm);
-  grid-template-columns: 1fr;
-}
-
-.accompagnement {
-  padding: var(--space-2xl) var(--space-md);
-}
-
-.accompagnement .cta-slot {
-  margin-top: var(--space-md);
-}
-
-.piliers {
-  padding: var(--space-2xl) var(--space-md);
-}
-
-.piliers .cards {
-  display: grid;
-  gap: var(--space-sm);
-  grid-template-columns: 1fr;
-}
-
-.accomplissements {
-  padding: var(--space-2xl) var(--space-md);
-}
-
-.accomplissements .cards {
-  display: grid;
-  gap: var(--space-sm);
-  grid-template-columns: 1fr;
-}
-
-.cta-final {
-  padding: var(--space-2xl) var(--space-md);
-}
-
-.cta-final .form-slot {
-  margin-top: var(--space-md);
-  padding: var(--space-md);
-  border: 1px solid var(--rouge-fonce);
-  border-radius: var(--radius-md);
-}
-
-@media (min-width: 768px) {
-  .criteres .cards,
-  .accomplissements .cards {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .piliers .cards {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}

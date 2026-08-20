@@ -42,18 +42,42 @@ de vérifier Settings → Pages → Source sur GitHub directement.
 - [x] 2/15 — Navigation, footer, SEO, câblage des CTA
 - [x] 3/15 — Clôture structure : 404, robots.txt/sitemap.xml, favicon, preconnect/defer, accessibilité de base
 - [x] 4/15 — Système de design (tokens, typo, boutons, cards, motif diamant) + application complète au hero + bifurcation
-- [ ] 5/15 à 15/15 — design des pages physique/business, animations, contenu, déploiement final
+- [x] 5/15 — Page /physique/ entièrement designée (bio, critères, accompagnement, 6 piliers, accomplissements, CTA final)
+- [x] 6/15 — Page /business/ designée (même système, icônes propres au contexte, CTA final à double hiérarchie) + passe de cohérence finale, **phase design terminée**
+- [ ] 7/15 à 15/15 — animations, contenu final, déploiement
 
 ## Système de design (depuis le prompt 4/15)
 
 Tokens dans `base.css` : échelle d'espacement (`--space-xs` à `--space-3xl`,
-base 8px), échelle typographique en `clamp()` (h1/h2/h3), boutons et cards
-avec hover. **Motif signature : le diamant rouge** du logo historique,
-repris à 3 échelles — petit (puce/séparateur/logo), et en grand filigrane
-(`.hero-diamond-ghost`) derrière le hero homepage, le risque assumé de ce
-prompt (voir commentaire dans `home.css`). Les pages physique/business
-héritent déjà des boutons/cards/typo via `base.css` sans avoir été
-retouchées : leur traitement visuel complet arrive dans un prompt dédié.
+base 8px), échelle typographique en `clamp()` (h1/h2/h3, avec un H1 réduit
+dans `.split-content` pour ne pas réutiliser l'échelle hero dans une
+colonne deux fois moins large), boutons et cards avec hover. **Motif
+signature : le diamant rouge** du logo historique, repris à 3 échelles —
+petit (puce/séparateur/logo), et en grand filigrane (`.hero-diamond-ghost`)
+derrière le hero homepage. `/physique/` et `/business/` partagent
+strictement le même système (`.split`, `.cards`, `.pilier-grid`,
+`.diamond-list`, icônes SVG) défini une seule fois dans `base.css` —
+`physique.css`/`business.css` ne contiennent plus aucune règle de mise en
+page, prêts pour un accent propre à chaque page si besoin un jour.
+
+Icônes SVG en trait rouge (jamais d'emoji) : génériques (cible, message,
+cycle) pour les 3 points de méthode communs, et propres au contexte pour
+les 6 piliers — haltère/formation/graphique côté physique, boîte à
+outils/verrou/dashboard côté business. Toutes vérifiées visuellement avant
+commit (rendu PIL en local, faute de vrai navigateur dans cet
+environnement) — 2 icônes retravaillées au prompt 5 (formes plus sûres
+que des arcs SVG non testés), aucun souci sur les 5 icônes du prompt 6.
+
+Quality floor posé au prompt 6/15 : `:focus-visible` explicite (anneau
+rouge) sur tout le site, `prefers-reduced-motion` respecté (transitions
+neutralisées en CSS, Lenis désactivé et scroll natif repris en JS).
+
+Bug de cohérence attrapé et corrigé au prompt 6/15 : `business.css`
+n'avait jamais été nettoyé comme `physique.css` au prompt 5, un ancien
+`.criteres .cards` en grille rentrait en conflit de spécificité avec la
+version flex-column de `base.css` — `/business/` affichait ses 3 cards de
+critères en grille au lieu d'empilées. Les deux fichiers de page sont
+maintenant symétriques et vides de règles de mise en page.
 
 ## Liens externes câblés
 

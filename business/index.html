@@ -50,22 +50,58 @@
   <main>
 
     <!-- ═══════════════════════════════════════════════════════════════
-         1. BIO — bio/crédibilité (section commune aux deux chemins,
-            dupliquée depuis /physique/ avec un accent différent)
+         1. BIO — bloc identique à /physique/, volontairement dupliqué
+            (même contenu, même traitement, voir prompt 6/15). CSS
+            mutualisé dans base.css, rien de spécifique ici.
          ═══════════════════════════════════════════════════════════════ -->
     <section class="bio">
-      <h1><!-- TODO: copy --></h1>
+      <div class="split">
+        <div class="portrait">
+          <!-- TODO: remplacer par la vraie photo portrait -->
+          <div class="portrait-placeholder">
+            <span class="diamond diamond--outline diamond--lg" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="split-content">
+          <p class="eyebrow"><!-- TODO: copy -->◆ Qui je suis</p>
+          <!-- TODO: copy finale — texte de calibrage -->
+          <h1>Je n&rsquo;accompagne pas des silhouettes, je construis des habitudes qui tiennent</h1>
+          <!-- TODO: copy finale — texte de calibrage -->
+          <p>Coach depuis plusieurs années, formé aux bases de la physiologie de l&rsquo;entraînement et de la nutrition, je construis chaque programme autour de la réalité de la personne en face de moi, jamais d&rsquo;une méthode figée appliquée à tout le monde.</p>
+          <ul class="diamond-list">
+            <li class="diamond-item"><!-- TODO: copy -->Entraînement et nutrition, jamais l&rsquo;un sans l&rsquo;autre</li>
+            <li class="diamond-item"><!-- TODO: copy -->Suivi réel, pas un programme livré puis oublié</li>
+            <li class="diamond-item"><!-- TODO: copy -->Exigence, sans brutalité inutile</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════
-         2. CRITÈRES — "est-ce fait pour toi", 3 cards
+         2. CRITÈRES — "est-ce fait pour toi", 3 cards empilées
          ═══════════════════════════════════════════════════════════════ -->
     <section class="criteres">
-      <h2><!-- TODO: copy (titre de section) --></h2>
-      <div class="cards">
-        <div class="card"><!-- TODO: copy --></div>
-        <div class="card"><!-- TODO: copy --></div>
-        <div class="card"><!-- TODO: copy --></div>
+      <div class="split">
+        <div class="split-content">
+          <p class="eyebrow"><!-- TODO: copy -->◆ Avant de commencer</p>
+          <h2><!-- TODO: copy -->Est-ce fait pour toi ?</h2>
+          <!-- TODO: copy finale — texte de calibrage -->
+          <p>Cet accompagnement n&rsquo;est pas pour tout le monde. Il fonctionne si ces 3 conditions sont réunies.</p>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <h3><!-- TODO: copy -->Tu veux scaler mais tu ne sais pas par où commencer</h3>
+            <p><!-- TODO: copy -->Tu sens le potentiel de ton activité, mais pas précisément quoi faire ni dans quel ordre.</p>
+          </div>
+          <div class="card">
+            <h3><!-- TODO: copy -->Prêt à bosser dur</h3>
+            <p><!-- TODO: copy -->Structurer un business, ça ne se fait pas en pilote automatique.</p>
+          </div>
+          <div class="card">
+            <h3><!-- TODO: copy -->Un objectif business clair</h3>
+            <p><!-- TODO: copy -->Ex : passer à X clients, structurer enfin ton offre.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -74,26 +110,118 @@
             (ancre vers la section CTA final de cette même page)
          ═══════════════════════════════════════════════════════════════ -->
     <section class="accompagnement">
-      <h2><!-- TODO: copy --></h2>
-      <div class="cta-slot">
-        <a href="#cta-final" class="btn-cta-primary">
-          <span>Accompagnement 1-to-1<!-- TODO: copy définitive --></span>
-        </a>
+      <div class="split">
+        <div class="split-content">
+          <p class="eyebrow"><!-- TODO: copy -->◆ La méthode</p>
+          <h2><!-- TODO: copy -->Un accompagnement 1-to-1 personnalisé</h2>
+          <!-- TODO: copy finale — texte de calibrage -->
+          <p>Pas un cours générique sur l&rsquo;entrepreneuriat. Un vrai suivi, ajusté à la réalité de ton activité et de tes clients.</p>
+          <div class="cta-slot">
+            <a href="#cta-final" class="btn-cta-primary">
+              <span>Accompagnement 1-to-1<!-- TODO: copy définitive --></span>
+            </a>
+            <span class="btn-subtext"><!-- TODO: copy -->Échange initial gratuit, sans engagement</span>
+          </div>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <circle cx="12" cy="12" r="5" />
+              <circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" />
+            </svg>
+            <h3><!-- TODO: copy -->Plan sur-mesure</h3>
+            <p><!-- TODO: copy -->Construit autour de ton activité actuelle, pas d&rsquo;un modèle générique.</p>
+          </div>
+          <div class="card">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="12" rx="2" />
+              <path d="M8 17l-2 4v-4" />
+            </svg>
+            <h3><!-- TODO: copy -->Suivi direct</h3>
+            <p><!-- TODO: copy -->Un échange régulier avec ton coach, jamais un ticket support anonyme.</p>
+          </div>
+          <div class="card">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="4 12 4 8 8 4 12 4 16 5 18 7" />
+              <polyline points="18 3 18 7 14 7" />
+              <polyline points="20 12 20 16 16 20 12 20 8 19 6 17" />
+              <polyline points="6 21 6 17 10 17" />
+            </svg>
+            <h3><!-- TODO: copy -->Ajustements réguliers</h3>
+            <p><!-- TODO: copy -->Ta stratégie évolue avec ton activité, jamais figée sur plusieurs mois.</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════
-         4. PILIERS — 6 cards
+         4. PILIERS — grille de 6 cards (3×2 desktop, 1 colonne mobile)
+            Icônes propres au contexte business (outils/données/gestion,
+            jamais d'haltère) — voir prompt 6/15. Piliers 1 et 3 mis en
+            avant : la marque propre et le cloisonnement sont les
+            arguments les plus différenciants pour un coach qui hésite.
          ═══════════════════════════════════════════════════════════════ -->
     <section class="piliers">
-      <h2><!-- TODO: copy (titre de section) --></h2>
-      <div class="cards">
-        <div class="card"><!-- TODO: copy --></div>
-        <div class="card"><!-- TODO: copy --></div>
-        <div class="card"><!-- TODO: copy --></div>
-        <div class="card"><!-- TODO: copy --></div>
-        <div class="card"><!-- TODO: copy --></div>
-        <div class="card"><!-- TODO: copy --></div>
+      <div class="section-header">
+        <p class="eyebrow"><!-- TODO: copy -->◆ Ce qui est inclus</p>
+        <h2><!-- TODO: copy -->Les 6 piliers de l&rsquo;accompagnement</h2>
+      </div>
+      <div class="pilier-grid">
+        <div class="card pilier-card pilier-card--emphasis">
+          <svg class="icon icon--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="9" width="18" height="10" rx="1.5" />
+            <path d="M8 9V6h8v3" />
+            <line x1="3" y1="13" x2="21" y2="13" />
+          </svg>
+          <h3><!-- TODO: copy -->Tous les outils clients à ta main</h3>
+          <p><!-- TODO: copy -->Sous ta propre marque, tes clients ne voient jamais EP Coaching.</p>
+        </div>
+        <div class="card pilier-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="16" rx="1.5" />
+            <line x1="3" y1="9" x2="21" y2="9" />
+            <line x1="8" y1="9" x2="8" y2="20" />
+          </svg>
+          <h3><!-- TODO: copy -->Espace de création de contenu</h3>
+          <p><!-- TODO: copy -->Idées, scripts, inspirations centralisés pour construire ta propre marque.</p>
+        </div>
+        <div class="card pilier-card pilier-card--emphasis">
+          <svg class="icon icon--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="5" y="11" width="14" height="10" rx="1.5" />
+            <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+            <circle cx="12" cy="16" r="1.3" fill="currentColor" stroke="none" />
+          </svg>
+          <h3><!-- TODO: copy -->Cloisonnement total</h3>
+          <p><!-- TODO: copy -->Tes clients ne sont jamais visibles par un autre coach de la plateforme.</p>
+        </div>
+        <div class="card pilier-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="4" y1="20" x2="20" y2="20" />
+            <rect x="6" y="13" width="3" height="7" />
+            <rect x="11" y="9" width="3" height="11" />
+            <rect x="16" y="5" width="3" height="15" />
+          </svg>
+          <h3><!-- TODO: copy -->Dashboard business</h3>
+          <p><!-- TODO: copy -->Tes chiffres réels, ton MRR estimé, en un coup d&rsquo;œil.</p>
+        </div>
+        <div class="card pilier-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 8l10-4 10 4-10 4-10-4z" />
+            <path d="M6 10v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" />
+            <path d="M22 8v6" />
+          </svg>
+          <h3><!-- TODO: copy -->5 formations incluses</h3>
+          <p><!-- TODO: copy -->Utilisables directement avec tes propres clients.</p>
+        </div>
+        <div class="card pilier-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="1.5" />
+            <path d="M4 6l8 7 8-7" />
+          </svg>
+          <h3><!-- TODO: copy -->Communication centralisée</h3>
+          <p><!-- TODO: copy -->Messagerie, notifications, tout au même endroit pour toi et tes clients.</p>
+        </div>
       </div>
     </section>
 
@@ -101,35 +229,58 @@
          5. ACCOMPLISSEMENTS — 3 bénéfices
          ═══════════════════════════════════════════════════════════════ -->
     <section class="accomplissements">
-      <h2><!-- TODO: copy (titre de section) --></h2>
-      <div class="cards">
-        <div class="card"><!-- TODO: copy --></div>
-        <div class="card"><!-- TODO: copy --></div>
-        <div class="card"><!-- TODO: copy --></div>
+      <div class="split">
+        <div class="split-content">
+          <h2><!-- TODO: copy -->Ce que tu vas pouvoir accomplir</h2>
+        </div>
+        <ul class="diamond-list diamond-list--lg">
+          <li class="diamond-item">
+            <strong><!-- TODO: copy -->Un business qui tourne sans tout micro-manager</strong>
+            <!-- TODO: copy -->Des outils qui font le suivi à ta place, pas un tableur de plus à tenir à jour.
+          </li>
+          <li class="diamond-item">
+            <strong><!-- TODO: copy -->Une vraie structure</strong>
+            <!-- TODO: copy -->Pas juste une intuition qui marche certains mois et pas d&rsquo;autres.
+          </li>
+          <li class="diamond-item">
+            <strong><!-- TODO: copy -->Plus de temps pour ce qui fait vraiment grandir ton activité</strong>
+            <!-- TODO: copy -->Moins de temps perdu dans l&rsquo;administratif et le suivi manuel.
+          </li>
+        </ul>
       </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════
-         6. CTA FINAL — formulaire de préqualification business (pas
-            encore créé, placeholder) + fallback inscription gratuite
+         6. CTA FINAL — deux CTA, hiérarchie assumée. Principal : réserver
+            l'appel (placeholder préqualif business, câblé au prompt 2).
+            Secondaire, nettement plus discret : inscription gratuite à
+            l'app (.btn-cta-fallback, déjà traité en lien souligné dans
+            base.css depuis le prompt 4 — pas de nouveau style à créer).
          ═══════════════════════════════════════════════════════════════ -->
     <section class="cta-final" id="cta-final">
-      <h2><!-- TODO: copy --></h2>
-      <div class="form-slot">
-        <!-- TODO: emplacement formulaire de préqualification embarqué -->
-        <!-- ⚠ TODO-PREQUALIFICATION-BUSINESS : remplacer ce href par le
-             vrai formulaire de préqualification business une fois créé
-             (chantier séparé, n'existe pas encore). -->
-        <a href="#TODO-prequalification-business" class="btn-cta-primary">
-          <span>Postuler à l&rsquo;accompagnement<!-- TODO: copy définitive --></span>
-        </a>
-        <!-- CTA de secours, volontairement moins visible que le CTA
-             principal (voir .btn-cta-fallback dans business.css) : mène à
-             l'inscription gratuite à l'app en attendant le vrai
-             formulaire business. -->
-        <a href="https://ep-coaching.vercel.app/auth/client" class="btn-cta-fallback">
-          <span>Ou commence gratuitement sur l&rsquo;app<!-- TODO: copy définitive --></span>
-        </a>
+      <div class="cta-final-inner">
+        <span class="diamond diamond--lg" aria-hidden="true"></span>
+        <!-- TODO: copy finale — texte de calibrage -->
+        <h2>Prêt à construire un vrai business ?</h2>
+        <!-- TODO: copy finale — texte de calibrage -->
+        <p>Un accompagnement réel pour structurer ton activité, pas un programme de plus à essayer seul dans ton coin.</p>
+        <div class="form-slot">
+          <!-- TODO: emplacement formulaire de préqualification embarqué -->
+          <!-- ⚠ TODO-PREQUALIFICATION-BUSINESS : remplacer ce href par le
+               vrai formulaire de préqualification business une fois créé
+               (chantier séparé, n'existe pas encore). -->
+          <a href="#TODO-prequalification-business" class="btn-cta-primary btn-cta-primary--lg">
+            <span>Réserver mon appel<!-- TODO: copy définitive --></span>
+          </a>
+          <span class="btn-subtext"><!-- TODO: copy -->Réponse sous 48h, sans engagement</span>
+          <!-- CTA de secours, volontairement en retrait : mène à
+               l'inscription gratuite à l'app pour qui n'est pas encore
+               prêt à réserver un appel. Ne doit jamais concurrencer le
+               CTA principal ci-dessus. -->
+          <a href="https://ep-coaching.vercel.app/auth/client" class="btn-cta-fallback">
+            <span>Ou commence gratuitement sur l&rsquo;app<!-- TODO: copy définitive --></span>
+          </a>
+        </div>
       </div>
     </section>
 
