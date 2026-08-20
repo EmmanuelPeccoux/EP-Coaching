@@ -45,9 +45,66 @@ de vérifier Settings → Pages → Source sur GitHub directement.
 - [x] 5/15 — Page /physique/ entièrement designée (bio, critères, accompagnement, 6 piliers, accomplissements, CTA final)
 - [x] 6/15 — Page /business/ designée (même système, icônes propres au contexte, CTA final à double hiérarchie) + passe de cohérence finale, **phase design terminée**
 - [x] 7/15 — Fondations animation : Lenis calibré, système de reveal réutilisable, entrée homepage orchestrée, entrée légère physique/business, utilitaire de découpe de texte (spans imbriqués préservés)
-- [ ] 8/15 à 15/15 — animations propres à chaque section, contenu final, déploiement
+- [x] 8/15 — Animations par section : titres en mots, cards en cascade, bio/portrait séquencés, CTA final à traitement renforcé, hover bifurcation, header au scroll — **phase animation de base terminée**
+- [ ] 9/15 à 15/15 — WebGL (si ça sert), contenu final, déploiement
 
-## Animations (depuis le prompt 7/15)
+## Animations par section (depuis le prompt 8/15)
+
+**Titres H2** : découpés en mots via `splitText()` (spans stylisés
+préservés), stagger court (35ms), déclenché à 85% du viewport. Un seul
+mécanisme pour tous les H2 du site, y compris celui du CTA final (qui
+reçoit juste une durée/easing plus marqués pour "plus de présence",
+sans jamais dupliquer le système). Le H2 de bifurcation homepage passe
+par la séquence d'entrée au chargement plutôt que par le scroll.
+
+**Cards en cascade** : stagger réduit à 80ms (dans la fourchette 60-100ms
+demandée), durée de groupe raccourcie à 0.6s pour que la grille de 6
+piliers reste sous 1s au total (5 × 0.08 + 0.6 = 1.0s pile). Stagger dans
+l'ordre du DOM = ordre de lecture naturel, rien à recalculer.
+
+**Bio/portrait** : timeline unique en 3 temps (portrait, puis texte avec
+léger décalage, puis les 3 compétences avec leur propre stagger) plutôt
+qu'un seul fade-up comme au prompt 7. Parallaxe très subtile sur le
+portrait (30px sur toute la traversée de la section, `scrub`) — sur un
+élément intérieur séparé de `.portrait` pour ne jamais entrer en conflit
+avec sa propre animation d'entrée.
+
+**CTA final** : séquence dédiée (pas le système générique), durée et
+easing plus marqués (power3.out, 1s). Sur `/business/`, le CTA de secours
+est ajouté à la timeline **après** le groupe principal, sans overlap :
+garantit qu'il ne peut jamais apparaître avant le CTA principal. Pas de
+pulsation du glow au repos, jugé "cheap" pour un site qui évite
+justement les patterns génériques (le prompt autorisait explicitement ce
+choix).
+
+**Bifurcation homepage** : au hover desktop (`hover:hover` et
+`pointer:fine` uniquement), le bloc survolé se met en avant et l'autre
+s'estompe. Aucun effet dépendant du hover sur tactile.
+
+**Header au scroll** : `position: sticky` ajouté (prérequis manquant pour
+que l'effet ait un sens), padding réduit et fond qui se densifie passé
+80px de scroll.
+
+**Vélocité de scroll** : pas d'effet de skew ajouté dans cette passe — le
+prompt autorise explicitement à ne pas le faire si le résultat n'est pas
+vérifiable, et un skew dynamique ne peut pas se juger sans un vrai
+navigateur pour voir un scroll rapide en conditions réelles.
+`window.lenisVelocity` reste disponible si l'effet est retenté plus tard.
+
+**Vrai bug trouvé et corrigé avant ce commit**, pas en relecture mais en
+testant réellement la logique (jsdom, sans navigateur disponible ici) :
+le H2 du CTA final était ciblé deux fois — une fois par le système
+générique de titres (ses mots), une fois par `initCtaFinalReveal` (le
+bloc entier). Deux `ScrollTrigger` distincts sur le même élément. Corrigé
+en retirant le H2 de `initCtaFinalReveal` et en lui donnant seulement une
+intensité différente dans le système générique. Vérifié après coup avec
+une simulation complète de `main.js` (gsap/ScrollTrigger mockés) contre
+les 3 pages réelles : 14 ScrollTrigger sur physique/business, 1 sur la
+home, et surtout **51 à 53 éléments mis à `opacity:0` ont bien tous une
+contrepartie qui les ramène à `opacity:1`** — aucun élément qui resterait
+invisible pour de bon.
+
+## Animations, fondations (prompt 7/15)
 
 **Lenis** (`lenis-init.js`) : durée 1.0s (plus réactif que le défaut 1.2s),
 `syncTouch: false` pour garder le momentum tactile natif iOS. Désactivé
@@ -56,21 +113,22 @@ lue dans `gsap.ticker`, jamais dans l'event `scroll` (piège déjà documenté
 au prompt 1, toujours respecté).
 
 **Reveal au scroll** (`main.js`) : `[data-reveal]` (élément isolé) et
-`[data-reveal-group]` (anime les enfants directs avec stagger) posés sur
-`/physique/` et `/business/` — critères, méthode, 6 piliers,
-accomplissements, CTA final. Fade + translateY(28px), déclenché à 83% du
-viewport, `once: true`. La homepage n'en a pas : hero et bifurcation
-passent par la séquence d'entrée dédiée à la place.
+`[data-reveal-group]` (anime les enfants directs avec stagger) — posé au
+prompt 7, affiné au prompt 8 (voir plus haut : les H2 en sont exclus, le
+CTA final est passé à son propre système). Fade + translateY(28px),
+déclenché à 83% du viewport, `once: true`. La homepage n'en a pas : hero
+et bifurcation passent par la séquence d'entrée dédiée à la place.
 
 **Entrée de page** : homepage = timeline orchestrée (logo → H1 → cadre VSL
-→ bifurcation, ~1.3s, sous la limite de 1,5s demandée). `/physique/` et
-`/business/` = un seul fade-up sur la section bio, sans séquence à étapes.
+→ bifurcation, ~1.4s, sous la limite de 1,5s demandée). `/physique/` et
+`/business/` = timeline légère sur la bio (voir plus haut), sans
+séquence longue.
 
-**Découpe de texte** (`splitText()`, exposée sur `window`) : préparée pour
-le prompt 8, pas encore appliquée. Teste réellement (jsdom, pas juste
-lu) contre un titre avec un mot stylisé imbriqué (`<span class="accent">`)
-: le span survit intact, seul son contenu est découpé en unités
-animables — c'était le piège explicitement signalé dans le prompt.
+**Découpe de texte** (`splitText()`, exposée sur `window`) : construite et
+testée au prompt 7 (jsdom, pas juste relu), appliquée pour de vrai aux
+titres H2 au prompt 8. Contre un titre avec un mot stylisé imbriqué
+(`<span class="accent">`) : le span survit intact, seul son contenu est
+découpé en unités animables — c'était le piège explicitement signalé.
 
 **Résilience CDN** : si GSAP ou ScrollTrigger ne charge pas (réseau, ad
 blocker), traité exactement comme `prefers-reduced-motion` — aucune

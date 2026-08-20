@@ -242,12 +242,28 @@ li.diamond-item::before {
 /* ── Header & footer communs aux 3 pages ──────────────────────────────── */
 
 header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--space-sm);
   padding: var(--space-md) var(--space-md);
+  background: transparent;
+  transition: padding 0.3s ease, background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+/* Compactage au scroll (prompt 8/15, voir initHeaderScroll dans main.js) :
+   padding réduit + fond qui se densifie passé 80px de scroll. sticky ci-
+   dessus est le prérequis (un header qui défile avec la page n'aurait
+   jamais l'occasion de se compacter sous les yeux du visiteur). */
+header.header--scrolled {
+  padding-top: var(--space-xs);
+  padding-bottom: var(--space-xs);
+  background: color-mix(in srgb, var(--noir-profond) 88%, transparent);
+  backdrop-filter: blur(12px);
 }
 
 .header-switch a {

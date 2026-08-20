@@ -161,6 +161,26 @@ header .logo-mark {
   transform: translateY(-4px);
 }
 
+/* Le choix se matérialise au hover : le bloc survolé se met en avant,
+   l'autre s'estompe légèrement (prompt 8/15). Réservé aux pointeurs fins
+   avec vrai hover (souris) — sur tactile, "ça rend mal ou frustrant" est
+   explicitement le risque signalé dans le prompt, donc jamais activé là
+   où le hover peut rester bloqué après un tap. Les deux blocs restent
+   pleinement lisibles par défaut, y compris sur mobile. */
+@media (hover: hover) and (pointer: fine) {
+  .bifurcation .blocs:hover .bloc {
+    opacity: 0.55;
+    transition: opacity 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  /* Même spécificité que la règle ci-dessus : doit rester après elle
+     dans le fichier pour gagner sur le bloc réellement survolé. */
+  .bifurcation .blocs .bloc:hover {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.015);
+  }
+}
+
 /* .diamond est inline-block par défaut (voir base.css) : explicitement
    passé en block ici, sinon margin-inline:auto ne centrerait rien. */
 .bifurcation .bloc .diamond {
