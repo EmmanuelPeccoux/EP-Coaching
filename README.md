@@ -10,7 +10,15 @@ ScrollTrigger, Lenis 1.1.14, Three.js 0.152.2 (UMD).
 
 ## Déploiement
 
-GitHub Pages, auto-deploy sur push vers `main`.
+GitHub Pages, auto-deploy sur push vers `main`. Servi actuellement sous
+`https://emmanuelpeccoux.github.io/EP-Coaching/` (pas de domaine
+personnalisé, aucun `CNAME` dans le repo). **Vérifié en conditions
+réelles** (pas seulement supposé) : après le push du prompt 2, un `curl`
+sur cette URL renvoyait bien le nouveau contenu quelques minutes plus
+tard, sans action manuelle. Pas d'accès aux settings GitHub Pages du repo
+depuis cet environnement (`gh` CLI absent, pas de connecteur GitHub) —
+si un jour le déploiement semble ne plus se faire, le premier réflexe est
+de vérifier Settings → Pages → Source sur GitHub directement.
 
 ## Structure
 
@@ -19,6 +27,9 @@ GitHub Pages, auto-deploy sur push vers `main`.
 ├── index.html          → Homepage courte (VSL + bifurcation)
 ├── physique/            → Chemin "progresser en musculation"
 ├── business/            → Chemin "scaler son business de coach"
+├── 404.html              → Page d'erreur, lien de retour en URL absolue (voir commentaire dans le fichier)
+├── robots.txt / sitemap.xml
+├── favicon.svg / favicon.ico / apple-touch-icon.png → placeholder carré rouge + "EP"
 └── assets/
     ├── css/              → base.css (variables/reset) + 1 fichier par page
     ├── js/               → lenis-init.js (setup smooth scroll) + main.js
@@ -29,7 +40,8 @@ GitHub Pages, auto-deploy sur push vers `main`.
 
 - [x] 1/15 — Structure (squelette HTML, arborescence, variables CSS de base)
 - [x] 2/15 — Navigation, footer, SEO, câblage des CTA
-- [ ] 3/15 à 15/15 — design, animations, contenu, déploiement final
+- [x] 3/15 — Clôture structure : 404, robots.txt/sitemap.xml, favicon, preconnect/defer, accessibilité de base
+- [ ] 4/15 à 15/15 — design, animations, contenu, déploiement final
 
 ## Liens externes câblés
 
@@ -38,6 +50,14 @@ GitHub Pages, auto-deploy sur push vers `main`.
 - Préqualification physique : https://ep-coaching-formulaires.vercel.app/prequalification
 - Préqualification business : pas encore créée, placeholder `#TODO-prequalification-business` dans `business/index.html`
 - Fallback business (inscription gratuite) : https://ep-coaching.vercel.app/auth/client
+
+## Accessibilité
+
+Un seul `<h1>` par page (bio pour physique/business, hero pour la home),
+`<h2>` sur chaque section, pas de saut de niveau. Pas encore de balise
+`<img>` dans le HTML (les photos dans `assets/images/` ne sont pas
+encore intégrées) : rien à mettre en `alt` pour l'instant, prévoir un
+texte descriptif réel à l'intégration de chaque image en phase design/contenu.
 
 ## Règles de contenu non négociables
 

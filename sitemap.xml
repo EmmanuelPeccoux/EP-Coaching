@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TODO: mettre à jour les URLs si un domaine personnalisé est configuré (CNAME) -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://emmanuelpeccoux.github.io/EP-Coaching/</loc>
+  </url>
+  <url>
+    <loc>https://emmanuelpeccoux.github.io/EP-Coaching/physique/</loc>
+  </url>
+  <url>
+    <loc>https://emmanuelpeccoux.github.io/EP-Coaching/business/</loc>
+  </url>
+</urlset>

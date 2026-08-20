@@ -16,13 +16,27 @@
 
   <meta name="theme-color" content="#E01E1E" />
 
+  <!-- Favicon — placeholder carré rouge + "EP" en attendant le vrai logo -->
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+
+  <!-- Préconnexions — CDN des libs + Google Fonts (Montserrat/Playfair Display) -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;900&family=Playfair+Display:ital,wght@1,700&display=swap" />
+
   <link rel="stylesheet" href="../assets/css/base.css" />
   <link rel="stylesheet" href="../assets/css/business.css" />
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+  <!-- defer partout : l'ordre relatif des scripts deferred est conservé,
+       la chaîne GSAP → ScrollTrigger → Lenis → lenis-init.js → main.js
+       reste garantie sans bloquer le rendu. -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js" defer></script>
 </head>
 <body>
 
@@ -40,14 +54,14 @@
             dupliquée depuis /physique/ avec un accent différent)
          ═══════════════════════════════════════════════════════════════ -->
     <section class="bio">
-      <!-- TODO: copy -->
+      <h1><!-- TODO: copy --></h1>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════
          2. CRITÈRES — "est-ce fait pour toi", 3 cards
          ═══════════════════════════════════════════════════════════════ -->
     <section class="criteres">
-      <!-- TODO: copy (titre de section) -->
+      <h2><!-- TODO: copy (titre de section) --></h2>
       <div class="cards">
         <div class="card"><!-- TODO: copy --></div>
         <div class="card"><!-- TODO: copy --></div>
@@ -60,7 +74,7 @@
             (ancre vers la section CTA final de cette même page)
          ═══════════════════════════════════════════════════════════════ -->
     <section class="accompagnement">
-      <!-- TODO: copy -->
+      <h2><!-- TODO: copy --></h2>
       <div class="cta-slot">
         <a href="#cta-final" class="btn-cta-primary">
           <span>Accompagnement 1-to-1<!-- TODO: copy définitive --></span>
@@ -72,7 +86,7 @@
          4. PILIERS — 6 cards
          ═══════════════════════════════════════════════════════════════ -->
     <section class="piliers">
-      <!-- TODO: copy (titre de section) -->
+      <h2><!-- TODO: copy (titre de section) --></h2>
       <div class="cards">
         <div class="card"><!-- TODO: copy --></div>
         <div class="card"><!-- TODO: copy --></div>
@@ -87,7 +101,7 @@
          5. ACCOMPLISSEMENTS — 3 bénéfices
          ═══════════════════════════════════════════════════════════════ -->
     <section class="accomplissements">
-      <!-- TODO: copy (titre de section) -->
+      <h2><!-- TODO: copy (titre de section) --></h2>
       <div class="cards">
         <div class="card"><!-- TODO: copy --></div>
         <div class="card"><!-- TODO: copy --></div>
@@ -100,7 +114,7 @@
             encore créé, placeholder) + fallback inscription gratuite
          ═══════════════════════════════════════════════════════════════ -->
     <section class="cta-final" id="cta-final">
-      <!-- TODO: copy -->
+      <h2><!-- TODO: copy --></h2>
       <div class="form-slot">
         <!-- TODO: emplacement formulaire de préqualification embarqué -->
         <!-- ⚠ TODO-PREQUALIFICATION-BUSINESS : remplacer ce href par le
@@ -131,7 +145,7 @@
     <a href="https://instagram.com/santamariasanchez_" target="_blank" rel="noopener noreferrer" class="footer-instagram">Instagram</a>
   </footer>
 
-  <script src="../assets/js/lenis-init.js"></script>
-  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/lenis-init.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
 </body>
 </html>
