@@ -28,7 +28,16 @@ GitHub Pages, auto-deploy sur push vers `main`.
 ## Suivi des prompts
 
 - [x] 1/15 — Structure (squelette HTML, arborescence, variables CSS de base)
-- [ ] 2/15 à 15/15 — design, animations, contenu, déploiement final
+- [x] 2/15 — Navigation, footer, SEO, câblage des CTA
+- [ ] 3/15 à 15/15 — design, animations, contenu, déploiement final
+
+## Liens externes câblés
+
+- Instagram : https://instagram.com/santamariasanchez_
+- Pages légales (temporaires, pointent vers l'app) : https://ep-coaching.vercel.app/legal/{cgu,cgv,confidentialite}
+- Préqualification physique : https://ep-coaching-formulaires.vercel.app/prequalification
+- Préqualification business : pas encore créée, placeholder `#TODO-prequalification-business` dans `business/index.html`
+- Fallback business (inscription gratuite) : https://ep-coaching.vercel.app/auth/client
 
 ## Règles de contenu non négociables
 
