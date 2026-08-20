@@ -14,6 +14,17 @@
    on ne touche pas du tout l'état initial, soit on l'affiche directement
    dans son état final sans animation. Jamais d'invisible qui dépend d'une
    animation qu'on vient justement de désactiver.
+
+   Règle de retrait (prompt 9/15) : repassé sur chaque effet du fichier en
+   se demandant s'il sert vraiment la lecture. Aucun n'a été retiré — les
+   reveals de titre/cards répondent à une demande explicite du prompt 8,
+   la parallaxe portrait/le compactage du header sont volontairement
+   discrets (jamais une "attraction"), et les 2-3 vrais moments du site
+   (entrée homepage, choix de la bifurcation, arrivée au CTA final)
+   restent peu nombreux et délibérés plutôt qu'une accumulation d'effets.
+   Le seul retrait de cette passe est plus radical qu'un simple réglage :
+   Three.js entier, voir le volet WebGL documenté dans le commit et le
+   README plutôt que dans ce fichier (rien ici n'en dépendait).
    ═══════════════════════════════════════════════════════════════════════ */
 
 // Dégradation propre si un CDN ne charge pas (coupure réseau, bloqueur de
@@ -303,10 +314,67 @@ function initHeaderScroll() {
   const header = document.querySelector("header");
   if (!header) return;
 
+  // Note performance (prompt 9/15) : padding/background-color/backdrop-
+  // filter ne sont pas transform/opacity, donc pas "gratuits" au sens
+  // strict — mais c'est un toggle de classe déclenché UNE fois par
+  // franchissement de seuil, jamais par frame de scroll. Le layout
+  // thrashing que la règle "transform/opacity uniquement" cherche à
+  // éviter concerne les propriétés animées en continu (des dizaines de
+  // fois par seconde), pas un changement d'état ponctuel — même les sites
+  // les plus optimisés compactent leur header ainsi.
   ScrollTrigger.create({
     start: 80,
     onEnter: () => header.classList.add("header--scrolled"),
     onLeaveBack: () => header.classList.remove("header--scrolled"),
+  });
+}
+
+/* ── Navigation par ancre ──────────────────────────────────────────────── */
+/* Le seul lien d'ancre du site (#cta-final, bouton "Accompagnement 1-to-1"
+   au milieu de /physique/ et /business/) passe par Lenis pour rester
+   cohérent avec le smooth scroll du reste du site plutôt qu'un saut natif
+   instantané. `click` couvre le clic souris ET l'activation clavier
+   (Entrée/Espace sur un lien focus déclenche le même événement `click`
+   natif, rien à coder en plus pour l'accessibilité) — exigence explicite
+   du prompt 9 : Lenis ne doit jamais empêcher la navigation par ancre au
+   clavier, donc jamais intercepté avec autre chose qu'un vrai handler de
+   clic standard. */
+
+function initAnchorScroll() {
+  if (prefersReducedMotion || !window.lenis) return; // saut natif instantané prend le relais, jamais bloqué
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const id = link.getAttribute("href").slice(1);
+      const target = id ? document.getElementById(id) : null;
+      if (!target) return;
+      e.preventDefault();
+      window.lenis.scrollTo(target);
+    });
+  });
+}
+
+/* ── Robustesse ScrollTrigger (prompt 9/15) ───────────────────────────── */
+/* Le redimensionnement de fenêtre est déjà géré nativement par
+   ScrollTrigger (il écoute resize et recalcule tout seul, rien à ajouter
+   ici). Deux cas réels non couverts par défaut :
+   1. Google Fonts charge en asynchrone (display=swap) : le texte rendu
+      dans la police de repli peut avoir une hauteur différente de la
+      police finale, faussant les positions de déclenchement calculées
+      avant que la vraie police n'arrive. document.fonts.ready règle ça.
+   2. Retour arrière navigateur : certains navigateurs restaurent la page
+      depuis le bfcache (event pageshow, persisted:true) sans forcément
+      recalculer les positions ScrollTrigger par rapport au scroll
+      restauré — un refresh() à ce moment évite tout état incohérent. */
+
+function initScrollTriggerRefresh() {
+  if (!animationsAvailable) return;
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => ScrollTrigger.refresh());
+  }
+
+  window.addEventListener("pageshow", (e) => {
+    if (e.persisted) ScrollTrigger.refresh();
   });
 }
 
@@ -381,3 +449,5 @@ initReveals();
 initPortraitParallax();
 initCtaFinalReveal();
 initHeaderScroll();
+initAnchorScroll();
+initScrollTriggerRefresh();

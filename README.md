@@ -46,7 +46,71 @@ de vérifier Settings → Pages → Source sur GitHub directement.
 - [x] 6/15 — Page /business/ designée (même système, icônes propres au contexte, CTA final à double hiérarchie) + passe de cohérence finale, **phase design terminée**
 - [x] 7/15 — Fondations animation : Lenis calibré, système de reveal réutilisable, entrée homepage orchestrée, entrée légère physique/business, utilitaire de découpe de texte (spans imbriqués préservés)
 - [x] 8/15 — Animations par section : titres en mots, cards en cascade, bio/portrait séquencés, CTA final à traitement renforcé, hover bifurcation, header au scroll — **phase animation de base terminée**
-- [ ] 9/15 à 15/15 — WebGL (si ça sert), contenu final, déploiement
+- [x] 9/15 — WebGL évalué et non retenu (raisons ci-dessous), scroll accessible vers les ancres, robustesse ScrollTrigger (polices/bfcache), audit "règle de retrait", passe mobile 375px — **phase animation terminée**
+- [ ] 10/15 à 15/15 — Contenu final, copywriting, déploiement
+
+## WebGL : évalué, non implémenté (prompt 9/15)
+
+Décision explicite de ne pas ajouter Three.js, avec des chiffres à l'appui
+plutôt qu'une impression :
+
+- Poids mesuré via CDN (`curl`) : Three.js 0.152.2 seul = **633 338 octets**,
+  soit environ 5x le poids cumulé de GSAP + ScrollTrigger + Lenis
+  (72 214 + 43 380 + 12 790 = **128 384 octets**). Un budget disproportionné
+  pour un effet que rien dans le brief ne rend indispensable.
+- Ce projet a déjà deux précédents WebGL ratés signalés explicitement dans
+  le prompt lui-même — un signal fort que le rapport risque/bénéfice est
+  mauvais ici, particulièrement sans navigateur réel dans cet environnement
+  pour vérifier un rendu shader/particules ou une perf mobile (l'iPhone est
+  l'appareil principal visé).
+- Le hero atteint déjà un rendu "cinématique" par CSS seul (diamant fantôme
+  en filigrane, dégradé radial, entrée orchestrée) : WebGL aurait ajouté du
+  risque sans combler un manque réel.
+- Le prompt autorisait explicitement à ne pas le faire si la vérification
+  n'est pas possible. Script `<script three@0.152.2>` retiré des 3 pages
+  (`sed -i '/three@0.152.2/d'`), confirmé par grep : plus aucune trace dans
+  le repo, la chaîne GSAP → ScrollTrigger → Lenis reste intacte partout.
+
+## Polish (prompt 9/15)
+
+**Scroll vers les ancres** (`initAnchorScroll`) : les liens `href="#..."`
+passent par `lenis.scrollTo()` au lieu du saut natif abrupt, cohérent avec
+le smooth scroll du reste du site. Reste un vrai `<a>` avec `href` réel
+(navigable au clavier, fonctionne sans JS) — seul le comportement de scroll
+est intercepté, jamais l'accessibilité du lien.
+
+**Robustesse ScrollTrigger** (`initScrollTriggerRefresh`) : un
+`ScrollTrigger.refresh()` après `document.fonts.ready` (les polices
+Google Fonts chargées en `swap` peuvent changer la hauteur du texte après
+le calcul initial des triggers) et un autre sur `pageshow` avec
+`persisted: true` (retour arrière/avant depuis le cache bfcache, où le JS
+ne se réexécute pas mais les positions de scroll doivent rester justes).
+
+**Vrai bug de test trouvé et corrigé avant ce commit**, pas dans le code
+mais dans le test lui-même : la première vérification jsdom de ces deux
+comportements rapportait un échec (`refreshCalls: 0`), alors que le code
+était correct — le test retournait un **instantané** du compteur au moment
+du `return`, pas une référence vivante mise à jour par les closures
+asynchrones ultérieures. Un test isolé corrigé confirme que les deux
+déclencheurs appellent bien `ScrollTrigger.refresh()` comme prévu. Retenu
+ici comme leçon de méthode plutôt que caché : ça aurait pu passer pour un
+"bug" alors que c'était le harnais de test qui mentait.
+
+**Audit "règle de retrait"** : repassage sur chaque effet du fichier en se
+demandant s'il sert vraiment la lecture. Aucun effet individuel retiré —
+chacun répond à une demande explicite (prompt 8) ou reste volontairement
+discret (parallaxe portrait, compactage du header). Le retrait réel de
+cette passe est Three.js dans son ensemble, plus radical qu'un simple
+réglage d'intensité.
+
+**Repasse mobile 375px** : toutes les grilles/flex du site passent en
+colonne unique par défaut et ne basculent en plusieurs colonnes qu'au-delà
+de 768px/900px ; aucune largeur fixe ne dépasse quelques `rem` (icônes,
+diamants) ; le seul débordement volontaire (diamant fantôme du hero,
+`min(75vw, 760px)` tourné à 45°) est doublement contenu — `overflow:hidden`
+sur `.hero-vsl` et sur le `body`. Analyse statique (pas de navigateur réel
+disponible ici), cohérente avec la vérification jsdom qui confirme que les
+51 à 53 éléments mis à `opacity:0` par page reviennent bien à `opacity:1`.
 
 ## Animations par section (depuis le prompt 8/15)
 
