@@ -94,3 +94,72 @@ h4 {
   font-style: italic;
   font-weight: 700;
 }
+
+/* ── Header & footer communs aux 3 pages ──────────────────────────────── */
+/* Structure uniquement (prompt 2/15) : pas d'ombre, pas de gradient, le
+   style visuel poussé arrive dans un prompt suivant. */
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.header-switch a {
+  font-size: 0.85rem;
+  border-bottom: 1px solid var(--rouge-fonce);
+  padding-bottom: 2px;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2.5rem 1.5rem;
+  border-top: 1px solid var(--rouge-tres-fonce);
+  text-align: center;
+}
+
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 0.85rem;
+}
+
+.footer-legal a,
+.footer-instagram {
+  opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+  footer {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+/* ── Boutons CTA communs ───────────────────────────────────────────────── */
+
+.btn-cta-primary {
+  display: inline-block;
+  padding: 1rem 1.75rem;
+  background: var(--rouge-principal);
+  color: var(--blanc-casse);
+  font-weight: 700;
+}
+
+.btn-cta-fallback {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  border-bottom: 1px solid var(--rouge-fonce);
+}

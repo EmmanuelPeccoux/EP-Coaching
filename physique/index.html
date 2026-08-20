@@ -3,8 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EP Coaching · Physique</title>
-  <!-- TODO: meta description (copy finale à venir) -->
+  <title>EP Coaching · Coaching musculation et transformation physique</title>
+  <meta name="description" content="Un accompagnement 1-to-1 pour progresser durablement en musculation, entraînement et nutrition adaptés à ta réalité." />
+  <!-- TODO: affiner titre/description en phase contenu -->
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="EP Coaching · Coaching musculation et transformation physique" />
+  <meta property="og:description" content="Un accompagnement 1-to-1 pour progresser durablement en musculation, entraînement et nutrition adaptés à ta réalité." />
+  <meta property="og:type" content="website" />
+  <!-- TODO: mettre à jour og:url si un domaine personnalisé est configuré (CNAME, prompt 1) -->
+  <meta property="og:url" content="https://emmanuelpeccoux.github.io/EP-Coaching/physique/" />
+
+  <meta name="theme-color" content="#E01E1E" />
 
   <link rel="stylesheet" href="../assets/css/base.css" />
   <link rel="stylesheet" href="../assets/css/physique.css" />
@@ -17,7 +27,10 @@
 <body>
 
   <header>
-    <a href="../" class="logo">EP</a>
+    <a href="../" class="logo">EP COACHING<!-- TODO: remplacer par le vrai logo PNG --></a>
+    <nav class="header-switch" aria-label="Changer de parcours">
+      <a href="../business/">Voir l&rsquo;autre accompagnement<!-- TODO: copy définitive --></a>
+    </nav>
   </header>
 
   <main>
@@ -44,11 +57,14 @@
 
     <!-- ═══════════════════════════════════════════════════════════════
          3. ACCOMPAGNEMENT — accompagnement 1-to-1 + emplacement CTA
+            (ancre vers la section CTA final de cette même page)
          ═══════════════════════════════════════════════════════════════ -->
     <section class="accompagnement">
       <!-- TODO: copy -->
       <div class="cta-slot">
-        <!-- TODO: bouton CTA -->
+        <a href="#cta-final" class="btn-cta-primary">
+          <span>Accompagnement 1-to-1<!-- TODO: copy définitive --></span>
+        </a>
       </div>
     </section>
 
@@ -82,18 +98,27 @@
     <!-- ═══════════════════════════════════════════════════════════════
          6. CTA FINAL — formulaire de préqualification + lien Calendly
          ═══════════════════════════════════════════════════════════════ -->
-    <section class="cta-final">
+    <section class="cta-final" id="cta-final">
       <!-- TODO: copy -->
       <div class="form-slot">
-        <!-- TODO: formulaire de préqualification -->
-        <!-- TODO: lien Calendly -->
+        <!-- TODO: emplacement formulaire de préqualification embarqué -->
+        <a href="https://ep-coaching-formulaires.vercel.app/prequalification" class="btn-cta-primary">
+          <span>Commencer ma préqualification<!-- TODO: copy définitive --></span>
+        </a>
+        <!-- TODO: lien Calendly (pas encore câblé, prompt à venir) -->
       </div>
     </section>
 
   </main>
 
   <footer>
-    <!-- TODO: liens légaux -->
+    <p class="footer-brand">EP Coaching</p>
+    <nav class="footer-legal" aria-label="Liens légaux">
+      <a href="https://ep-coaching.vercel.app/legal/cgu" target="_blank" rel="noopener noreferrer">CGU</a>
+      <a href="https://ep-coaching.vercel.app/legal/cgv" target="_blank" rel="noopener noreferrer">CGV</a>
+      <a href="https://ep-coaching.vercel.app/legal/confidentialite" target="_blank" rel="noopener noreferrer">Confidentialité</a>
+    </nav>
+    <a href="https://instagram.com/santamariasanchez_" target="_blank" rel="noopener noreferrer" class="footer-instagram">Instagram</a>
   </footer>
 
   <script src="../assets/js/lenis-init.js"></script>
