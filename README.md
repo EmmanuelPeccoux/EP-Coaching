@@ -44,7 +44,39 @@ de vérifier Settings → Pages → Source sur GitHub directement.
 - [x] 4/15 — Système de design (tokens, typo, boutons, cards, motif diamant) + application complète au hero + bifurcation
 - [x] 5/15 — Page /physique/ entièrement designée (bio, critères, accompagnement, 6 piliers, accomplissements, CTA final)
 - [x] 6/15 — Page /business/ designée (même système, icônes propres au contexte, CTA final à double hiérarchie) + passe de cohérence finale, **phase design terminée**
-- [ ] 7/15 à 15/15 — animations, contenu final, déploiement
+- [x] 7/15 — Fondations animation : Lenis calibré, système de reveal réutilisable, entrée homepage orchestrée, entrée légère physique/business, utilitaire de découpe de texte (spans imbriqués préservés)
+- [ ] 8/15 à 15/15 — animations propres à chaque section, contenu final, déploiement
+
+## Animations (depuis le prompt 7/15)
+
+**Lenis** (`lenis-init.js`) : durée 1.0s (plus réactif que le défaut 1.2s),
+`syncTouch: false` pour garder le momentum tactile natif iOS. Désactivé
+entièrement (`lenis.stop()`) si `prefers-reduced-motion`. Vélocité toujours
+lue dans `gsap.ticker`, jamais dans l'event `scroll` (piège déjà documenté
+au prompt 1, toujours respecté).
+
+**Reveal au scroll** (`main.js`) : `[data-reveal]` (élément isolé) et
+`[data-reveal-group]` (anime les enfants directs avec stagger) posés sur
+`/physique/` et `/business/` — critères, méthode, 6 piliers,
+accomplissements, CTA final. Fade + translateY(28px), déclenché à 83% du
+viewport, `once: true`. La homepage n'en a pas : hero et bifurcation
+passent par la séquence d'entrée dédiée à la place.
+
+**Entrée de page** : homepage = timeline orchestrée (logo → H1 → cadre VSL
+→ bifurcation, ~1.3s, sous la limite de 1,5s demandée). `/physique/` et
+`/business/` = un seul fade-up sur la section bio, sans séquence à étapes.
+
+**Découpe de texte** (`splitText()`, exposée sur `window`) : préparée pour
+le prompt 8, pas encore appliquée. Teste réellement (jsdom, pas juste
+lu) contre un titre avec un mot stylisé imbriqué (`<span class="accent">`)
+: le span survit intact, seul son contenu est découpé en unités
+animables — c'était le piège explicitement signalé dans le prompt.
+
+**Résilience CDN** : si GSAP ou ScrollTrigger ne charge pas (réseau, ad
+blocker), traité exactement comme `prefers-reduced-motion` — aucune
+section ne dépend de ces libs pour redevenir visible. Repris de l'exigence
+déjà documentée sur l'ancienne version de ce site ("tout dégrade
+proprement si les CDN ne chargent pas").
 
 ## Système de design (depuis le prompt 4/15)
 

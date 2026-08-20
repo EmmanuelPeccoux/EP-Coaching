@@ -13,11 +13,22 @@ gsap.registerPlugin(ScrollTrigger);
 // du navigateur prend le relais, ScrollTrigger continue de fonctionner
 // normalement dessus (il ne dépend pas de Lenis pour exister).
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+// Exposé globalement : main.js (reveals, timelines d'entrée) s'appuie sur
+// la même valeur plutôt que de refaire le matchMedia de son côté — une
+// seule source de vérité, jamais de risque de désync entre les deux.
+window.prefersReducedMotion = prefersReducedMotion;
 
 const lenis = new Lenis({
-  duration: 1.2,
+  // 1s plutôt que le 1.2s par défaut : reste premium sans donner
+  // l'impression de patiner, cf. retour explicite "réactif, pas mou".
+  duration: 1.0,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   smoothWheel: !prefersReducedMotion,
+  // Le tactile garde son momentum natif iOS (déjà excellent) plutôt que
+  // d'être repris par le lissage Lenis, pensé pour la molette souris —
+  // Emmanuel consulte principalement sur iPhone, un scroll tactile
+  // "lissé artificiellement" se sentirait pire que le natif, pas mieux.
+  syncTouch: false,
 });
 
 if (prefersReducedMotion) {
