@@ -39,7 +39,10 @@
 <body>
 
   <header>
-    <a href="../" class="logo">EP COACHING<!-- TODO: remplacer par le vrai logo PNG --></a>
+    <!-- LOGO : voir le commentaire détaillé dans index.html (recherché
+         dans tout le repo et son historique git, introuvable, pas
+         fabriqué). Fichier attendu : assets/images/logo.png. -->
+    <a href="../" class="logo">EP COACHING</a>
     <nav class="header-switch" aria-label="Changer de parcours">
       <a href="../business/">Voir l&rsquo;autre accompagnement</a>
     </nav>
@@ -51,15 +54,25 @@
          1. BIO — bio/crédibilité (section commune aux deux chemins,
             sera dupliquée avec un accent différent en business.css)
 
-         Portrait en placeholder volontairement : aucune photo du repo
-         (assets/images/) n'est jugée appropriée pour ce traitement public
-         (photos personnelles/casual, pas des portraits pro) — voir le
-         message de commit pour le détail de cette décision.
+         Portrait en placeholder volontairement (revérifié au prompt 12/15,
+         les 25 photos de assets/images/ passées en revue une par une) :
+         aucune n'est une photo posée/professionnelle (selfies miroir,
+         photos de progression, tenue de sport) — pas le traitement adapté
+         à un portrait public en tête de page. Sujet mineur (voir contexte
+         projet) : le choix de LA photo publiée publiquement revient à
+         Santamaria/son entourage, pas une sélection unilatérale parmi des
+         photos personnelles existantes.
+         Fichier attendu quand la photo sera fournie : assets/images/portrait.jpg
+         (+ portrait.webp si fourni en double format), ratio 4:5 (comme
+         .portrait ci-dessous), au moins 1000×1250px source pour rester
+         net en retina. Bandes noires à rogner, tout logo/watermark tiers
+         à retirer avant intégration (règles du prompt 12/15).
          ═══════════════════════════════════════════════════════════════ -->
     <section class="bio">
       <div class="split">
         <div class="portrait">
-          <!-- TODO: remplacer par la vraie photo portrait -->
+          <!-- TODO: remplacer par la vraie photo portrait, voir le
+               commentaire au-dessus de <section class="bio"> -->
           <div class="portrait-placeholder">
             <span class="diamond diamond--outline diamond--lg" aria-hidden="true"></span>
           </div>

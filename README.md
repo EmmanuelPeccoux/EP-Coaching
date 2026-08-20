@@ -33,7 +33,11 @@ de vérifier Settings → Pages → Source sur GitHub directement.
 └── assets/
     ├── css/              → base.css (variables/reset) + 1 fichier par page
     ├── js/               → lenis-init.js (setup smooth scroll) + main.js
-    └── images/           → photos réutilisées de l'ancienne version du site
+    └── images/           → photothèque réutilisée de l'ancienne version du
+                             site, en .jpg (22 fichiers étaient en réalité
+                             du JPEG mal étiqueté .png, corrigé au prompt
+                             12/15, voir plus bas) ; pas encore référencée
+                             dans le HTML (aucun <img> nulle part)
 ```
 
 ## Suivi des prompts
@@ -49,7 +53,97 @@ de vérifier Settings → Pages → Source sur GitHub directement.
 - [x] 9/15 — WebGL évalué et non retenu (raisons ci-dessous), scroll accessible vers les ancres, robustesse ScrollTrigger (polices/bfcache), audit "règle de retrait", passe mobile 375px — **phase animation terminée**
 - [x] 10/15 — Contenu final homepage + /physique/ (copy validé intégré, mots-clés accentués dans les H1/H2, meta tags dérivés du copy)
 - [x] 11/15 — Contenu final /business/ (copy validé intégré, bio confirmée identique au caractère près, CTA de secours phrase+lien) — **les 3 pages ont maintenant leur copy final**
-- [ ] 12/15 à 15/15 — Formulaires/Calendly, déploiement final
+- [x] 12/15 — Assets réels : façade VSL (YouTube lazy-load), audit icônes, correction et optimisation de la photothèque, logo/portrait toujours en attente (voir ci-dessous) — **phase contenu (10 à 12) terminée**
+- [ ] 13/15 à 15/15 — Formulaires/Calendly, déploiement final
+
+## Assets réels (prompt 12/15)
+
+**Logo** : recherché dans le repo entier ET son historique git sur
+**toutes les branches** (`git log --all --diff-filter=A --name-only`) —
+introuvable, jamais commité nulle part sous ce projet. Règle du prompt
+respectée à la lettre : pas fabriqué en CSS/SVG. Le placeholder texte
+reste en place dans le header des 3 pages, avec un commentaire détaillé
+dans `index.html` (recopié en résumé dans `physique/`/`business/`)
+indiquant le chemin exact attendu : **`assets/images/logo.png`**, PNG à
+fond transparent, au moins 640×200px source pour rester net en retina
+affiché à ~40px de haut. Une fois déposé, il suffit de suivre le
+commentaire pour remplacer `<a class="logo">` par un vrai `<img>` (header
+des 3 pages + footer + favicon, voir prompt 3).
+
+**VSL** : façade complète implémentée (`initVslFacade()` dans `main.js`).
+Rien n'est chargé au chargement de la page : l'attribut
+`data-youtube-id="VIDEO_ID_A_REMPLACER"` sur `#vsl-placeholder`
+(`index.html`) est **l'unique valeur à changer** quand la vidéo unlisted
+sera prête. Tant qu'elle vaut ce placeholder, le bloc reste exactement
+dans son état non interactif d'avant ce prompt (pas de `role="button"`,
+pas de faux affordance). Dès qu'un vrai ID y est mis : la vraie miniature
+YouTube (`img.youtube.com/vi/{id}/maxresdefault.jpg`) remplace le dégradé
+sombre avec un voile pour garantir le contraste du bouton play, le bloc
+devient activable à la souris ET au clavier (Entrée/Espace), et le clic
+injecte une iframe `youtube-nocookie.com` (`rel=0`, `modestbranding=1`,
+`autoplay=1` déclenché par le clic lui-même, jamais au chargement de la
+page). Testé avec jsdom dans les 3 états (sentinelle non remplacée, ID
+réel avec clic souris, ID réel avec activation clavier) : les trois se
+comportent exactement comme prévu.
+
+**Photo portrait** : les 25 photos de `assets/images/` passées en revue
+une par une (pas juste le nom de fichier) — aucune n'est un portrait
+posé/professionnel (selfies miroir, photos de progression, tenues de
+sport), pas le traitement adapté à l'image publique en tête de page.
+Sujet mineur : le choix de LA photo à publier revient délibérément à
+Santamaria/son entourage, pas à une sélection unilatérale de ma part
+parmi des photos personnelles existantes. Placeholder conservé. Fichier
+attendu : **`assets/images/portrait.jpg`** (+ `.webp` en complément si
+fourni), ratio 4:5, au moins 1000×1250px source. Bandes noires à rogner
+et tout logo/watermark tiers à retirer avant intégration, comme demandé.
+
+**Icônes** : audit de cohérence fait sur les 18 SVG des 2 pages (9 par
+page) — un seul jeu d'attributs partout
+(`fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"`),
+aucun emoji, aucune flèche bricolée à la main, vérifié par grep sur les
+plages Unicode emoji (rien trouvé dans le HTML visible). Rien à changer,
+déjà conforme depuis les prompts 5/6.
+
+**Un vrai bug trouvé en préparant la compression** : 22 des 25 fichiers
+de `assets/images/` sont en réalité des JPEG (marqueurs `jfif` +
+profil ICC "Google Inc. 2016" détectés par Pillow), simplement mal
+étiquetés avec une extension `.png`. Une première tentative de
+compression PNG "sans perte" les a fait **grossir de 5 à 8×** (2,03 Mo →
+10,81 Mo) : PNG ne peut que réencoder en perte de temps ce qui est déjà
+du JPEG décodé, jamais le compresser correctement. Repéré immédiatement
+au résultat anormal, annulé avec `git checkout` avant tout commit, puis
+corrigé à la racine : les 22 fichiers JPEG mal étiquetés sont renommés en
+`.jpg` (copie identique à l'octet près, aucune perte, `git` confirme le
+renommage). Les 3 vrais PNG restants (`debut_2022a`, `debut_2022b`,
+`proof_photo`, contenu photographique) sont convertis en JPEG qualité 88.
+**Poids total de `assets/images/` : 2,03 Mo → 1,49 Mo (28 % de gain)**,
+mais aucun de ces fichiers n'est référencé dans le HTML à ce jour
+(confirmé par grep) : ils ne font donc pas partie du poids de page
+ci-dessous, `loading="lazy"` et les attributs `width`/`height` n'ont
+nulle part où s'appliquer tant qu'aucun `<img>` ne les utilise.
+
+## Poids des pages (mesuré au prompt 12/15)
+
+Fichiers propres au site (HTML + CSS + JS, avant compression gzip/brotli
+du serveur) :
+
+| Page | HTML | CSS | JS | Total 1ʳᵉ partie |
+|---|---|---|---|---|
+| `/` (home) | 8,9 Ko | 27,6 Ko (base+home) | 29,9 Ko | **~66 Ko** |
+| `/physique/` | 18,5 Ko | 19,4 Ko (base+physique) | 29,9 Ko | **~68 Ko** |
+| `/business/` | 19,3 Ko | 20,4 Ko (base+business) | 29,9 Ko | **~69 Ko** |
+
+Plus, partagé et mis en cache par le navigateur dès la 1ʳᵉ page visitée
+(pas re-téléchargé en changeant de page) :
+- GSAP + ScrollTrigger + Lenis (CDN) : ~128 Ko (mesuré au prompt 9/15)
+- Google Fonts (Montserrat + Playfair Display) : variable selon le
+  sous-ensemble Unicode servi par le navigateur (un seul fichier par
+  graisse pour du contenu en français, pas les 9 variantes que renvoie
+  un `curl` qui les demande toutes) — de l'ordre de 15 à 40 Ko en usage
+  réel, pas mesurable précisément sans un vrai navigateur ici.
+
+Aucune image de `assets/images/` n'est chargée par une page actuellement
+(aucun `<img>` dans le HTML), donc rien à ajouter aux totaux ci-dessus.
 
 ## Contenu /business/ (prompt 11/15)
 

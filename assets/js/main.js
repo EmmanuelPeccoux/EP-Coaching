@@ -354,6 +354,69 @@ function initHeaderScroll() {
   });
 }
 
+/* ── Façade VSL (prompt 12/15) ─────────────────────────────────────────── */
+/* Iframe YouTube jamais chargée au chargement de la page : uniquement au
+   clic (pas de scripts YouTube tant que la vidéo n'a pas été demandée,
+   ce qui compte particulièrement sur mobile). VSL_PLACEHOLDER_ID est le
+   SEUL point de comparaison ici — la vraie valeur à remplacer quand la
+   vidéo sera prête vit dans l'attribut `data-youtube-id` sur
+   `.vsl-placeholder` (index.html), pas dans ce fichier, pour rester au
+   plus près du HTML qu'elle concerne (une seule chaîne à changer, un
+   seul endroit). Tant que cette valeur vaut VSL_PLACEHOLDER_ID, ce bloc
+   reste non interactif à l'identique d'avant ce prompt : jamais de
+   role="button" sur un clic qui ne ferait rien (même garde-fou que celui
+   déjà documenté dans le commentaire HTML du placeholder). */
+
+const VSL_PLACEHOLDER_ID = "VIDEO_ID_A_REMPLACER";
+
+function initVslFacade() {
+  const el = document.getElementById("vsl-placeholder");
+  if (!el) return; // pas la homepage
+
+  const videoId = el.dataset.youtubeId;
+  if (!videoId || videoId === VSL_PLACEHOLDER_ID) return; // vidéo pas encore fournie
+
+  // Vraie miniature YouTube en couverture (remplace le dégradé sombre de
+  // base.css/home.css) + voile sombre (classe ci-dessous, voir home.css)
+  // pour garantir le contraste du bouton play quelle que soit l'image.
+  el.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/maxresdefault.jpg)`;
+  el.style.backgroundSize = "cover";
+  el.style.backgroundPosition = "center";
+  el.classList.add("vsl-placeholder--has-cover");
+
+  el.setAttribute("role", "button");
+  el.setAttribute("tabindex", "0");
+  el.setAttribute("aria-label", "Lire la vidéo de présentation");
+
+  const load = () => {
+    // youtube-nocookie.com : aucun cookie tant que la vidéo n'est pas
+    // effectivement lancée, cohérent avec l'esprit "rien au chargement"
+    // de toute cette façade. rel=0 (pas de suggestions d'autres chaînes)
+    // + modestbranding=1 (branding YouTube réduit), demandés explicitement.
+    // autoplay=1 ici démarre la lecture suite au clic qui vient d'avoir
+    // lieu (le geste utilisateur), ce n'est jamais une lecture automatique
+    // au chargement de la page.
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+    iframe.title = "Vidéo de présentation EP Coaching";
+    iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+    iframe.setAttribute("allowfullscreen", "");
+    el.replaceChildren(iframe);
+    el.removeAttribute("role");
+    el.removeAttribute("tabindex");
+    el.style.backgroundImage = "";
+    el.classList.remove("vsl-placeholder--has-cover");
+  };
+
+  el.addEventListener("click", load);
+  el.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      load();
+    }
+  });
+}
+
 /* ── Navigation par ancre ──────────────────────────────────────────────── */
 /* Le seul lien d'ancre du site (#cta-final, bouton "Accompagnement 1-to-1"
    au milieu de /physique/ et /business/) passe par Lenis pour rester
@@ -474,5 +537,6 @@ initReveals();
 initPortraitParallax();
 initCtaFinalReveal();
 initHeaderScroll();
+initVslFacade();
 initAnchorScroll();
 initScrollTriggerRefresh();

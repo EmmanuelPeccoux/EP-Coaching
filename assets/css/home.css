@@ -137,6 +137,30 @@ header .logo-mark {
   margin-left: 0.3rem; /* recentre optiquement le triangle dans le cercle */
 }
 
+/* Façade VSL (prompt 12/15, voir initVslFacade dans main.js) : quand une
+   vraie miniature YouTube remplace le dégradé sombre par défaut, ce voile
+   garantit que le bouton play reste lisible quel que soit le contenu de
+   l'image (une miniature claire ne doit jamais faire disparaître le
+   contraste du triangle blanc). */
+.vsl-placeholder--has-cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--noir-profond) 45%, transparent);
+  pointer-events: none;
+}
+
+/* L'iframe injectée au clic remplit le même cadre 16:9 que le placeholder
+   qu'elle remplace (.vsl-placeholder garde déjà position:relative et son
+   aspect-ratio, rien à changer côté conteneur). */
+.vsl-placeholder iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 /* ── Bifurcation ───────────────────────────────────────────────────────── */
 
 .bifurcation {

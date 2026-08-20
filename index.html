@@ -44,7 +44,17 @@
        1. HEADER — logo EP Coaching
        ═══════════════════════════════════════════════════════════════ -->
   <header>
-    <a href="./" class="logo">EP COACHING<!-- TODO: remplacer par le vrai logo PNG --></a>
+    <!-- LOGO (prompt 12/15) : cherché dans le repo et son historique git
+         (toutes branches) — introuvable, jamais commité nulle part. Pas
+         fabriqué en CSS/SVG (règle ferme du projet, un logo se fournit,
+         ne se recrée pas). Fichier attendu : assets/images/logo.png (PNG,
+         fond transparent), au moins 640×200px source pour rester net en
+         retina affiché à ~40px de haut dans ce header. Une fois déposé,
+         remplacer le <a class="logo"> ci-dessous par
+         <img src="assets/images/logo.png" alt="EP Coaching" height="40" />
+         (chemin relatif adapté à la profondeur de chaque page), pareil
+         dans le footer (.footer-brand) et pour le favicon (voir prompt 3). -->
+    <a href="./" class="logo">EP COACHING</a>
     <!-- Diamant signature sous le wordmark, comme sur l'ancien logo EP. -->
     <span class="diamond logo-mark" aria-hidden="true"></span>
   </header>
@@ -64,11 +74,18 @@
       <h1>Progresser <span class="accent">plus vite</span>, avec quelqu&rsquo;un qui bosse avec toi</h1>
       <p class="hero-subtitle">Que tu veuilles transformer ton physique ou faire décoller ton business de coach, la logique est la même. Un objectif clair, du travail, et un accompagnement qui suit.</p>
 
-      <!-- TODO: remplacer par l'iframe YouTube unlisted réelle. Pas de
-           role="button" tant qu'aucun clic ne fait quoi que ce soit :
+      <!-- Façade VSL (prompt 12/15) : l'iframe YouTube n'est jamais
+           chargée au chargement de la page, seulement au clic (perf,
+           surtout mobile, voir initVslFacade dans main.js). data-youtube-id
+           est LA seule valeur à remplacer quand la vidéo unlisted sera
+           prête : tant qu'elle vaut "VIDEO_ID_A_REMPLACER", le script
+           détecte l'absence de vraie vidéo et laisse ce bloc exactement
+           dans son état actuel (pas de role="button", pas de clic actif) —
            un faux affordance interactif serait pire que pas d'affordance
-           du tout pour un lecteur d'écran. -->
-      <div class="vsl-placeholder" aria-label="Emplacement de la vidéo de présentation">
+           du tout pour un lecteur d'écran. Dès qu'un vrai ID YouTube est
+           renseigné ici, le bouton devient réellement cliquable/activable
+           au clavier et récupère automatiquement la vraie miniature. -->
+      <div class="vsl-placeholder" id="vsl-placeholder" data-youtube-id="VIDEO_ID_A_REMPLACER" aria-label="Emplacement de la vidéo de présentation">
         <span class="vsl-play" aria-hidden="true"></span>
       </div>
       <p class="vsl-caption">Regarde la vidéo, puis choisis ton chemin.</p>
