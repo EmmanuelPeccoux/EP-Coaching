@@ -1,0 +1,96 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   EP Coaching — Variables, reset, typographie de base
+   ═══════════════════════════════════════════════════════════════════════
+   INTERDITS STRICTS — à respecter absolument dans TOUT le projet :
+   - Jamais #080808 ni #DC0A14
+   - Jamais de tons froids (bleu, vert, violet...)
+   - Jamais la police "Bebas Neue"
+   - Police titres : Montserrat 900, letter-spacing négatif
+   - Police logo UNIQUEMENT : Playfair Display Italic Bold
+   - Jamais de tiret em (—) dans aucun texte
+   - Jamais de prix affiché nulle part
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --rouge-principal: #E01E1E;
+  --rouge-fonce: #890404;
+  --rouge-moyen: #B00202;
+  --rouge-tres-fonce: #270101;
+  --noir-profond: #0D0000;
+  --blanc-casse: #F5EDED;
+  --rose-clair: #FDC4C4; /* usage rare */
+}
+
+/* ── Reset ─────────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto; /* Lenis prend le relais du smooth scroll */
+}
+
+body {
+  background: var(--noir-profond);
+  color: var(--blanc-casse);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+picture,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* ── Typographie de base ──────────────────────────────────────────────── */
+/* Chargement des polices géré par chaque page (prompts suivants) — ici
+   seule la déclaration des rôles/valeurs de base. */
+
+body {
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.logo {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-weight: 700;
+}
