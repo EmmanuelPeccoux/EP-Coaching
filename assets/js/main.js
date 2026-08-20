@@ -171,21 +171,37 @@ function initHomeEntrance() {
 
   const logo = document.querySelector("header .logo");
   const h1 = heroVsl.querySelector("h1");
+  const subtitle = heroVsl.querySelector(".hero-subtitle");
   const vsl = heroVsl.querySelector(".vsl-placeholder");
+  const caption = heroVsl.querySelector(".vsl-caption");
   const bifurcationH2 = document.querySelector(".bifurcation h2");
   const blocs = document.querySelectorAll(".bifurcation .bloc");
 
   const titleWords = bifurcationH2 ? prepareTitleWords(bifurcationH2) : null;
 
+  // H1 + sous-titre regroupés en un seul temps (léger stagger interne),
+  // pareil pour le cadre VSL + sa légende : ajouté au prompt 10/15 avec le
+  // vrai copy, sans changer le nombre de "temps" de la timeline d'origine
+  // (logo → texte hero → VSL → titre bifurcation → blocs) ni dépasser le
+  // budget de 1,5s déjà documenté.
+  const heroText = [h1, subtitle].filter(Boolean);
+  const vslUnits = [vsl, caption].filter(Boolean);
+
   const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
   if (logo) tl.from(logo, { opacity: 0, y: -12, duration: 0.4 });
-  if (h1) tl.from(h1, { opacity: 0, y: 20, duration: 0.5 }, "-=0.2");
-  if (vsl) tl.from(vsl, { opacity: 0, y: 20, duration: 0.5 }, "-=0.25");
+  if (heroText.length) {
+    tl.from(heroText, { opacity: 0, y: 20, duration: 0.5, stagger: 0.08 }, "-=0.2");
+  }
+  if (vslUnits.length) {
+    tl.from(vslUnits, { opacity: 0, y: 20, duration: 0.5, stagger: 0.08 }, "-=0.25");
+  }
   if (titleWords) {
     tl.to(titleWords, { opacity: 1, y: 0, duration: 0.4, stagger: TITLE_WORD_STAGGER }, "-=0.15");
   }
   if (blocs.length) tl.from(blocs, { opacity: 0, y: 20, duration: 0.4, stagger: 0.12 }, "-=0.1");
-  // Durée totale approximative : 0.4 + 0.3 + 0.25 + 0.25 + (0.4 + 0.12) ≈ 1.4s.
+  // Durée totale approximative : 0.4 + 0.38 + 0.33 + 0.25 + 0.52 ≈ 1.5s
+  // (légèrement plus long qu'au prompt 7/15 à cause des deux nouveaux
+  // éléments de texte, reste dans le budget demandé).
 }
 
 /* ── Entrée légère — pages /physique/ et /business/ ───────────────────── */
@@ -203,13 +219,17 @@ function initSectionEntrance() {
   const portrait = bio.querySelector(".portrait");
   const eyebrow = bio.querySelector(".split-content .eyebrow");
   const heading = bio.querySelector(".split-content h1");
-  const bodyText = bio.querySelector(".split-content > p");
+  // Bio du prompt 10/15 : 3 paragraphes (pas 1 comme au placeholder), tous
+  // doivent entrer dans le même mouvement que l'eyebrow/le titre, sinon
+  // les paragraphes 2 et 3 resteraient visibles d'emblée pendant que le
+  // reste de la colonne anime encore, un vrai décalage visuel.
+  const bodyParagraphs = bio.querySelectorAll(".split-content > p");
   const listItems = bio.querySelectorAll(".diamond-list .diamond-item");
 
   const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
   if (portrait) tl.from(portrait, { opacity: 0, y: 24, duration: 0.6 });
 
-  const textUnits = [eyebrow, heading, bodyText].filter(Boolean);
+  const textUnits = [eyebrow, heading, ...bodyParagraphs].filter(Boolean);
   if (textUnits.length) {
     tl.from(textUnits, { opacity: 0, y: 18, duration: 0.5, stagger: 0.08 }, portrait ? "-=0.35" : 0);
   }

@@ -47,7 +47,78 @@ de vérifier Settings → Pages → Source sur GitHub directement.
 - [x] 7/15 — Fondations animation : Lenis calibré, système de reveal réutilisable, entrée homepage orchestrée, entrée légère physique/business, utilitaire de découpe de texte (spans imbriqués préservés)
 - [x] 8/15 — Animations par section : titres en mots, cards en cascade, bio/portrait séquencés, CTA final à traitement renforcé, hover bifurcation, header au scroll — **phase animation de base terminée**
 - [x] 9/15 — WebGL évalué et non retenu (raisons ci-dessous), scroll accessible vers les ancres, robustesse ScrollTrigger (polices/bfcache), audit "règle de retrait", passe mobile 375px — **phase animation terminée**
-- [ ] 10/15 à 15/15 — Contenu final, copywriting, déploiement
+- [x] 10/15 — Contenu final homepage + /physique/ (copy validé intégré, mots-clés accentués dans les H1/H2, meta tags dérivés du copy)
+- [ ] 11/15 à 15/15 — Contenu /business/, formulaires/Calendly, déploiement final
+
+## Contenu (depuis le prompt 10/15)
+
+Copy final intégré sur la homepage et `/physique/`, reproduit tel quel
+(aucune reformulation, comme demandé). `/business/` suit au prompt 11/15,
+la bio (bloc commun aux deux pages) n'a donc été mise à jour que sur
+`/physique/` pour l'instant.
+
+**Mots-clés accentués** (`<span class="accent">`, rouge plein, un par
+titre maximum) : `plus vite` (H1 hero), `ton chemin` (H2 bifurcation),
+`fait pour toi`, `1-to-1`, `6 piliers`, `accomplir`, `commencer` sur
+`/physique/`. Exception délibérée : le H1 de la bio (`Santamaria
+Sànchez`) n'a pas d'accent, un prénom/nom n'a pas de "mot clé" à mettre
+en avant sans que ça ait l'air arbitraire. Vérifié avec `splitText()` sur
+le vrai HTML (jsdom) : le span survit intact à la découpe en mots, y
+compris sur un accent de 3 mots ("fait pour toi") au milieu d'un H2 de 7
+mots au total.
+
+**Bio physique/business** : la structure du placeholder (1 phrase-crochet
+en H1 + 1 paragraphe + 3 phrases courtes) ne correspondait plus au copy
+validé (nom en H1 + 3 paragraphes + 3 intitulés de compétences). Le H1
+reste un H1 (une seule règle jamais changée : un seul H1 par page, situé
+dans la bio pour physique/business) mais son contenu textuel est
+maintenant le nom. `initSectionEntrance()` dans `main.js` ciblait un seul
+paragraphe (`querySelector`, singulier) : corrigé en `querySelectorAll`
+pour que les 3 paragraphes de bio animent ensemble, sinon les paragraphes
+2 et 3 seraient restés visibles d'emblée pendant que le reste de la
+colonne anime encore.
+
+**Hero homepage** : ajout du sous-titre et de la légende sous la VSL (pas
+dans le placeholder d'origine, qui n'avait qu'un H1). Intégrés dans la
+timeline d'entrée existante (`initHomeEntrance`) en les regroupant avec
+leurs voisins immédiats (H1+sous-titre, VSL+légende) plutôt qu'en
+ajoutant deux temps supplémentaires, pour rester dans le budget de 1,5s
+déjà documenté (~1,5s au lieu de ~1,4s, écart minime).
+
+**Bifurcation homepage** : le copy donnait un "bouton" par bloc en plus
+du titre et de la ligne descriptive, mais chaque bloc est déjà un unique
+`<a>` cliquable sur toute sa surface. Un `<a>` imbriqué dans un `<a>` est
+invalide en HTML ; le "bouton" est donc un label visuel (`.bloc-cta`,
+flèche qui se décale légèrement au survol), jamais un second lien, pour
+ne pas casser l'accessibilité clavier (un seul stop de tabulation par
+bloc, comme avant).
+
+**Ce qui n'était pas couvert par le copy** (eyebrows, "Choisis ton
+chemin", le lien "Voir l'autre accompagnement" du header) : conservé tel
+quel, TODO retiré. Ce sont des micro-copies déjà sobres et cohérentes
+avec le reste, pas des placeholders à valider séparément.
+
+**Meta tags** : titres et descriptions réécrits, dérivés du copy validé
+plutôt qu'inventés (ex. la description homepage reprend le sous-titre
+mot pour mot, déjà écrit pour ça). Toujours aucun prix, aucun tiret em.
+
+**Attributs alt** : rien à faire dans ce prompt. Aucune balise `<img>`
+n'existe encore dans le HTML (les photos ne sont pas intégrées), donc
+aucun `alt` à renseigner pour l'instant, cf. section Accessibilité.
+
+**Vérification des longueurs** (pas de vrai navigateur ici, analyse
+statique comme pour les prompts précédents) : les 6 paragraphes de
+piliers vont de 114 à 163 caractères, groupés en deux lignes de grille de
+longueurs très proches (160/160/163 puis 127/114/129) — `.pilier-grid`
+utilise `align-items: stretch` par défaut (comportement Grid natif, rien
+à ajouter), donc les cards d'une même ligne s'alignent en hauteur même
+sans ce hasard de longueurs. Le H1 homepage (57 caractères) reste sous
+`max-width: 20ch` avec `text-wrap: balance`, prévu pour wrapper sur 3
+lignes par design. Les titres de cards les plus longs (34 caractères,
+piliers "Suivi et progression..."/"Nutrition et programme...") wrapperont
+sur 2 lignes à 375px, un `<h3>` en bloc sans `white-space: nowrap` nulle
+part dans le projet (vérifié par grep) : jamais de débordement
+horizontal, seulement un retour à la ligne normal.
 
 ## WebGL : évalué, non implémenté (prompt 9/15)
 

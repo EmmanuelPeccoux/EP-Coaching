@@ -162,6 +162,16 @@ p {
   letter-spacing: 0.01em;
 }
 
+/* Mot ou groupe de mots clé mis en valeur dans un H1/H2 (phase contenu,
+   prompt 10/15) : un accent par titre maximum, jamais plus. Rouge plein
+   plutôt qu'un traitement outline ici — plus lisible sur les tailles de
+   texte réduites des titres en `.split-content`. splitText() (prompt 7)
+   préserve ce span intact quand le titre est découpé en mots animables :
+   c'est exactement le cas d'usage prévu pour la variante "spans imbriqués". */
+.accent {
+  color: var(--rouge-principal);
+}
+
 /* Eyebrows/labels — Montserrat 700, petit, tracking large, rouge
    principal. Le glyphe ◆ en préfixe est la variante texte du motif
    diamant (voir plus bas), pour un usage inline sans CSS supplémentaire. */

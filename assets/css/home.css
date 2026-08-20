@@ -75,6 +75,23 @@ header .logo-mark {
   justify-content: center;
 }
 
+/* Sous-titre hero (prompt 10/15) : hérite du `p` de base.css (60ch,
+   couleur atténuée) mais un peu plus grand pour lire comme un vrai
+   sous-titre sous un H1 pleine échelle, sans jamais rivaliser avec lui. */
+.hero-vsl .hero-subtitle {
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+  color: color-mix(in srgb, var(--blanc-casse) 82%, transparent);
+  max-width: 42ch;
+}
+
+/* Légende sous la VSL : la plus petite ligne du hero, volontairement
+   discrète (elle annonce juste l'action suivante, pas un argument). */
+.hero-vsl .vsl-caption {
+  font-size: 0.875rem;
+  color: color-mix(in srgb, var(--blanc-casse) 55%, transparent);
+  max-width: none;
+}
+
 .vsl-placeholder {
   position: relative;
   width: 100%;
@@ -196,6 +213,40 @@ header .logo-mark {
   font-size: 1.375rem;
   letter-spacing: -0.02em;
   color: var(--blanc-casse);
+}
+
+/* Ligne descriptive + "bouton" du bloc (prompt 10/15) : toute la card est
+   déjà le lien cliquable (voir .bifurcation .bloc plus haut), donc le
+   "bouton" du copy est un label visuel, jamais un <a> imbriqué (invalide
+   en HTML) ni un focus stop supplémentaire pour le clavier. */
+.bifurcation .bloc .bloc-line {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--blanc-casse) 65%, transparent);
+}
+
+.bifurcation .bloc .bloc-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-top: var(--space-sm);
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--rouge-principal);
+}
+
+.bifurcation .bloc .bloc-cta::after {
+  content: "→";
+  transition: transform 0.2s ease;
+}
+
+.bifurcation .bloc:hover .bloc-cta::after {
+  transform: translateX(4px);
 }
 
 @media (min-width: 768px) {
