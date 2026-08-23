@@ -256,10 +256,11 @@
 
     <!-- ═══════════════════════════════════════════════════════════════
          6. CTA FINAL — deux CTA, hiérarchie assumée. Principal : réserver
-            l'appel (placeholder préqualif business, câblé au prompt 2).
-            Secondaire, nettement plus discret : inscription gratuite à
-            l'app (.btn-cta-fallback, déjà traité en lien souligné dans
-            base.css depuis le prompt 4 — pas de nouveau style à créer).
+            l'appel, câblé au prompt 14/15 vers le formulaire business
+            (ep-coaching-formulaires, repo separe). Secondaire, nettement
+            plus discret : inscription gratuite à l'app (.btn-cta-fallback,
+            déjà traité en lien souligné dans base.css depuis le prompt
+            4 — pas de nouveau style à créer).
          ═══════════════════════════════════════════════════════════════ -->
     <section class="cta-final" id="cta-final">
       <div class="cta-final-inner">
@@ -267,11 +268,7 @@
         <h2>Prêt à passer au <span class="accent">niveau supérieur</span> ?</h2>
         <p>Réponds à quelques questions, puis réserve ton appel. On fait le point sur ton activité et on voit comment la plateforme peut s&rsquo;y intégrer.</p>
         <div class="form-slot">
-          <!-- TODO: emplacement formulaire de préqualification embarqué -->
-          <!-- ⚠ TODO-PREQUALIFICATION-BUSINESS : remplacer ce href par le
-               vrai formulaire de préqualification business une fois créé
-               (chantier séparé, n'existe pas encore). -->
-          <a href="#TODO-prequalification-business" class="btn-cta-primary btn-cta-primary--lg">
+          <a href="https://ep-coaching-formulaires.vercel.app/business" class="btn-cta-primary btn-cta-primary--lg">
             <span>Réserver mon appel</span>
           </a>
           <span class="btn-subtext">Appel gratuit, sans engagement</span>

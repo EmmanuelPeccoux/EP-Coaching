@@ -54,7 +54,34 @@ de vérifier Settings → Pages → Source sur GitHub directement.
 - [x] 10/15 — Contenu final homepage + /physique/ (copy validé intégré, mots-clés accentués dans les H1/H2, meta tags dérivés du copy)
 - [x] 11/15 — Contenu final /business/ (copy validé intégré, bio confirmée identique au caractère près, CTA de secours phrase+lien) — **les 3 pages ont maintenant leur copy final**
 - [x] 12/15 — Assets réels : façade VSL (YouTube lazy-load), audit icônes, correction et optimisation de la photothèque, logo/portrait toujours en attente (voir ci-dessous) — **phase contenu (10 à 12) terminée**
-- [ ] 13/15 à 15/15 — Formulaires/Calendly, déploiement final
+- [x] 13/15 — Formulaires de préqualification (repo séparé `ep-coaching-formulaires`, reconstruit de zéro) — voir son propre README pour le détail
+- [x] 14/15 — Câblage du funnel : CTA business branché sur le vrai formulaire, liens vérifiés sur les 3 pages, Calendly câblé côté formulaires (voir `ep-coaching-formulaires`) — **funnel complet du clic homepage jusqu'à la réservation, sauf déploiement Vercel des formulaires en attente**
+- [ ] 15/15 — Déploiement final
+
+## Câblage du funnel (prompt 14/15)
+
+Le CTA principal de `/business/` (`#TODO-prequalification-business`
+depuis le prompt 2) pointe maintenant vers
+`https://ep-coaching-formulaires.vercel.app/business`, le formulaire créé
+au prompt 13/15. Le CTA de `/physique/` était déjà correct (route
+`/prequalification` inchangée par le prompt 13/15), simplement revérifié.
+
+**Audit complet des liens sortants des 3 pages** (section 2.3 du
+prompt) : tous corrects, aucun lien mort, aucun placeholder restant
+(vérifié par grep). Règle "conversion reste dans l'onglet, consultation
+s'ouvre dans un nouvel onglet" déjà respectée avant ce prompt et
+reconfirmée : formulaires et fallback business (inscription app) sans
+`target`, légal et Instagram avec `target="_blank"`.
+
+**Ce qui reste en dehors de ce repo** : le câblage réel vers Calendly
+(redirection après soumission, pré-remplissage, distinction
+physique/business) vit dans `ep-coaching-formulaires`, pas ici — voir son
+README pour le détail complet (option retenue, bug Calendly trouvé et
+corrigé, etc.). Le déploiement Vercel de ce repo formulaires n'a pas pu
+être finalisé dans cette session (connecteur Vercel non fonctionnel,
+documenté en détail côté `ep-coaching-formulaires`) : les deux URLs
+câblées ici (`/prequalification` et `/business`) sont donc correctes
+mais ne serviront le nouveau contenu qu'une fois ce déploiement fait.
 
 ## Assets réels (prompt 12/15)
 
@@ -460,8 +487,8 @@ maintenant symétriques et vides de règles de mise en page.
 
 - Instagram : https://instagram.com/santamariasanchez_
 - Pages légales (temporaires, pointent vers l'app) : https://ep-coaching.vercel.app/legal/{cgu,cgv,confidentialite}
-- Préqualification physique : https://ep-coaching-formulaires.vercel.app/prequalification
-- Préqualification business : pas encore créée, placeholder `#TODO-prequalification-business` dans `business/index.html`
+- Formulaire physique : https://ep-coaching-formulaires.vercel.app/prequalification (route inchangée depuis le prompt 13/15)
+- Formulaire business : https://ep-coaching-formulaires.vercel.app/business (câblé au prompt 14/15, repo séparé ep-coaching-formulaires)
 - Fallback business (inscription gratuite) : https://ep-coaching.vercel.app/auth/client
 
 ## Accessibilité
