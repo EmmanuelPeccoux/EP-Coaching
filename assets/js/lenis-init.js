@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   EP Coaching — Setup Lenis + branchement GSAP ScrollTrigger
+   EP Coaching, Setup Lenis + branchement GSAP ScrollTrigger
    ═══════════════════════════════════════════════════════════════════════
    Chargé après les CDN GSAP/ScrollTrigger/Lenis (voir <head> de chaque
    page) et avant main.js.
@@ -14,7 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
 // normalement dessus (il ne dépend pas de Lenis pour exister).
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 // Exposé globalement : main.js (reveals, timelines d'entrée) s'appuie sur
-// la même valeur plutôt que de refaire le matchMedia de son côté — une
+// la même valeur plutôt que de refaire le matchMedia de son côté, une
 // seule source de vérité, jamais de risque de désync entre les deux.
 window.prefersReducedMotion = prefersReducedMotion;
 
@@ -25,8 +25,7 @@ const lenis = new Lenis({
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   smoothWheel: !prefersReducedMotion,
   // Le tactile garde son momentum natif iOS (déjà excellent) plutôt que
-  // d'être repris par le lissage Lenis, pensé pour la molette souris —
-  // Emmanuel consulte principalement sur iPhone, un scroll tactile
+  // d'être repris par le lissage Lenis, pensé pour la molette souris, // Emmanuel consulte principalement sur iPhone, un scroll tactile
   // "lissé artificiellement" se sentirait pire que le natif, pas mieux.
   syncTouch: false,
 });

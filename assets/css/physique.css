@@ -1,8 +1,8 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   EP Coaching — Page /physique/
+   EP Coaching, Page /physique/
    Depuis le prompt 5/15, toute la mise en page des sections (bio,
    critères, accompagnement, piliers, accomplissements, cta-final) vit
-   dans base.css, partagée avec business.css — les deux pages utilisent
+   dans base.css, partagée avec business.css, les deux pages utilisent
    les mêmes classes (.split, .cards, .pilier-grid, .diamond-list...), pas
    de raison de dupliquer. Ce fichier reste prêt pour un accent propre à
    /physique/ si un jour physique et business doivent diverger visuellement.

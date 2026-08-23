@@ -12,15 +12,19 @@
   <meta property="og:type" content="website" />
   <!-- TODO: mettre à jour og:url si un domaine personnalisé est configuré (CNAME, prompt 1) -->
   <meta property="og:url" content="https://emmanuelpeccoux.github.io/EP-Coaching/" />
+  <meta property="og:image" content="https://emmanuelpeccoux.github.io/EP-Coaching/assets/images/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <meta name="theme-color" content="#E01E1E" />
 
-  <!-- Favicon — placeholder carré rouge + "EP" en attendant le vrai logo -->
+  <!-- Favicon, placeholder carré rouge + "EP" en attendant le vrai logo -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
-  <!-- Préconnexions — CDN des libs + Google Fonts (Montserrat/Playfair Display) -->
+  <!-- Préconnexions, CDN des libs + Google Fonts (Montserrat/Playfair Display) -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,7 +33,7 @@
   <link rel="stylesheet" href="assets/css/base.css" />
   <link rel="stylesheet" href="assets/css/home.css" />
 
-  <!-- CDN — chargées ici en préparation des prompts suivants (animations).
+  <!-- CDN, chargées ici en préparation des prompts suivants (animations).
        defer partout (y compris les scripts locaux) pour ne pas bloquer le
        rendu : l'ordre relatif est conservé entre scripts deferred, donc la
        chaîne de dépendance GSAP → ScrollTrigger → Lenis → lenis-init.js →
@@ -41,11 +45,11 @@
 <body>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       1. HEADER — logo EP Coaching
+       1. HEADER, logo EP Coaching
        ═══════════════════════════════════════════════════════════════ -->
   <header>
     <!-- LOGO (prompt 12/15) : cherché dans le repo et son historique git
-         (toutes branches) — introuvable, jamais commité nulle part. Pas
+         (toutes branches), introuvable, jamais commité nulle part. Pas
          fabriqué en CSS/SVG (règle ferme du projet, un logo se fournit,
          ne se recrée pas). Fichier attendu : assets/images/logo.png (PNG,
          fond transparent), au moins 640×200px source pour rester net en
@@ -62,7 +66,7 @@
   <main>
 
     <!-- ═══════════════════════════════════════════════════════════════
-         2. HERO VSL — emplacement vidéo de vente (YouTube unlisted à venir)
+         2. HERO VSL, emplacement vidéo de vente (YouTube unlisted à venir)
          ═══════════════════════════════════════════════════════════════ -->
     <section class="hero-vsl">
       <!-- Diamant géant en filigrane, voir home.css pour la justification
@@ -80,8 +84,7 @@
            est LA seule valeur à remplacer quand la vidéo unlisted sera
            prête : tant qu'elle vaut "VIDEO_ID_A_REMPLACER", le script
            détecte l'absence de vraie vidéo et laisse ce bloc exactement
-           dans son état actuel (pas de role="button", pas de clic actif) —
-           un faux affordance interactif serait pire que pas d'affordance
+           dans son état actuel (pas de role="button", pas de clic actif), un faux affordance interactif serait pire que pas d'affordance
            du tout pour un lecteur d'écran. Dès qu'un vrai ID YouTube est
            renseigné ici, le bouton devient réellement cliquable/activable
            au clavier et récupère automatiquement la vraie miniature. -->
@@ -92,7 +95,7 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════
-         3. BIFURCATION — 2 blocs cliquables vers /physique/ et /business/
+         3. BIFURCATION, 2 blocs cliquables vers /physique/ et /business/
          ═══════════════════════════════════════════════════════════════ -->
     <section class="bifurcation">
       <div class="section-divider" aria-hidden="true"><span class="diamond"></span></div>
@@ -116,7 +119,7 @@
   </main>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       FOOTER — commun aux 3 pages
+       FOOTER, commun aux 3 pages
        ═══════════════════════════════════════════════════════════════ -->
   <footer>
     <p class="footer-brand">EP Coaching</p>

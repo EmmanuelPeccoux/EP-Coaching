@@ -1,10 +1,10 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   EP Coaching — Point d'entrée JS commun aux 3 pages
+   EP Coaching, Point d'entrée JS commun aux 3 pages
    ═══════════════════════════════════════════════════════════════════════
    Chargé après lenis-init.js (qui expose window.prefersReducedMotion).
    Fondations posées au prompt 7/15, animations par section ajoutées au
    prompt 8/15. Principe directeur rappelé dans le prompt : cinématique,
-   pas agité — un visiteur doit se souvenir d'un ou deux moments, pas de
+   pas agité, un visiteur doit se souvenir d'un ou deux moments, pas de
    vingt effets. En cas de doute sur un effet, il a été retiré plutôt que
    gardé "au cas où" (voir le skew de vélocité plus bas, périmètre
    volontairement pas fait dans cette passe).
@@ -16,7 +16,7 @@
    animation qu'on vient justement de désactiver.
 
    Règle de retrait (prompt 9/15) : repassé sur chaque effet du fichier en
-   se demandant s'il sert vraiment la lecture. Aucun n'a été retiré — les
+   se demandant s'il sert vraiment la lecture. Aucun n'a été retiré, les
    reveals de titre/cards répondent à une demande explicite du prompt 8,
    la parallaxe portrait/le compactage du header sont volontairement
    discrets (jamais une "attraction"), et les 2-3 vrais moments du site
@@ -28,7 +28,7 @@
    ═══════════════════════════════════════════════════════════════════════ */
 
 // Dégradation propre si un CDN ne charge pas (coupure réseau, bloqueur de
-// script...) : traité exactement comme prefers-reduced-motion — aucune
+// script...) : traité exactement comme prefers-reduced-motion, aucune
 // section ne doit jamais dépendre de GSAP/ScrollTrigger pour redevenir
 // visible. Sans ce garde-fou, un `gsap.set(el,{opacity:0})` qui réussit
 // suivi d'un `ScrollTrigger.create()` qui échoue (un seul des deux CDN en
@@ -38,23 +38,22 @@ const prefersReducedMotion = window.prefersReducedMotion === true || !animations
 
 // Note pour le prompt 9 (WebGL/Three.js) : ne jamais combiner un
 // rotateY CSS avec la synchronisation d'un plan WebGL sur le même
-// élément (les plans se réduisent à des slivers) — piège déjà rencontré
+// élément (les plans se réduisent à des slivers), piège déjà rencontré
 // sur ce projet. Rien à faire ici, juste garder ce garde-fou visible au
 // bon endroit avant que le prompt 9 n'ajoute du WebGL.
 
 /* ── Découpe de texte (prompt 7, utilisée ici pour la 1ère fois) ──────── */
-/* Voir le commentaire complet de la fonction plus bas dans ce fichier —
-   déplacée logiquement après son premier usage réel serait plus naturel,
+/* Voir le commentaire complet de la fonction plus bas dans ce fichier, déplacée logiquement après son premier usage réel serait plus naturel,
    mais les déclarations `function` sont hissées : l'ordre dans le fichier
    n'a pas d'incidence sur l'exécution, seulement sur la lecture. Elle
    reste en bas, avec sa documentation complète, comme au prompt 7. */
 
-/* ── Titres de section (H2) — découpe par mots, style préservé ────────── */
+/* ── Titres de section (H2), découpe par mots, style préservé ────────── */
 /* Un seul type de traitement pour tous les H2 du site : découpe en mots
    (jamais en caractères, plus lisible pendant l'animation sur des titres
    longs), chaque mot part d'opacity:0 + léger y, stagger court. Les mots
    stylisés (span rouge/outline) gardent leur style intact grâce à
-   splitText — c'est tout l'intérêt de la variante "spans imbriqués". */
+   splitText, c'est tout l'intérêt de la variante "spans imbriqués". */
 
 const TITLE_WORD_DURATION = 0.5;
 const TITLE_WORD_STAGGER = 0.035;
@@ -82,12 +81,12 @@ function initTitleReveals() {
   const titles = document.querySelectorAll("h2");
   titles.forEach((h2) => {
     // Le H2 de la bifurcation homepage est géré dans initHomeEntrance
-    // (au chargement, pas au scroll) — même traitement de mots, autre
+    // (au chargement, pas au scroll), même traitement de mots, autre
     // déclencheur, pas de doublon ici.
     if (h2.closest(".bifurcation")) return;
     const words = prepareTitleWords(h2);
     // Le H2 du CTA final garde le même mécanisme (mots, spans préservés)
-    // que tous les autres — "un seul type de traitement" — mais avec une
+    // que tous les autres, "un seul type de traitement", mais avec une
     // nuance d'intensité (durée/easing) cohérente avec le reste de cette
     // section, qui mérite plus de présence (voir initCtaFinalReveal).
     // Un seul ScrollTrigger, un seul système : pas de doublon.
@@ -105,7 +104,7 @@ function initTitleReveals() {
 /* ── Système de reveal au scroll (réutilisable, prompt 7) ─────────────── */
 /* [data-reveal] sur un élément isolé : fade + léger déplacement vertical,
    déclenché une seule fois quand l'élément entre à ~83% du viewport
-   (once:true — un élément déjà lu ne redisparaît jamais en remontant).
+   (once:true, un élément déjà lu ne redisparaît jamais en remontant).
 
    [data-reveal-group] sur un conteneur (grille de piliers, liste de
    cards, bloc eyebrow+paragraphe) : anime ses enfants directs avec un
@@ -122,7 +121,7 @@ function initReveals() {
   const REVEAL_START = "top 83%";
   const GROUP_DURATION = 0.6; // plus court que REVEAL_DURATION : avec le
   // stagger, un groupe de 6 (piliers) doit rester sous 1s au total
-  // (demande explicite) — 5 × 0.08 + 0.6 = 1.0s pile.
+  // (demande explicite), 5 × 0.08 + 0.6 = 1.0s pile.
   const GROUP_STAGGER = 0.08;
 
   const singles = document.querySelectorAll("[data-reveal]");
@@ -160,7 +159,7 @@ function initReveals() {
   });
 }
 
-/* ── Séquence d'entrée — homepage ─────────────────────────────────────── */
+/* ── Séquence d'entrée, homepage ─────────────────────────────────────── */
 /* Logo, puis H1, puis cadre VSL, puis le H2 de bifurcation (mots), puis
    les 2 blocs. Timeline unique, sous 1,5s au total. */
 
@@ -204,7 +203,7 @@ function initHomeEntrance() {
   // éléments de texte, reste dans le budget demandé).
 }
 
-/* ── Entrée légère — pages /physique/ et /business/ ───────────────────── */
+/* ── Entrée légère, pages /physique/ et /business/ ───────────────────── */
 /* "Une entrée plus légère suffit", mais en plusieurs petits temps plutôt
    qu'un seul bloc : le portrait arrive, le texte le suit avec un léger
    décalage (demande explicite), puis les 3 compétences en dessous avec
@@ -239,9 +238,9 @@ function initSectionEntrance() {
   }
 }
 
-/* ── Parallaxe légère — portrait de la section bio ────────────────────── */
+/* ── Parallaxe légère, portrait de la section bio ────────────────────── */
 /* Sur un élément INTÉRIEUR au portrait (jamais .portrait lui-même, qui
-   est déjà animé par initSectionEntrance ci-dessus — deux tweens GSAP sur
+   est déjà animé par initSectionEntrance ci-dessus, deux tweens GSAP sur
    la même propriété du même élément se marcheraient dessus). Déplacement
    total capé à 30px sur toute la traversée de la section, scrub (lié à la
    position de scroll, pas à sa vélocité) pour un mouvement toujours
@@ -270,14 +269,14 @@ function initPortraitParallax() {
   );
 }
 
-/* ── CTA final — traitement le plus marqué de la page ─────────────────── */
+/* ── CTA final, traitement le plus marqué de la page ─────────────────── */
 /* Séquence dédiée (pas le système générique [data-reveal]) : durée et
-   easing plus présents que le reveal standard, ET ordre garanti — sur
+   easing plus présents que le reveal standard, ET ordre garanti, sur
    /business/, le CTA de secours ne doit JAMAIS apparaître avant le CTA
    principal (demande explicite, la hiérarchie visuelle doit se retrouver
    dans le temps). Pas de pulsation du glow au repos : un CTA statique
    bien dessiné (déjà en place depuis la phase design) est plus premium
-   qu'une micro-animation qui attire l'oeil en continu — jugé "cheap" ici,
+   qu'une micro-animation qui attire l'oeil en continu, jugé "cheap" ici,
    volontairement pas fait (le prompt autorise explicitement ce choix). */
 
 function initCtaFinalReveal() {
@@ -287,7 +286,7 @@ function initCtaFinalReveal() {
   const diamond = inner.querySelector(".diamond");
   // Le H2 n'est PAS repris ici : initTitleReveals() s'en charge déjà,
   // comme pour tous les H2 du site (un seul type de traitement, sans
-  // exception — demande explicite du prompt 8). Le mettre aussi dans
+  // exception, demande explicite du prompt 8). Le mettre aussi dans
   // mainUnits ci-dessous ferait doublon : deux ScrollTrigger distincts
   // animeraient le même élément (l'un ses mots via splitText, l'autre le
   // bloc entier), trouvé en testant la logique avec jsdom avant ce commit.
@@ -328,7 +327,7 @@ function initCtaFinalReveal() {
 
 /* ── Header au scroll ──────────────────────────────────────────────────── */
 /* Se compacte légèrement passé 80px de scroll (padding réduit, fond qui
-   se densifie — voir .header--scrolled dans base.css). Toggle de classe
+   se densifie, voir .header--scrolled dans base.css). Toggle de classe
    uniquement, pas de tween GSAP : reste correct même sous reduced-motion
    (la transition CSS est déjà neutralisée globalement dans ce cas, voir
    base.css) et ne cache jamais aucun contenu, donc pas besoin du
@@ -341,11 +340,11 @@ function initHeaderScroll() {
 
   // Note performance (prompt 9/15) : padding/background-color/backdrop-
   // filter ne sont pas transform/opacity, donc pas "gratuits" au sens
-  // strict — mais c'est un toggle de classe déclenché UNE fois par
+  // strict, mais c'est un toggle de classe déclenché UNE fois par
   // franchissement de seuil, jamais par frame de scroll. Le layout
   // thrashing que la règle "transform/opacity uniquement" cherche à
   // éviter concerne les propriétés animées en continu (des dizaines de
-  // fois par seconde), pas un changement d'état ponctuel — même les sites
+  // fois par seconde), pas un changement d'état ponctuel, même les sites
   // les plus optimisés compactent leur header ainsi.
   ScrollTrigger.create({
     start: 80,
@@ -358,7 +357,7 @@ function initHeaderScroll() {
 /* Iframe YouTube jamais chargée au chargement de la page : uniquement au
    clic (pas de scripts YouTube tant que la vidéo n'a pas été demandée,
    ce qui compte particulièrement sur mobile). VSL_PLACEHOLDER_ID est le
-   SEUL point de comparaison ici — la vraie valeur à remplacer quand la
+   SEUL point de comparaison ici, la vraie valeur à remplacer quand la
    vidéo sera prête vit dans l'attribut `data-youtube-id` sur
    `.vsl-placeholder` (index.html), pas dans ce fichier, pour rester au
    plus près du HTML qu'elle concerne (une seule chaîne à changer, un
@@ -423,7 +422,7 @@ function initVslFacade() {
    cohérent avec le smooth scroll du reste du site plutôt qu'un saut natif
    instantané. `click` couvre le clic souris ET l'activation clavier
    (Entrée/Espace sur un lien focus déclenche le même événement `click`
-   natif, rien à coder en plus pour l'accessibilité) — exigence explicite
+   natif, rien à coder en plus pour l'accessibilité), exigence explicite
    du prompt 9 : Lenis ne doit jamais empêcher la navigation par ancre au
    clavier, donc jamais intercepté avec autre chose qu'un vrai handler de
    clic standard. */
@@ -452,7 +451,7 @@ function initAnchorScroll() {
    2. Retour arrière navigateur : certains navigateurs restaurent la page
       depuis le bfcache (event pageshow, persisted:true) sans forcément
       recalculer les positions ScrollTrigger par rapport au scroll
-      restauré — un refresh() à ce moment évite tout état incohérent. */
+      restauré, un refresh() à ce moment évite tout état incohérent. */
 
 function initScrollTriggerRefresh() {
   if (!animationsAvailable) return;
@@ -473,7 +472,7 @@ function initScrollTriggerRefresh() {
    en contour) : une découpe naïve qui ne traite que el.textContent
    perdrait ce style. Ici, un noeud élément rencontré est cloné (balise +
    attributs + classes préservés) et son PROPRE contenu est découpé
-   récursivement à l'intérieur — jamais aplati en texte brut. Testé avec
+   récursivement à l'intérieur, jamais aplati en texte brut. Testé avec
    jsdom au prompt 7 (pas seulement relu) : un span imbriqué survit
    intact après découpe. */
 
@@ -501,7 +500,7 @@ function splitText(el, { by = "words" } = {}) {
       } else if (child.nodeType === Node.ELEMENT_NODE) {
         // Élément imbriqué (mot stylisé) : cloné tel quel (balise,
         // classes, attributs), son contenu est découpé récursivement à
-        // l'intérieur — le style du span d'origine survit intact.
+        // l'intérieur, le style du span d'origine survit intact.
         const clone = child.cloneNode(false);
         clone.appendChild(walk(child));
         fragment.appendChild(clone);

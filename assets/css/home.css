@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   EP Coaching — Homepage
+   EP Coaching, Homepage
    Système de design (tokens/typo/boutons/cards) dans base.css. Ce fichier
-   applique ce système au hero + à la bifurcation (prompt 4/15) — premier
+   applique ce système au hero + à la bifurcation (prompt 4/15), premier
    endroit du site à recevoir un traitement visuel fini. Pas d'animation
    scroll-triggered ici (phase suivante), seulement des hovers simples.
    ═══════════════════════════════════════════════════════════════════════ */
@@ -45,7 +45,7 @@ header .logo-mark {
 
 /* Risque assumé de ce prompt : le diamant du logo, agrandi à l'échelle
    architecturale, posé en filigrane derrière tout le hero plutôt que
-   cantonné à une petite puce décorative — la signature visuelle EP
+   cantonné à une petite puce décorative, la signature visuelle EP
    devient la structure même de la section, pas un détail dessus. */
 .hero-diamond-ghost {
   position: absolute;
@@ -204,7 +204,7 @@ header .logo-mark {
 
 /* Le choix se matérialise au hover : le bloc survolé se met en avant,
    l'autre s'estompe légèrement (prompt 8/15). Réservé aux pointeurs fins
-   avec vrai hover (souris) — sur tactile, "ça rend mal ou frustrant" est
+   avec vrai hover (souris), sur tactile, "ça rend mal ou frustrant" est
    explicitement le risque signalé dans le prompt, donc jamais activé là
    où le hover peut rester bloqué après un tap. Les deux blocs restent
    pleinement lisibles par défaut, y compris sur mobile. */
@@ -261,7 +261,12 @@ header .logo-mark {
   font-size: 0.8125rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--rouge-principal);
+  /* rose-clair plutot que rouge-principal (QA finale, prompt 15/15) :
+     rouge-principal sur rouge-tres-fonce ne tient qu'a 4.01:1, sous le
+     seuil WCAG AA de 4.5:1 pour du texte de cette taille. rose-clair
+     (deja dans la palette officielle) tient a 12.7:1. La flèche ::after
+     hérite de cette couleur, corrigée du même coup. */
+  color: var(--rose-clair);
 }
 
 .bifurcation .bloc .bloc-cta::after {

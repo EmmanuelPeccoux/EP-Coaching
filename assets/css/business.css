@@ -1,8 +1,8 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   EP Coaching — Page /business/
+   EP Coaching, Page /business/
    Depuis le prompt 5/15, toute la mise en page des sections (bio,
    critères, accompagnement, piliers, accomplissements, cta-final) vit
-   dans base.css, partagée avec physique.css — les deux pages utilisent
+   dans base.css, partagée avec physique.css, les deux pages utilisent
    les mêmes classes (.split, .cards, .pilier-grid, .diamond-list...), pas
    de raison de dupliquer. Ce fichier reste prêt pour un accent propre à
    /business/ si un jour physique et business doivent diverger visuellement.
@@ -11,7 +11,7 @@
    n'avait jamais été nettoyé comme physique.css l'avait été au prompt 5,
    et gardait un ancien .criteres .cards en grid (repeat(3,1fr) à 768px)
    qui rentrait en conflit de spécificité avec le .criteres .cards en
-   flex-column de base.css — même spécificité, ce fichier chargé après
+   flex-column de base.css, même spécificité, ce fichier chargé après
    base.css l'emportait, donc /business/ affichait les 3 cards critères
    en grille 3 colonnes au lieu d'empilées comme sur /physique/. Supprimé.
    ═══════════════════════════════════════════════════════════════════════ */

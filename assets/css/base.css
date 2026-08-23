@@ -1,13 +1,13 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   EP Coaching — Variables, reset, système de design
+   EP Coaching, Variables, reset, système de design
    ═══════════════════════════════════════════════════════════════════════
-   INTERDITS STRICTS — à respecter absolument dans TOUT le projet :
+   INTERDITS STRICTS, à respecter absolument dans TOUT le projet :
    - Jamais #080808 ni #DC0A14
    - Jamais de tons froids (bleu, vert, violet...)
    - Jamais la police "Bebas Neue"
    - Police titres : Montserrat 900, letter-spacing négatif
    - Police logo UNIQUEMENT : Playfair Display Italic Bold
-   - Jamais de tiret em (—) dans aucun texte
+   - Jamais de tiret cadratin (le signe de ponctuation long) dans aucun texte
    - Jamais de prix affiché nulle part
    ═══════════════════════════════════════════════════════════════════════ */
 
@@ -20,7 +20,7 @@
   --blanc-casse: #F5EDED;
   --rose-clair: #FDC4C4; /* usage rare */
 
-  /* Échelle d'espacement (base 8px, esprit cinématique — sections
+  /* Échelle d'espacement (base 8px, esprit cinématique, sections
      généreusement aérées, jamais denses). */
   --space-xs: 0.5rem;   /* 8px */
   --space-sm: 1rem;     /* 16px */
@@ -30,7 +30,7 @@
   --space-2xl: 6rem;    /* 96px */
   --space-3xl: 8rem;    /* 128px */
 
-  /* Rayon de coin volontairement modeste — arrondi perceptible mais
+  /* Rayon de coin volontairement modeste, arrondi perceptible mais
      jamais le border-radius agressif façon SaaS générique. */
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -90,7 +90,7 @@ ol {
 
 /* Anneau de focus clavier explicite plutôt que de compter sur le style
    par défaut du navigateur (couleur/épaisseur imprévisibles selon
-   OS/navigateur) — visible sur tous les éléments interactifs, jamais
+   OS/navigateur), visible sur tous les éléments interactifs, jamais
    supprimé (pas de outline:none sans remplacement dans tout le projet). */
 :focus-visible {
   outline: 2px solid var(--rouge-principal);
@@ -164,7 +164,7 @@ p {
 
 /* Mot ou groupe de mots clé mis en valeur dans un H1/H2 (phase contenu,
    prompt 10/15) : un accent par titre maximum, jamais plus. Rouge plein
-   plutôt qu'un traitement outline ici — plus lisible sur les tailles de
+   plutôt qu'un traitement outline ici, plus lisible sur les tailles de
    texte réduites des titres en `.split-content`. splitText() (prompt 7)
    préserve ce span intact quand le titre est découpé en mots animables :
    c'est exactement le cas d'usage prévu pour la variante "spans imbriqués". */
@@ -172,7 +172,7 @@ p {
   color: var(--rouge-principal);
 }
 
-/* Eyebrows/labels — Montserrat 700, petit, tracking large, rouge
+/* Eyebrows/labels, Montserrat 700, petit, tracking large, rouge
    principal. Le glyphe ◆ en préfixe est la variante texte du motif
    diamant (voir plus bas), pour un usage inline sans CSS supplémentaire. */
 .eyebrow {
@@ -184,7 +184,12 @@ p {
   font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--rouge-principal);
+  /* rose-clair plutot que rouge-principal (QA finale, prompt 15/15) :
+     rouge-principal sur noir-profond a un texte aussi petit et gras ne
+     tient qu'a 4.3:1, sous le seuil WCAG AA de 4.5:1 pour du petit texte.
+     rose-clair (deja dans la palette officielle, "usage rare") tient a
+     13.6:1, tres largement au-dessus, sans sortir des 7 couleurs. */
+  color: var(--rose-clair);
 }
 
 /* ── Motif signature : le diamant ─────────────────────────────────────── */
@@ -213,7 +218,7 @@ p {
   height: 0.875rem;
 }
 
-/* Séparateur : ligne fine, diamant, ligne fine — utilisable entre deux
+/* Séparateur : ligne fine, diamant, ligne fine, utilisable entre deux
    sections ou au-dessus d'un titre. */
 .section-divider {
   display: flex;
@@ -232,7 +237,7 @@ p {
 }
 
 /* Puce de liste diamant (:before sur <li>, prête pour le contenu à venir
-   en phase copy — aucune liste réelle dans les placeholders actuels). */
+   en phase copy, aucune liste réelle dans les placeholders actuels). */
 li.diamond-item {
   position: relative;
   padding-left: 1.25rem;
@@ -273,6 +278,10 @@ header.header--scrolled {
   padding-top: var(--space-xs);
   padding-bottom: var(--space-xs);
   background: color-mix(in srgb, var(--noir-profond) 88%, transparent);
+  /* -webkit- necessaire pour Safari/iOS (QA finale, prompt 15/15) : sans
+     ce prefixe, le flou echoue silencieusement sur Safari et le header
+     compacte affiche juste le fond semi-transparent sans le blur. */
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
 
@@ -316,7 +325,10 @@ footer {
 .footer-legal a:hover,
 .footer-instagram:hover {
   opacity: 1;
-  color: var(--rouge-principal);
+  /* rose-clair plutot que rouge-principal (QA finale, prompt 15/15) :
+     meme constat que .eyebrow, 4.3:1 sous le seuil WCAG AA a cette
+     taille de texte. */
+  color: var(--rose-clair);
 }
 
 @media (min-width: 768px) {
@@ -353,13 +365,17 @@ footer {
 }
 
 /* Sous-texte optionnel sous un CTA primaire (ex. "Appel gratuit, sans
-   engagement") — slot prêt, pas encore rempli partout. */
+   engagement"), slot prêt, pas encore rempli partout. */
 .btn-cta-primary + .btn-subtext {
   display: block;
   margin-top: 0.625rem;
   font-size: 0.75rem;
   text-align: center;
-  color: color-mix(in srgb, var(--blanc-casse) 45%, transparent);
+  /* 55%, pas 45% (QA finale, prompt 15/15) : a 45%, ce texte ne tenait
+     qu'a 4.0:1 sur noir-profond, sous le seuil WCAG AA de 4.5:1 pour du
+     petit texte. A 55%, 5.55:1, avec marge meme sur le degrade plus clair
+     du CTA final. */
+  color: color-mix(in srgb, var(--blanc-casse) 55%, transparent);
 }
 
 .btn-cta-fallback {
@@ -410,7 +426,7 @@ footer {
 /* ── Icônes ────────────────────────────────────────────────────────────── */
 /* SVG en trait (jamais en aplat, sauf le petit point "live"), currentColor
    pour hériter du rouge principal. Un seul système, réutilisé partout où
-   une icône apparaît (méthode, piliers) — voir prompt 5/15. */
+   une icône apparaît (méthode, piliers), voir prompt 5/15. */
 
 .icon {
   width: 1.75rem;
@@ -425,7 +441,7 @@ footer {
 }
 
 /* ── Layout deux colonnes (split) ─────────────────────────────────────── */
-/* Empilé sur mobile, deux colonnes à partir de 900px — réutilisé par
+/* Empilé sur mobile, deux colonnes à partir de 900px, réutilisé par
    bio/critères/accompagnement/accomplissements sur physique ET business. */
 
 .split {
@@ -452,7 +468,7 @@ footer {
 }
 
 /* Le H1 hero (jusqu'à 5.5rem) sert la section hero pleine largeur du
-   prompt 4 — dans .split-content, il partage une colonne deux fois moins
+   prompt 4, dans .split-content, il partage une colonne deux fois moins
    large avec une phrase longue (bio), la même échelle y ferait beaucoup
    trop de lignes. Ramené au même poids visuel que les H2 de section :
    toujours le plus grand texte de la page (correct sémantiquement),
@@ -515,7 +531,7 @@ footer {
 }
 
 /* ── Liste à puce diamant ──────────────────────────────────────────────── */
-/* li.diamond-item existe déjà (motif signature, prompt 4) — .diamond-list
+/* li.diamond-item existe déjà (motif signature, prompt 4), .diamond-list
    n'ajoute que l'espacement de la liste elle-même. */
 
 .diamond-list {
@@ -544,7 +560,7 @@ footer {
 /* ── Sections de contenu (bio / critères / accompagnement / piliers /
    accomplissements) ──────────────────────────────────────────────────── */
 /* Partagées par physique.css ET business.css (mêmes classes, même
-   structure HTML) — voir prompt 5/15. */
+   structure HTML), voir prompt 5/15. */
 
 .bio,
 .criteres,
@@ -584,7 +600,7 @@ footer {
 }
 
 /* Hiérarchie entre piliers : bordure pleinement rouge sur les 2 cards
-   prioritaires plutôt qu'une taille différente — garde la grille 3×2
+   prioritaires plutôt qu'une taille différente, garde la grille 3×2
    propre et symétrique tout en signalant clairement l'importance. */
 .pilier-card--emphasis {
   border-color: var(--rouge-principal);
