@@ -527,6 +527,54 @@ window.splitText = splitText;
    test. Mieux vaut ne rien livrer que livrer un effet non vérifié qui
    donnerait le mal de mer, exactement le risque décrit dans le prompt. */
 
+/* ── Newsletter (footer, commun aux 3 pages) ──────────────────────────── */
+/* Le formulaire poste vers ep-coaching-app (Next.js), seul endroit qui
+   detient la cle Brevo (voir app/api/newsletter/subscribe/route.ts) : ce
+   site est statique (GitHub Pages), aucun secret ne peut y vivre. */
+
+const NEWSLETTER_ENDPOINT = "https://ep-coaching.vercel.app/api/newsletter/subscribe";
+
+function initNewsletterFooter() {
+  const form = document.getElementById("newsletter-form");
+  if (!form) return;
+
+  const input = form.querySelector('input[type="email"]');
+  const honeypot = form.querySelector('input[name="website"]');
+  const button = form.querySelector('button[type="submit"]');
+  const feedback = form.parentElement.querySelector(".newsletter-feedback");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (button.disabled) return;
+    if (honeypot && honeypot.value) return; // rempli seulement par un bot
+
+    const email = input.value.trim();
+    button.disabled = true;
+    button.textContent = "...";
+    if (feedback) feedback.hidden = true;
+
+    try {
+      const res = await fetch(NEWSLETTER_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, source: "site" }),
+      });
+      const data = await res.json();
+      if (!data.ok) throw new Error("subscribe_failed");
+
+      const wrapper = form.parentElement;
+      wrapper.innerHTML = '<p class="newsletter-success">Inscription confirmée, à demain !</p>';
+    } catch {
+      button.disabled = false;
+      button.textContent = "Je m'inscris";
+      if (feedback) {
+        feedback.textContent = "L'inscription n'a pas fonctionné, réessaie dans un instant.";
+        feedback.hidden = false;
+      }
+    }
+  });
+}
+
 /* ── Init ──────────────────────────────────────────────────────────────── */
 
 initHomeEntrance();
@@ -539,3 +587,4 @@ initHeaderScroll();
 initVslFacade();
 initAnchorScroll();
 initScrollTriggerRefresh();
+initNewsletterFooter();

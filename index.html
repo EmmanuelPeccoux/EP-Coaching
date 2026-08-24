@@ -123,6 +123,18 @@
        ═══════════════════════════════════════════════════════════════ -->
   <footer>
     <p class="footer-brand">EP Coaching</p>
+
+    <div class="footer-newsletter">
+      <p class="footer-newsletter-label">Un mail par jour : entraînement, nutrition, mindset</p>
+      <form id="newsletter-form" class="newsletter-form" novalidate>
+        <label for="newsletter-email" class="sr-only">Ton email</label>
+        <input type="text" name="website" class="newsletter-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <input type="email" id="newsletter-email" name="email" required placeholder="ton@email.com" class="newsletter-input" />
+        <button type="submit" class="newsletter-submit">Je m'inscris</button>
+      </form>
+      <p class="newsletter-feedback" role="status" hidden></p>
+    </div>
+
     <nav class="footer-legal" aria-label="Liens légaux">
       <a href="https://ep-coaching.vercel.app/legal/cgu" target="_blank" rel="noopener noreferrer">CGU</a>
       <a href="https://ep-coaching.vercel.app/legal/cgv" target="_blank" rel="noopener noreferrer">CGV</a>

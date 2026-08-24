@@ -339,6 +339,116 @@ footer {
   }
 }
 
+/* Reservee au texte utile aux lecteurs d'ecran mais inutile a l'oeil (ex.
+   label du champ email de la newsletter, deja porte visuellement par le
+   placeholder). Technique standard : hors flux visuel, jamais display:none
+   (qui le retirerait aussi du DOM accessible). */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Newsletter (footer, commun aux 3 pages) ──────────────────────────── */
+
+.footer-newsletter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  width: 100%;
+  max-width: 380px;
+}
+
+.footer-newsletter-label {
+  font-size: 0.8125rem;
+  color: color-mix(in srgb, var(--blanc-casse) 65%, transparent);
+  margin: 0;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.newsletter-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.newsletter-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: var(--blanc-casse);
+  background: color-mix(in srgb, var(--rouge-tres-fonce) 60%, var(--noir-profond));
+  border: 1px solid color-mix(in srgb, var(--rouge-principal) 25%, transparent);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.2s ease;
+}
+
+.newsletter-input::placeholder {
+  color: color-mix(in srgb, var(--blanc-casse) 35%, transparent);
+}
+
+.newsletter-input:focus {
+  outline: none;
+  border-color: var(--rouge-principal);
+}
+
+.newsletter-submit {
+  padding: 0.7rem 1.1rem;
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: var(--blanc-casse);
+  background: var(--rouge-principal);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.newsletter-submit:hover {
+  background: color-mix(in srgb, var(--rouge-principal) 85%, white);
+}
+
+.newsletter-submit:active {
+  transform: scale(0.97);
+}
+
+.newsletter-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.newsletter-feedback {
+  font-size: 0.8125rem;
+  color: var(--rose-clair);
+  margin: 0;
+}
+
+.newsletter-success {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--blanc-casse);
+  margin: 0;
+}
+
 /* ── Boutons CTA communs ───────────────────────────────────────────────── */
 
 .btn-cta-primary {
