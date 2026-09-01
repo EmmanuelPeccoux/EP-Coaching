@@ -230,6 +230,47 @@ faite d'une certaine façon, pas nécessaire pour la maintenance courante
 - [x] 14/15, Câblage du funnel : CTA business branché sur le vrai formulaire, liens vérifiés sur les 3 pages, Calendly câblé côté formulaires, déploiement Vercel des formulaires résolu et vérifié en ligne (voir `ep-coaching-formulaires`), **funnel complet du clic homepage jusqu'à la réservation, bout en bout, vérifié en production**
 - [x] 15/15, QA complète et mise en production : audit de conformité (violations réelles trouvées et corrigées), 3 écarts de contraste WCAG mesurés et corrigés, bug de compatibilité Safari corrigé, image de partage créée, README réécrit pour la passation, **le site est en production**
 
+## Passe de cohérence avec Notion (2026-09-01, hors série de 15 prompts)
+
+Audit de cohérence entre le contenu publié et le positionnement réel
+documenté dans Notion (🎯 Stratégie & Business, Pitch, Stratégie Contenu
+Instagram, synthèse webinaire Matis Clouet). Quatre écarts factuels
+corrigés, aucun changement de design ni de structure.
+
+1. **"en préparation pour la Heroes Cup WNBF France"** (bio, les 2
+   pages) : faux au moment où c'est écrit, la prep ne commence que début
+   2027, la phase actuelle est une phase de masse. Remplacé par
+   "objectif Heroes Cup WNBF France en Classic Physique", formulation
+   exacte du Pitch Notion.
+2. **"5 formations complètes" / "5 formations incluses"** : les 5
+   formations existent comme structure dans l'app (148 leçons réparties)
+   mais aucune n'est publiée et aucune leçon n'a de vidéo (vérifié en
+   base le 2026-09-01). Notion parle de 2 formations réellement faites
+   sur les 5 prévues, 20h sur 80h. Le mot "complètes" est retiré, la
+   promesse devient "un socle qui s'enrichit au fil des mois", vrai et
+   tenable.
+3. **"Communauté et coachs spécialisés"** (/physique/) : "tu accèdes à
+   différents coachs selon ce dont tu as besoin" ne pouvait désigner que
+   les coachs IA de l'app, qui sont strictement internes et ne doivent
+   jamais être évoqués publiquement (règle Notion). Recentré sur la
+   communauté, qui est réelle.
+4. **"Coaching live avec un vrai coach"** : le mot "vrai" n'a de sens
+   que par opposition à un coach IA, dont l'existence n'est jamais
+   évoquée publiquement. Devenu "avec ton coach".
+
+Ajouté au passage, sans toucher à la structure : la douleur réelle de
+l'avatar client (la surinformation, les avis contradictoires) était
+absente des trois pages alors que c'est le cœur du positionnement. Elle
+est maintenant nommée dans l'intro de la section "La méthode" de
+/physique/, et le pendant côté coach (savoir quoi changer en premier
+plutôt qu'une liste de cinquante choses) dans celle de /business/.
+
+**Point non résolu, qui ne dépend pas du code** : l'URL du site
+(`emmanuelpeccoux.github.io/EP-Coaching/`) contient le nom légal, alors
+que l'identité publique unique doit être Santamaria Sànchez. Un domaine
+personnalisé (CNAME) est la seule vraie correction, voir les TODO
+`og:url` dans les 3 pages et dans 404.html.
+
 ## QA complète et mise en production (prompt 15/15)
 
 Dernier prompt : aucun développement, uniquement vérification,
